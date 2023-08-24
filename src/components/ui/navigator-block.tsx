@@ -40,7 +40,7 @@ Navigator.Button = ({ Icon, children, action, className, isActive }) => {
             }
             onClick={action}
         >
-            <Icon className="h-4 w-4 lg:w-12 lg:h-12" />
+            <Icon className="h-8 w-8 lg:w-4 lg:h-4" />
             <Separator className={cn("h-px w-8 duration-150 lg:h-5 lg:w-px", (isActive ? "mb-0" : "mb-1 lg:mb-0 group-hover:mb-0"))} />
             <div className={cn("duration-150 text-xs lg:text-sm", (isActive ? "lg:ml-1 mb-1 lg:mb-0" : "group-hover:lg:ml-1 mb-0 group-hover:mb-1 group-hover:lg:mb-0"))}>{children}</div>
         </div>
