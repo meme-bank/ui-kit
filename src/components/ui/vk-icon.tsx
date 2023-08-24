@@ -1,10 +1,10 @@
+import { LucideProps } from "lucide-react";
 import * as React from "react";
 
-export const VKIcon: React.FC<{ scale: number }> = ({ scale }) => {
+export const VKIcon: React.FC<LucideProps> = (props) => {
     return (
         <svg
-            height={scale}
-            width={scale}
+            {...props}
             viewBox="0 0 28 28"
             fill="white"
             xmlns="http://www.w3.org/2000/svg"

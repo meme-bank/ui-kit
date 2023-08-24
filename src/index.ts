@@ -5,6 +5,8 @@ export * from "@components/PageBlockError";
 export * from "@components/InputFormField";
 export * from "@components/Footer";
 export * from "@components/Layout";
+export * from "@components/VKAuthRequireDialog";
+export * from "@components/NavigationLayout";
 
 // UI Components
 export * from "@ui-components/avatar";
@@ -33,7 +35,8 @@ export * from "@ui-components/use-toast";
 export * from "@ui-components/vk-auth-button";
 export * from "@ui-components/vk-icon";
 export * from "@ui-components/line-block";
-export * from "@ui-components/profile-block"
+export * from "@ui-components/profile-block";
+export * from "@ui-components/navigator-block";
 
 // Libs
 export * from "@lib/utils";
