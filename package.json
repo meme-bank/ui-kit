@@ -75,7 +75,8 @@
     "style.css",
     "src-style.css",
     "img",
-    "README.MD"
+    "README.MD",
+    "LICENSE.txt"
   ],
   "dependencies": {
     "@hookform/resolvers": "^3.3.0",
