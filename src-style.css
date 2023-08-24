@@ -1,5 +1,5 @@
-@import url("./fonts/sfui/stylesheet.css");
-@import url("./fonts/vk-sans/stylesheet.css");
+@import url("./sf-ui-stylesheet.css");
+@import url("./vk-sans-stylesheet.css");
 
 @tailwind base;
 @tailwind components;
