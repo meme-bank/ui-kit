@@ -271,10 +271,9 @@ export const Header: React.FC<HeaderProps> = ({ returnToBank, search, unReadNoti
                 </Tooltip>}
                 <Tooltip>
                     <TooltipTrigger asChild>
-                        <Button variant={"ghost"} className="px-1.5">
+                        <Button variant={"ghost"} onClick={homePage} className="px-1.5">
                             <Logotype
                                 {...logo}
-                                onClick={homePage}
                             />
                         </Button>
                     </TooltipTrigger>
