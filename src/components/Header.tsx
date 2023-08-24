@@ -271,10 +271,12 @@ export const Header: React.FC<HeaderProps> = ({ returnToBank, search, unReadNoti
                 </Tooltip>}
                 <Tooltip>
                     <TooltipTrigger asChild>
-                        <Logotype
-                            {...logo}
-                            onClick={homePage}
-                        />
+                        <Button variant={"ghost"} className="px-1.5">
+                            <Logotype
+                                {...logo}
+                                onClick={homePage}
+                            />
+                        </Button>
                     </TooltipTrigger>
                     <TooltipContent>
                         <p>Главная страница</p>
