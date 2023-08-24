@@ -273,6 +273,7 @@ export const Header: React.FC<HeaderProps> = ({ returnToBank, search, unReadNoti
                     <TooltipTrigger asChild>
                         <Logotype
                             {...logo}
+                            onClick={homePage}
                         />
                     </TooltipTrigger>
                     <TooltipContent>
