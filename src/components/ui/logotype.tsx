@@ -1,17 +1,17 @@
 import MeduzaLogo from "@/../img/svg/icon-swag.svg";
 import * as React from "react";
 import { Badge } from "./badge";
-import { Button } from "./button";
+import { Button, ButtonProps } from "./button";
+import { cn } from "@/lib/utils";
 
-export interface LogotypeProps {
+export interface LogotypeProps extends ButtonProps {
     superscriptLogo?: string;
     badgeText?: string;
     logoSrc?: string;
     appName?: string;
-    isButton?: boolean
 }
 
-export const Logotype: React.FC<LogotypeProps> = ({ superscriptLogo, logoSrc, appName, badgeText, isButton }) => {
+export const Logotype: React.FC<LogotypeProps> = ({ superscriptLogo, logoSrc, appName, badgeText, ...props }) => {
     const logotype = (
         <>
             <img className="w-7 h-7 aspect-square" src={logoSrc || MeduzaLogo} />
@@ -21,15 +21,9 @@ export const Logotype: React.FC<LogotypeProps> = ({ superscriptLogo, logoSrc, ap
             </Badge>}
         </>
     )
-    if (isButton) return (
-        <Button variant={"ghost"} className="px-1.5 flex items-center gap-1" >
+    return (
+        <Button variant={"ghost"} {...props} className={cn("px-1.5 flex items-center gap-1", props.className)} >
             {logotype}
         </Button>
-    )
-
-    return (
-        <div className="flex items-center gap-1">
-            {logotype}
-        </div>
     )
 };

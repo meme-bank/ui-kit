@@ -43,6 +43,7 @@ interface HeaderProps {
     Notifications?: React.FC;
     unReadNotify?: boolean;
     logo?: Omit<LogotypeProps, "isButton">;
+    homePage?: () => void;
 }
 
 const HeaderSearch: React.FC<{ search: (text: string) => void; appName?: string }> = ({ search, appName }) => {
@@ -254,7 +255,7 @@ const AuthMenu: React.FC<{ user: UserAccount; userActions: UserAccountActions; s
     )
 }
 
-export const Header: React.FC<HeaderProps> = ({ returnToBank, search, unReadNotify = false, sanctumShow, logo, Notifications, user, login, userActions, themeSwitch, useTooltipProvider = true, balance }) => {
+export const Header: React.FC<HeaderProps> = ({ returnToBank, search, unReadNotify = false, sanctumShow, logo, Notifications, user, login, userActions, themeSwitch, useTooltipProvider = true, balance, homePage }) => {
     const Component = <div className="w-full top-0 left-0 h-14 fixed z-50">
         <div className="flex bg-background/80 rounded-b-md backdrop-blur-sm shadow-sm flex-row border-b justify-between h-full gap-1 p-2 container">
             <div className="flex flex-row items-center gap-1">
@@ -269,10 +270,9 @@ export const Header: React.FC<HeaderProps> = ({ returnToBank, search, unReadNoti
                     </TooltipContent>
                 </Tooltip>}
                 <Tooltip>
-                    <TooltipTrigger>
+                    <TooltipTrigger asChild>
                         <Logotype
                             {...logo}
-                            isButton
                         />
                     </TooltipTrigger>
                     <TooltipContent>
