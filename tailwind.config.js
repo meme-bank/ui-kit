@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class", '[data-mode="dark"]'],
@@ -16,6 +18,11 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        "vksans": ["VK Sans Display", "SF UI Display", "SF UI Text", ...defaultTheme.fontFamily.sans],
+        "sf-display": ["SF UI Display", "SF UI Text", ...defaultTheme.fontFamily.sans],
+        "sf-text": ["SF UI Text", "SF UI Display", ...defaultTheme.fontFamily.sans],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

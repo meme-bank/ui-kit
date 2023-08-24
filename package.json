@@ -65,11 +65,11 @@
     "webpack-cli": "^5.1.1"
   },
   "peerDependencies": {
+    "@hookform/resolvers": "^3.3.0",
+    "lucide-react": "^0.268.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "7.45.4",
-    "lucide-react": "^0.268.0",
-    "@hookform/resolvers": "^3.3.0",
     "zod": "^3.22.2"
   },
   "files": [
@@ -78,7 +78,8 @@
     "src-style.css",
     "img",
     "README.MD",
-    "LICENSE"
+    "LICENSE",
+    "fonts"
   ],
   "dependencies": {
     "@radix-ui/react-avatar": "^1.0.3",
@@ -96,6 +97,7 @@
     "buffer": "^6.0.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "rollup-plugin-font": "^1.1.2",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.6"
   },
