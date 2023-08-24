@@ -1,10 +1,10 @@
 import * as React from "react";
 import { Skeleton } from "@ui-components/skeleton";
 import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@ui-components/form";
-import { Input } from "@ui-components/input";
+import { Input, InputProps } from "@ui-components/input";
 import { LucideIcon } from "lucide-react";
 
-export interface InputFormFieldProps {
+export interface InputFormFieldProps extends InputProps {
     label?: string;
     name: string;
     skeletonLoad?: boolean;
@@ -13,10 +13,7 @@ export interface InputFormFieldProps {
     LabelIcon?: LucideIcon;
 }
 
-/*
-    @using Using InputFormField in Form
-*/
-export const InputFormField: React.FC<InputFormFieldProps> = ({ label, name, skeletonLoad, placeholder, description, LabelIcon }) => {
+export const InputFormField: React.FC<InputFormFieldProps> = ({ label, name, skeletonLoad, placeholder, description, LabelIcon, ...props }) => {
     if (skeletonLoad) {
         return (
             <div className="space-y-2">
@@ -45,7 +42,7 @@ export const InputFormField: React.FC<InputFormFieldProps> = ({ label, name, ske
                     </FormLabel>
                 }
                 <FormControl>
-                    <Input {...field} placeholder={placeholder} />
+                    <Input {...props} {...field} placeholder={placeholder} />
                 </FormControl>
                 {description && <FormDescription>{description}</FormDescription>}
                 <FormMessage />
