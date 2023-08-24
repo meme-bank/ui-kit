@@ -2,7 +2,7 @@ import * as React from "react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@ui-components/tooltip";
 import { Button } from "@ui-components/button";
 import { Bell, Coins, Computer, Flag, Lock, LogIn, LogOut, Moon, Receipt, RussianRuble, Search, Sun, User, Wallet, X } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage, StandardAvatar } from "@ui-components/avatar"
+import { StandardAvatar } from "@ui-components/avatar"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@ui-components/dropdown-menu";
 import { Separator } from "@ui-components/separator";
 import { nFormatter } from "@/lib/utils";

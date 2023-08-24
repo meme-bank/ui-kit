@@ -34,7 +34,8 @@ export * from "@ui-components/use-toast";
 export * from "@ui-components/vk-auth-button";
 export * from "@ui-components/vk-icon";
 export * from "@ui-components/line-block";
-export * from "@ui-components/profile-block"
+export * from "@ui-components/profile-block";
+export * from "@ui-components/navigator-block";
 
 // Libs
 export * from "@lib/utils";
