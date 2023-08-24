@@ -6,6 +6,7 @@ export * from "@components/InputFormField";
 export * from "@components/Footer";
 export * from "@components/Layout";
 export * from "@components/VKAuthRequireDialog";
+export * from "@components/NavigationLayout";
 
 // UI Components
 export * from "@ui-components/avatar";
