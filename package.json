@@ -6,7 +6,7 @@
   "module": "dist/esm/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "pub": "npm run build && npm version patch && npm publish",
+    "pub": "npm run build && git commit -am \"publish new version or no comment\" && npm version patch && git push && npm publish",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "build-webpack": "webpack",

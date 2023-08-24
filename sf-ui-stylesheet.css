@@ -96,7 +96,7 @@
 
 @font-face {
     font-family: 'SF UI Text';
-    src: url('./fonts/sfui/fonts/sfui/SFUIText-Semibold.eot');
+    src: url('./fonts/sfui/SFUIText-Semibold.eot');
     src: local('SF UI Text Semibold'), local('SFUIText-Semibold'),
         url('./fonts/sfui/SFUIText-Semibold.eot?#iefix') format('embedded-opentype'),
         url('./fonts/sfui/SFUIText-Semibold.woff2') format('woff2'),
