@@ -2,7 +2,7 @@ import * as React from "react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@ui-components/tooltip";
 import { Button } from "@ui-components/button";
 import { Bell, Coins, Computer, Flag, Lock, LogIn, LogOut, Moon, Receipt, RussianRuble, Search, Sun, User, Wallet, X } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@ui-components/avatar"
+import { Avatar, AvatarFallback, AvatarImage, StandardAvatar } from "@ui-components/avatar"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@ui-components/dropdown-menu";
 import { Separator } from "@ui-components/separator";
 import { nFormatter } from "@/lib/utils";
@@ -212,12 +212,7 @@ const AuthMenu: React.FC<{ user: UserAccount; userActions: UserAccountActions; s
                 <TooltipTrigger asChild>
                     <DropdownMenuTrigger asChild>
                         <Button variant={"outline"} className="p-1.5 px-2 flex items-center gap-1" >
-                            <Avatar className="h-7 w-7">
-                                <AvatarImage src={user.avatarSrc} />
-                                <AvatarFallback>
-                                    {user.displayName && user.displayName.split(" ").map(v => v.slice(0, 1)).slice(0, 2).join("")}
-                                </AvatarFallback>
-                            </Avatar>
+                            <StandardAvatar className="h-7 w-7" src={user.avatarSrc} fallback={user.displayName} />
                             <p className="hidden md:block text-xs text-ellipsis overflow-hidden whitespace-nowrap w-20 max-w-full">{user.displayName}</p>
                         </Button>
                     </DropdownMenuTrigger>
@@ -229,12 +224,7 @@ const AuthMenu: React.FC<{ user: UserAccount; userActions: UserAccountActions; s
             <DropdownMenuContent>
                 <DropdownMenuLabel>
                     <div className="flex gap-2 h-12 items-center">
-                        <Avatar>
-                            <AvatarImage src={user.avatarSrc} />
-                            <AvatarFallback>
-                                {user.displayName && user.displayName.split(" ").map(v => v.slice(0, 1)).slice(0, 3).join("")}
-                            </AvatarFallback>
-                        </Avatar>
+                        <StandardAvatar src={user.avatarSrc} fallback={user.displayName} />
                         <Separator orientation="vertical" />
                         <div className="flex flex-col gap-[2px]">
                             <p>{user.displayName}</p>
@@ -243,7 +233,7 @@ const AuthMenu: React.FC<{ user: UserAccount; userActions: UserAccountActions; s
                     </div>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={userActions?.openMeduzaSanctum}>
+                <DropdownMenuItem onClick={userActions?.open}>
                     <User className="mr-2 h-4 w-4" />
                     Профиль
                 </DropdownMenuItem>
@@ -265,7 +255,7 @@ const AuthMenu: React.FC<{ user: UserAccount; userActions: UserAccountActions; s
 }
 
 export const Header: React.FC<HeaderProps> = ({ returnToBank, search, unReadNotify = false, sanctumShow, logo, Notifications, user, login, userActions, themeSwitch, useTooltipProvider = true, balance }) => {
-    const Component = <div className="w-full top-0 left-0 h-14 fixed">
+    const Component = <div className="w-full top-0 left-0 h-14 fixed z-50">
         <div className="flex bg-background/80 rounded-b-md backdrop-blur-sm shadow-sm flex-row border-b justify-between h-full gap-1 p-2 container">
             <div className="flex flex-row items-center gap-1">
                 {returnToBank && <Tooltip>
@@ -279,7 +269,7 @@ export const Header: React.FC<HeaderProps> = ({ returnToBank, search, unReadNoti
                     </TooltipContent>
                 </Tooltip>}
                 <Tooltip>
-                    <TooltipTrigger asChild>
+                    <TooltipTrigger>
                         <Logotype
                             {...logo}
                             isButton

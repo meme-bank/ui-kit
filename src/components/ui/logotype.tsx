@@ -14,7 +14,7 @@ export interface LogotypeProps {
 export const Logotype: React.FC<LogotypeProps> = ({ superscriptLogo, logoSrc, appName, badgeText, isButton }) => {
     const logotype = (
         <>
-            <img className="w-8 aspect-square" src={logoSrc || MeduzaLogo} />
+            <img className="w-7 h-7 aspect-square" src={logoSrc || MeduzaLogo} />
             <h1 className="text-xl font-vksans font-semibold">{(appName || "нбм").toLocaleLowerCase()}{superscriptLogo && <sup className="text-muted-foreground text-xs">{superscriptLogo}</sup>}</h1>
             {badgeText && <Badge variant={"outline"}>
                 {badgeText}

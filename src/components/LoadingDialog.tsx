@@ -8,10 +8,12 @@ export const LoadingDialog: React.FC = () => {
             <DialogContent autoClose>
                 <DialogHeader>
                     <DialogTitle>Загрузка...</DialogTitle>
-                    <DialogDescription>Заварите чайку, пока мы что-то грузим )</DialogDescription>
+                    <DialogDescription>Заварите чайку, пока мы что-то грузим ;)</DialogDescription>
                 </DialogHeader>
                 <DialogFooter>
-                    <Loader2 className="aspect-square w-8 h-8 animate-spin" />
+                    <div className="flex items-center justify-center">
+                        <Loader2 className="aspect-square w-8 h-8 animate-spin" />
+                    </div>
                 </DialogFooter>
             </DialogContent>
         </Dialog >
