@@ -1,13 +1,13 @@
 import { FC, MouseEventHandler, PropsWithChildren, SetStateAction, useState } from "react";
-import { ChevronLeftCircle, LucideIcon } from "lucide-react";
+import { ChevronLeftCircle, ChevronRightCircle, LucideIcon } from "lucide-react";
 import React from "react";
 import { PageBlock } from "./page-block";
 import { cn } from "@lib/utils";
 import { Separator } from "./separator";
 
 export interface NavigatorType extends FC<PropsWithChildren> {
-    Button: FC<PropsWithChildren<{ action: MouseEventHandler, Icon: LucideIcon, className?: string; isActive?: boolean }>>;
-    ButtonNoAdaptive: FC<PropsWithChildren<{ action: MouseEventHandler, Icon: LucideIcon, className?: string; isActive?: boolean }>>;
+    Button: FC<PropsWithChildren<{ action: MouseEventHandler, Icon?: LucideIcon, IconRender?: React.FC, iconClassName?: string, className?: string; isActive?: boolean }>>;
+    ButtonNoAdaptive: FC<PropsWithChildren<{ action: MouseEventHandler, Icon?: LucideIcon, IconRender?: React.FC, iconClassName?: string, className?: string; isActive?: boolean }>>;
     Header: FC<PropsWithChildren>;
     ButtonContainer: FC<PropsWithChildren>;
     Separator: FC;
@@ -28,7 +28,7 @@ export const Navigator: NavigatorType = ({ children }) => {
     )
 };
 
-Navigator.Button = ({ Icon, children, action, className, isActive }) => {
+Navigator.Button = ({ Icon, children, action, className, isActive, IconRender, iconClassName }) => {
     return (
         <div
             className={
@@ -40,13 +40,15 @@ Navigator.Button = ({ Icon, children, action, className, isActive }) => {
             }
             onClick={action}
         >
-            <Icon className="h-8 w-8 lg:w-4 lg:h-4" />
+            {Icon && <Icon className={cn("h-8 w-8 lg:w-4 lg:h-4", iconClassName)} />}
+            {(IconRender && !Icon) && <IconRender />}
+            {(!IconRender && !Icon) && <ChevronRightCircle className={cn("h-8 w-8 rotate-90 lg:w-4 lg:h-4 lg:rotate-0", iconClassName)} />}
             <Separator className={cn("h-px w-8 duration-150 lg:h-5 lg:w-px", (isActive ? "mb-0" : "mb-1 lg:mb-0 group-hover:mb-0"))} />
             <div className={cn("duration-150 text-xs lg:text-sm", (isActive ? "lg:ml-1 mb-1 lg:mb-0" : "group-hover:lg:ml-1 mb-0 group-hover:mb-1 group-hover:lg:mb-0"))}>{children}</div>
         </div>
     )
 };
-Navigator.ButtonNoAdaptive = ({ Icon, children, action, className, isActive }) => {
+Navigator.ButtonNoAdaptive = ({ Icon, children, action, className, isActive, IconRender, iconClassName }) => {
     return (
         <div
             className={
@@ -58,7 +60,9 @@ Navigator.ButtonNoAdaptive = ({ Icon, children, action, className, isActive }) =
             }
             onClick={action}
         >
-            <Icon className="h-4 w-4" />
+            {Icon && <Icon className={cn("h-4 w-4", iconClassName)} />}
+            {(IconRender && !Icon) && <IconRender />}
+            {(!IconRender && !Icon) && <ChevronRightCircle className={cn("h-4 w-4", iconClassName)} />}
             <Separator orientation="vertical" className="h-5" />
             <div className={cn("duration-150", (isActive ? "ml-1" : "group-hover:lg:ml-1"))}>{children}</div>
         </div>
