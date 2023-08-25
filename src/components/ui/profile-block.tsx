@@ -39,7 +39,7 @@ export const ProfileBlockBackground: React.FC<React.PropsWithChildren<Pick<Profi
 export const ProfileInfoBlock: React.FC<{ user?: Pick<UserType, "backgroundUrl" | "avatarUrl" | "displayname" | "tag">; setAvatar?: () => void; className?: string; }> = ({ className, setAvatar, user }) => {
     return (
         <div className={cn("border h-40 max-h-full aspect-square flex items-center flex-col gap-1.5 justify-evenly p-2 bg-background/90 backdrop-blur-[2px] rounded-md", className)}>
-            <StandardAvatar className="h-20 w-20 border group/avatar relative aspect-square max-h-full" fallback={user?.displayname} src={user?.tag}>
+            <StandardAvatar className="h-20 w-20 border group/avatar relative aspect-square max-h-full" fallback={user?.displayname} src={user?.avatarUrl}>
                 {setAvatar && <div onClick={setAvatar} className="hidden inset-0 m-auto bg-background/90 group-hover/avatar:flex duration-150 justify-center items-center cursor-pointer h-8 w-8 rounded-full absolute border backdrop-blur-sm">
                     <Pencil className="h-4 w-4" />
                 </div>}
