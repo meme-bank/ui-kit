@@ -33,7 +33,7 @@ Navigator.Button = ({ Icon, children, action, className, isActive, IconRender, i
         <div
             className={
                 cn(
-                    "w-[90px] h-[90px] lg:w-full lg:h-auto p-2 text-sm flex lg:justify-start justify-center flex-col lg:flex-row select-none px-3 duration-150 rounded-md items-center group cursor-pointer text-secondary-foreground gap-2 font-semibold",
+                    "w-[100px] h-[100px] lg:w-full lg:h-auto p-2 text-sm flex lg:justify-start justify-center flex-col lg:flex-row select-none px-3 duration-150 rounded-md items-center group cursor-pointer text-secondary-foreground gap-2 font-semibold",
                     (isActive ? "bg-secondary shadow" : "hover:bg-secondary hover:shadow"),
                     className
                 )
