@@ -44,7 +44,7 @@ Navigator.Button = ({ Icon, children, action, className, isActive, IconRender, i
             {(IconRender && !Icon) && <IconRender />}
             {(!IconRender && !Icon) && <ChevronRightCircle className={cn("h-8 w-8 rotate-90 lg:w-4 lg:h-4 lg:rotate-0", iconClassName)} />}
             <Separator className={cn("h-px w-8 duration-150 lg:h-5 lg:w-px", (isActive ? "mb-0" : "mb-1 lg:mb-0 group-hover:mb-0"))} />
-            <div className={cn("duration-150 text-xs lg:text-sm", (isActive ? "lg:ml-1 mb-1 lg:mb-0" : "group-hover:lg:ml-1 mb-0 group-hover:mb-1 group-hover:lg:mb-0"))}>{children}</div>
+            <div className={cn("duration-150 text-xs lg:text-sm text-ellipsis block overflow-hidden whitespace-nowrap", (isActive ? "lg:ml-1 mb-1 lg:mb-0" : "group-hover:lg:ml-1 mb-0 group-hover:mb-1 group-hover:lg:mb-0"))}>{children}</div>
         </div>
     )
 };
@@ -64,7 +64,7 @@ Navigator.ButtonNoAdaptive = ({ Icon, children, action, className, isActive, Ico
             {(IconRender && !Icon) && <IconRender />}
             {(!IconRender && !Icon) && <ChevronRightCircle className={cn("h-4 w-4", iconClassName)} />}
             <Separator orientation="vertical" className="h-5" />
-            <div className={cn("duration-150", (isActive ? "ml-1" : "group-hover:lg:ml-1"))}>{children}</div>
+            <div className={cn("duration-150 text-ellipsis block overflow-hidden whitespace-nowrap", (isActive ? "ml-1" : "group-hover:lg:ml-1"))}>{children}</div>
         </div>
     )
 };
