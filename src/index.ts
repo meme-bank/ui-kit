@@ -10,6 +10,7 @@ export * from "@components/NavigationLayout";
 export * from "@components/BackButton";
 
 // UI Components
+export * from "@ui-components/table";
 export * from "@ui-components/avatar";
 export * from "@ui-components/badge";
 export * from "@ui-components/button";
