@@ -62,14 +62,14 @@
   * {
     @apply border-border border-solid;
   }
-  html {
+  /* html {
     scrollbar-gutter: stable;
-  }
+  } */
   body {
     @apply bg-background text-foreground font-sf-display;
   }
   ::-webkit-scrollbar {
-    @apply w-4;
+    @apply w-2;
   }
   ::-webkit-scrollbar-track {
     @apply bg-background;
