@@ -25,3 +25,22 @@ export function nFormatter(num: number, digits: number = 2) {
 export function usernameFirstLiterals(username: string) {
   return username.split(" ").map(v => v.slice(0, 1)).slice(0, 2).join("")
 }
+
+// 23:00 21.01.20
+export function dateFormat(date: Date, miniYear = false) {
+  // time
+  const hours = date.getHours().toString().padStart(2, "0");
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+  const time = [hours, minutes].join(":");
+
+  // date
+  const year = miniYear ? date.getFullYear().toString().slice(2, 4).padStart(2, "0") : date.getFullYear().toString().padStart(4, "0");
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const day = date.getDate().toString().padStart(2, "0");
+  const __date = [day, month, year].join(".");
+
+  // format
+  const format = [time, __date].join(" ");
+
+  return format;
+}

@@ -51,7 +51,7 @@ const HeaderSearch: React.FC<{ search: (text: string) => void; appName?: string 
 
     return (
         <>
-            <form onSubmit={handleSubmit(({ search: text }) => search(text))} className="hidden sm:flex flex-row items-center gap-1">
+            {/* <form onSubmit={handleSubmit(({ search: text }) => search(text))} className="hidden sm:flex flex-row items-center gap-1">
                 <Input type="search" {...register("search")} className="w-52 max-w-full" placeholder="Поиск" />
                 <Tooltip>
                     <TooltipTrigger asChild>
@@ -63,13 +63,14 @@ const HeaderSearch: React.FC<{ search: (text: string) => void; appName?: string 
                         <p>Найти</p>
                     </TooltipContent>
                 </Tooltip>
-            </form>
+            </form> */}
             <Dialog>
                 <Tooltip>
                     <TooltipTrigger asChild>
                         <DialogTrigger asChild>
-                            <Button className="sm:hidden" type="submit" size={"icon"} variant={"outline"}>
-                                <Search className="h-[1.2rem] w-[1.2rem]" />
+                            <Button type="submit" size={"icon"} className="sm:w-52 sm:px-4 sm:py-2" variant={"outline"}>
+                                <Search className="h-[1.2rem] w-[1.2rem] mr-2" />
+                                <span className="text-secondary hidden sm:inline">Поиск</span>
                             </Button>
                         </DialogTrigger>
                     </TooltipTrigger>
