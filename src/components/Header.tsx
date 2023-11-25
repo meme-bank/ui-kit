@@ -68,9 +68,9 @@ const HeaderSearch: React.FC<{ search: (text: string) => void; appName?: string 
                 <Tooltip>
                     <TooltipTrigger asChild>
                         <DialogTrigger asChild>
-                            <Button type="submit" size={"icon"} className="sm:w-52 sm:px-4 sm:py-2" variant={"outline"}>
-                                <Search className="h-[1.2rem] w-[1.2rem] mr-2" />
-                                <span className="text-secondary hidden sm:inline">Поиск</span>
+                            <Button type="submit" size={"icon"} className="sm:w-52 sm:px-4 sm:py-2 sm:justify-start" variant={"outline"}>
+                                <Search className="h-[1.2rem] w-[1.2rem] sm:mr-2" />
+                                <span className="text-muted-foreground hidden sm:inline">Поиск</span>
                             </Button>
                         </DialogTrigger>
                     </TooltipTrigger>
