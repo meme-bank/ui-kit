@@ -81,7 +81,8 @@
     "LICENSE",
     "fonts",
     "sf-ui-stylesheet.css",
-    "vk-sans-stylesheet.css"
+    "vk-sans-stylesheet.css",
+    "tailwind.config.js"
   ],
   "dependencies": {
     "@radix-ui/react-avatar": "^1.0.3",
