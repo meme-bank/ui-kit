@@ -4,7 +4,7 @@ import { Check, ChevronRight, Circle } from "lucide-react"
 
 import { cn, useMediaQuery } from "@/lib/utils"
 import { Drawer, DrawerContent, DrawerHeader, DrawerPortal, DrawerProps, DrawerTitle, DrawerTrigger, DrawerClose, DrawerFooter, NestedDrawer } from "./drawer"
-import { ReponsibilityHOC } from "@/lib/hocs"
+import { ResponsibilityHOC } from "@/lib/hocs"
 import { Button } from "./button"
 import { DialogTitleProps } from "@radix-ui/react-dialog"
 
@@ -198,8 +198,8 @@ export const DropdownMenu: React.FC<DropdownMenuPrimitive.DropdownMenuProps & Dr
     <Drawer shouldScaleBackground open={!isDesktop && open} onOpenChange={setOpen} {...props} children={children} />
   </DropdownMenuNonResponsibility>
 }
-export const DropdownMenuTrigger = ReponsibilityHOC("(min-width: 768px)", DropdownMenuTriggerNonResponsibility, DrawerTrigger)
-export const DropdownMenuContent = ReponsibilityHOC("(min-width: 768px)", DropdownMenuContentNonResponsibility, DrawerContent)
+export const DropdownMenuTrigger = ResponsibilityHOC("(min-width: 768px)", DropdownMenuTriggerNonResponsibility, DrawerTrigger)
+export const DropdownMenuContent = ResponsibilityHOC("(min-width: 768px)", DropdownMenuContentNonResponsibility, DrawerContent)
 export const DropdownMenuSub: React.FC<DropdownMenuPrimitive.DropdownMenuProps & DrawerProps> = ({ children, ...props }) => {
   const [open, setOpen] = React.useState(false)
   const isDesktop = useMediaQuery("(min-width: 768px)")
@@ -208,10 +208,10 @@ export const DropdownMenuSub: React.FC<DropdownMenuPrimitive.DropdownMenuProps &
     <NestedDrawer shouldScaleBackground open={!isDesktop && open} onOpenChange={setOpen} {...props} children={children} />
   </DropdownMenuSubNonResponsibility>
 }
-export const DropdownMenuSubTrigger = ReponsibilityHOC("(min-width: 768px)", DropdownMenuSubTriggerNonResponsibility, DrawerTrigger)
-export const DropdownMenuSubContent = ReponsibilityHOC("(min-width: 768px)", DropdownMenuSubContentNonResponsibility, DrawerContent)
-export const DropdownMenuPortal = ReponsibilityHOC("(min-width: 768px)", DropdownMenuPortalNonResponsibility, DrawerPortal)
-export const DropdownMenuLabel = ReponsibilityHOC("(min-width: 768px)", DropdownMenuLabelNonResponsibility, (props: React.HTMLAttributes<HTMLDivElement>) => <DrawerHeader className="ms-text-lg ms-font-semibold ms-leading-none ms-tracking-tight" {...props} />)
+export const DropdownMenuSubTrigger = ResponsibilityHOC("(min-width: 768px)", DropdownMenuSubTriggerNonResponsibility, DrawerTrigger)
+export const DropdownMenuSubContent = ResponsibilityHOC("(min-width: 768px)", DropdownMenuSubContentNonResponsibility, DrawerContent)
+export const DropdownMenuPortal = ResponsibilityHOC("(min-width: 768px)", DropdownMenuPortalNonResponsibility, DrawerPortal)
+export const DropdownMenuLabel = ResponsibilityHOC("(min-width: 768px)", DropdownMenuLabelNonResponsibility, (props: React.HTMLAttributes<HTMLDivElement>) => <DrawerHeader className="ms-text-lg ms-font-semibold ms-leading-none ms-tracking-tight" {...props} />)
 //   DropdownMenuCheckboxItem,
 //   DropdownMenuRadioItem,
 //   DropdownMenuGroup,

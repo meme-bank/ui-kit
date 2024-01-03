@@ -43,3 +43,4 @@ export * from "@ui-components/navigator-block";
 
 // Libs
 export * from "@lib/utils";
+export * from "@lib/hocs";

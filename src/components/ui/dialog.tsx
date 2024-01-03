@@ -13,7 +13,7 @@ import {
 import { X } from "lucide-react"
 
 import { cn, useMediaQuery } from "@/lib/utils"
-import { ReponsibilityHOC } from "@/lib/hocs";
+import { ResponsibilityHOC } from "@/lib/hocs";
 
 const DialogNonResponsibility = DialogPrimitive.Root
 
@@ -115,12 +115,12 @@ const DialogDescriptionNonResponsibility = React.forwardRef<
 ))
 DialogDescriptionNonResponsibility.displayName = DialogPrimitive.Description.displayName
 
-const DialogContent = ReponsibilityHOC("(min-width: 768px)", DialogContentNonResponsibility, DrawerContent);
-const DialogTrigger = ReponsibilityHOC("(min-width: 768px)", DialogTriggerNonResponsibility, DrawerTrigger);
-const DialogHeader = ReponsibilityHOC("(min-width: 768px)", DialogHeaderNonResponsibility, DrawerHeader);
-const DialogFooter = ReponsibilityHOC("(min-width: 768px)", DialogFooterNonResponsibility, DrawerFooter);
-const DialogTitle = ReponsibilityHOC("(min-width: 768px)", DialogTitleNonResponsibility, DrawerTitle);
-const DialogDescription = ReponsibilityHOC("(min-width: 768px)", DialogDescriptionNonResponsibility, DrawerDescription);
+const DialogContent = ResponsibilityHOC("(min-width: 768px)", DialogContentNonResponsibility, DrawerContent);
+const DialogTrigger = ResponsibilityHOC("(min-width: 768px)", DialogTriggerNonResponsibility, DrawerTrigger);
+const DialogHeader = ResponsibilityHOC("(min-width: 768px)", DialogHeaderNonResponsibility, DrawerHeader);
+const DialogFooter = ResponsibilityHOC("(min-width: 768px)", DialogFooterNonResponsibility, DrawerFooter);
+const DialogTitle = ResponsibilityHOC("(min-width: 768px)", DialogTitleNonResponsibility, DrawerTitle);
+const DialogDescription = ResponsibilityHOC("(min-width: 768px)", DialogDescriptionNonResponsibility, DrawerDescription);
 const Dialog: React.FC<DialogPrimitive.DialogProps & DrawerProps> = (props) => {
   const [open, setOpen] = React.useState(false)
   const isDesktop = useMediaQuery("(min-width: 768px)")

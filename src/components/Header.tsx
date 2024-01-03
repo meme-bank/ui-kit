@@ -15,6 +15,7 @@ interface UserAccount {
     displayName: string;
     avatarSrc?: string;
     tag: string;
+    backgroundSrc?: string;
 }
 interface UserAccountActions {
     openMeduzaSanctum?: () => void;
@@ -214,7 +215,7 @@ const AuthMenu: React.FC<{ user: UserAccount; userActions: UserAccountActions; s
                 </TooltipContent>
             </Tooltip>
             <DropdownMenuContent>
-                <DropdownMenuLabel className="ms-rounded-xl ms-flex ms-justify-center md:ms-rounded ms-p-2 ms-m-2 md:ms-m-0" style={{ background: `url("https://sun9-6.userapi.com/impf/Y3wjEu05luVib6V9H-B_q8HyJpnROsnNa0ePXw/I7446H6ZaIE.jpg?size=1024x1024&quality=95&sign=06f1234cd4ee782250fa3ec21d69e7f4&type=album")`, backgroundSize: "cover", backgroundPosition: "center" }}>
+                <DropdownMenuLabel className="ms-rounded-xl ms-flex ms-justify-center md:ms-rounded ms-p-2 ms-m-2 md:ms-m-0" style={{ background: `url("${user.backgroundSrc}")`, backgroundSize: "cover", backgroundPosition: "center" }}>
                     <div className="ms-flex ms-text-center ms-aspect-square md:ms-aspect-auto md:ms-text-left ms-flex-col md:ms-flex-row ms-bg-background/75 ms-backdrop-blur ms-p-3 ms-rounded-xl md:ms-rounded ms-gap-2 ms-items-center ms-justify-center">
                         <StandardAvatar src={user.avatarSrc} fallback={user.displayName} className="ms-h-16 ms-w-16 md:ms-h-10 md:ms-w-10" />
                         <Separator className="ms-w-12 md:ms-w-px md:ms-h-12" />

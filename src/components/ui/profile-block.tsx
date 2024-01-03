@@ -13,7 +13,7 @@ interface UserType {
 }
 
 export interface ProfileBlockProps {
-    user?: Pick<UserType, "backgroundUrl" | "avatarUrl" | "displayname" | "tag">;
+    account?: Pick<UserType, "backgroundUrl" | "avatarUrl" | "displayname" | "tag">;
     skeletonLoad?: boolean;
     noFullWidth?: boolean;
     setAvatar?: () => void;
@@ -23,7 +23,7 @@ export interface ProfileBlockProps {
     avatarClassName?: ClassNameValue;
     displaynameClassName?: ClassNameValue;
     tagClassName?: ClassNameValue;
-    nameBlockClassName: ClassNameValue;
+    nameBlockClassName?: ClassNameValue;
 }
 
 export const ProfileBlockBackground: React.FC<React.PropsWithChildren<Pick<ProfileBlockProps, "className" | "setBg" | "skeletonLoad" | "noFullWidth"> & { backgroundUrl?: string }>> = ({ children, className, setBg, skeletonLoad, noFullWidth, backgroundUrl }) => {
@@ -43,27 +43,27 @@ export const ProfileBlockBackground: React.FC<React.PropsWithChildren<Pick<Profi
 
 export const ProfileInfoBlock: React.FC<{
     displaynameClassName?: ClassNameValue;
-    tagClassName?: ClassNameValue; nameBlockClassName?: ClassNameValue; avatarClassName?: ClassNameValue, user?: Pick<UserType, "backgroundUrl" | "avatarUrl" | "displayname" | "tag">; setAvatar?: () => void; className?: ClassNameValue;
-}> = ({ className, setAvatar, user, avatarClassName, displaynameClassName, tagClassName, nameBlockClassName }) => {
+    tagClassName?: ClassNameValue; nameBlockClassName?: ClassNameValue; avatarClassName?: ClassNameValue, account?: Pick<UserType, "backgroundUrl" | "avatarUrl" | "displayname" | "tag">; setAvatar?: () => void; className?: ClassNameValue;
+}> = ({ className, setAvatar, account, avatarClassName, displaynameClassName, tagClassName, nameBlockClassName }) => {
     return (
         <div className={cn("ms-border ms-h-40 ms-max-h-full ms-aspect-square ms-flex ms-items-center ms-flex-col ms-gap-1.5 ms-justify-evenly ms-p-2 ms-bg-background/90 ms-backdrop-blur-[2px] ms-rounded-md", className)}>
-            <StandardAvatar className={cn("ms-h-20 ms-w-20 ms-border ms-group/avatar ms-relative ms-aspect-square ms-max-h-full", avatarClassName)} fallback={user?.displayname} src={user?.avatarUrl}>
+            <StandardAvatar className={cn("ms-h-20 ms-w-20 ms-border ms-group/avatar ms-relative ms-aspect-square ms-max-h-full", avatarClassName)} fallback={account?.displayname} src={account?.avatarUrl}>
                 {setAvatar && <div onClick={setAvatar} className="ms-hidden ms-inset-0 ms-m-auto ms-bg-background/90 group-hover/avatar:ms-flex ms-duration-150 ms-justify-center ms-items-center ms-cursor-pointer ms-h-8 ms-w-8 ms-rounded-full ms-absolute ms-border ms-backdrop-blur-sm">
                     <Pencil className="ms-h-4 ms-w-4" />
                 </div>}
             </StandardAvatar>
             <div className={cn("ms-flex ms-items-center ms-flex-col", nameBlockClassName)}>
-                <h4 className={cn("ms-text-xs", displaynameClassName)}>{user?.displayname}</h4>
-                <p className={cn("ms-text-xs ms-text-muted-foreground", tagClassName)}>@{user?.tag}</p>
+                <h4 className={cn("ms-text-xs", displaynameClassName)}>{account?.displayname}</h4>
+                <p className={cn("ms-text-xs ms-text-muted-foreground", tagClassName)}>@{account?.tag}</p>
             </div>
         </div>
     );
 }
 
-export const ProfileBlock: React.FC<ProfileBlockProps> = ({ user, skeletonLoad, noFullWidth, setAvatar, setBg, className, infoClassName, avatarClassName, nameBlockClassName, displaynameClassName, tagClassName }) => {
+export const ProfileBlock: React.FC<ProfileBlockProps> = ({ account, skeletonLoad, noFullWidth, setAvatar, setBg, className, infoClassName, avatarClassName, nameBlockClassName, displaynameClassName, tagClassName }) => {
     return (
-        <ProfileBlockBackground skeletonLoad={skeletonLoad} noFullWidth={noFullWidth} backgroundUrl={user?.backgroundUrl} className={className} setBg={setBg}>
-            <ProfileInfoBlock user={user} setAvatar={setAvatar} className={infoClassName} avatarClassName={avatarClassName} nameBlockClassName={nameBlockClassName} displaynameClassName={displaynameClassName} tagClassName={tagClassName} />
+        <ProfileBlockBackground skeletonLoad={skeletonLoad} noFullWidth={noFullWidth} backgroundUrl={account?.backgroundUrl} className={className} setBg={setBg}>
+            <ProfileInfoBlock account={account} setAvatar={setAvatar} className={infoClassName} avatarClassName={avatarClassName} nameBlockClassName={nameBlockClassName} displaynameClassName={displaynameClassName} tagClassName={tagClassName} />
         </ProfileBlockBackground>
     )
 }
