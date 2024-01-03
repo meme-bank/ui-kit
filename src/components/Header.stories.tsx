@@ -26,7 +26,8 @@ export const Authorized: Story = {
             displayName: "Уртём Альянов"
         },
         balance: {
-            balance: 100000
+            balance: 100000,
+            currencyImageSrc: "http://192.168.0.28:5000/api/photo/d88bf937-6737-49df-a8da-110c04d72dc5"
         },
         search(text) {
             console.log(text);

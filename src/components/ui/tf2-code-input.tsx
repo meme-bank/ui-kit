@@ -116,7 +116,7 @@ export const TF2CodeInput: React.FC<Props> = ({ valueLength, value, onChange }) 
     }
 
     return (
-        <div className={"flex gap-1"}>
+        <div className={"ms-flex ms-gap-1"}>
             {valueItems.map((digit, idx) => (
                 <Input
                     key={idx}
@@ -125,7 +125,7 @@ export const TF2CodeInput: React.FC<Props> = ({ valueLength, value, onChange }) 
                     autoComplete="one-time-code"
                     pattern="\d{1}"
                     maxLength={valueLength}
-                    className={"aspect-square w-auto text-center"}
+                    className={"ms-aspect-square ms-w-auto ms-text-center"}
                     value={digit}
                     onChange={(e) => inputOnChange(e, idx)}
                     onKeyDown={inputOnKeyDown}

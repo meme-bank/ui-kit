@@ -16,16 +16,16 @@ export interface InputFormFieldProps extends InputProps {
 export const InputFormField: React.FC<InputFormFieldProps> = ({ label, name, skeletonLoad, placeholder, description, LabelIcon, ...props }) => {
     if (skeletonLoad) {
         return (
-            <div className="space-y-2">
-                <Skeleton className="inline-block leading-none text-sm font-medium rounded-md">
-                    <span className="invisible inline-flex items-center gap-2">
+            <div className="ms-space-y-2">
+                <Skeleton className="ms-inline-block ms-leading-none ms-text-sm ms-font-medium ms-rounded-md">
+                    <span className="ms-invisible ms-inline-flex ms-items-center ms-gap-2">
                         {LabelIcon && <LabelIcon className="h-4 w-4" />}
                         {label}
                     </span>
                 </Skeleton>
-                <Skeleton className="h-10 w-full rounded-md px-3 py-2 text-sm" />
-                <Skeleton className="inline-block rounded-md">
-                    <span className="invisible text-sm text-muted-foreground">{description}</span>
+                <Skeleton className="ms-h-10 ms-w-full ms-rounded-md ms-px-3 ms-py-2 ms-text-sm" />
+                <Skeleton className="ms-inline-block ms-rounded-md">
+                    <span className="ms-invisible ms-text-sm ms-text-muted-foreground">{description}</span>
                 </Skeleton>
             </div>
         )
@@ -35,7 +35,7 @@ export const InputFormField: React.FC<InputFormFieldProps> = ({ label, name, ske
             <FormItem>
                 {label &&
                     <FormLabel>
-                        <span className="flex items-center gap-2">
+                        <span className="ms-flex ms-items-center ms-gap-2">
                             {LabelIcon && <LabelIcon className="h-4 w-4" />}
                             {label}
                         </span>

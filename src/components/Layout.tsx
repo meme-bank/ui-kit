@@ -4,12 +4,12 @@ import { Footer } from "./Footer";
 
 export const Layout: React.FC<React.PropsWithChildren> = ({ children }) => {
     return (
-        <div className="flex flex-col gap-4">
-            <div className="h-14" />
-            <div className="p-2 mx-auto container">
+        <div className="ms-flex ms-flex-col ms-gap-4">
+            <div className="ms-h-14" />
+            <div className="ms-p-2 ms-mx-auto ms-container">
                 {children}
             </div>
-            <Separator className="container mx-auto" />
+            <Separator className="ms-container ms-mx-auto" />
             <Footer />
         </div>
     );

@@ -11,13 +11,13 @@ interface IPageBlockErrorProps {
 export const PageBlockError: React.FC<IPageBlockErrorProps> = ({ close, error }) => {
     return (
         <PageBlock error>
-            <div className="flex items-center justify-between">
-                <h3 className="font-vksans font-semibold text-lg text-red-800 dark:text-red-100">Ошибка</h3>
-                <Button onClick={close} size={"icon"} className={"bg-transparent w-7 h-7 hover:bg-red-200 dark:hover:bg-red-600 text-red-800 dark:text-red-100"}>
-                    <X className="h-[1rem] w-[1rem]" />
+            <div className="ms-flex ms-items-center ms-justify-between">
+                <h3 className="ms-font-vksans ms-font-semibold ms-text-lg ms-text-destructive-foreground">Ошибка</h3>
+                <Button onClick={close} size={"icon"} className={"ms-bg-transparent ms-w-7 ms-h-7 hover:ms-bg-red-200 dark:hover:ms-bg-red-600 ms-text-red-800 dark:ms-text-red-100"}>
+                    <X className="ms-h-[1rem] ms-w-[1rem]" />
                 </Button>
             </div>
-            <p className="font-vksans text-sm">{error}</p>
+            <p className="ms-font-vksans ms-text-sm">{error}</p>
         </PageBlock>
     )
 }

@@ -11,8 +11,8 @@ export const LoadingDialog: React.FC = () => {
                     <DialogDescription>Заварите чайку, пока мы что-то грузим ;)</DialogDescription>
                 </DialogHeader>
                 <DialogFooter>
-                    <div className="flex items-center justify-center">
-                        <Loader2 className="aspect-square w-8 h-8 animate-spin" />
+                    <div className="ms-flex ms-items-center ms-justify-center">
+                        <Loader2 className="ms-aspect-square ms-w-8 ms-h-8 ms-animate-spin" />
                     </div>
                 </DialogFooter>
             </DialogContent>

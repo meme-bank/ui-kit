@@ -20,7 +20,7 @@ export const QrCode: React.FC<{ text: string; suffix?: string; logo?: string; }>
     );
 
     return (
-        <div className="p-4 rounded-md border bg-white aspect-square w-52 max-w-full">
+        <div className="ms-p-4 ms-rounded-md ms-border ms-bg-white ms-aspect-square ms-w-52 ms-max-w-full">
             <img src={
                 `data:image/svg+xml;base64,${Buffer.from(
                     elem.trim()

@@ -9,7 +9,6 @@
     :root {
       color-scheme: light;
       
-      
       --background: 0 0% 100%;
       --foreground: 0 0% 3.9%;
       --card: 0 0% 100%;
@@ -60,21 +59,21 @@
  
 @layer base {
   * {
-    @apply border-border border-solid;
+    @apply ms-border-border ms-border-solid;
   }
   /* html {
     scrollbar-gutter: stable;
   } */
   body {
-    @apply bg-background text-foreground font-sf-display;
+    @apply ms-bg-background ms-text-foreground ms-font-sf-display;
   }
   ::-webkit-scrollbar {
-    @apply w-2 h-2;
+    @apply ms-w-2 ms-h-2;
   }
   ::-webkit-scrollbar-track {
-    @apply bg-background;
+    @apply ms-bg-background;
   }
   ::-webkit-scrollbar-thumb {
-    @apply bg-secondary hover:bg-primary rounded-md shadow-md duration-150;
+    @apply ms-bg-secondary hover:ms-bg-primary ms-rounded-md ms-shadow-md ms-duration-150;
   }
 }

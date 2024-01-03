@@ -8,7 +8,7 @@ export interface NavigationLayoutType extends React.FC<React.PropsWithChildren<{
 
 export const NavigationLayout: NavigationLayoutType = ({ children, className }) => {
     return (
-        <div className={cn("flex flex-col lg:grid lg:grid-cols-5 gap-4", className)}>
+        <div className={cn("ms-flex ms-flex-col lg:ms-grid lg:ms-grid-cols-5 ms-gap-4", className)}>
             {children}
         </div>
     )
@@ -16,7 +16,7 @@ export const NavigationLayout: NavigationLayoutType = ({ children, className }) 
 
 NavigationLayout.NavigatorBlock = ({ children, className }) => {
     return (
-        <div className={cn("col-span-1 z-10 flex flex-col gap-4", className)}>
+        <div className={cn("ms-col-span-1 ms-z-10 ms-flex ms-flex-col ms-gap-4", className)}>
             {children}
         </div>
     )
@@ -24,6 +24,6 @@ NavigationLayout.NavigatorBlock = ({ children, className }) => {
 
 NavigationLayout.PageBlock = ({ children, className }) => {
     return (
-        <div className={cn("col-span-4", className)}>{children}</div>
+        <div className={cn("ms-col-span-4", className)}>{children}</div>
     )
 };

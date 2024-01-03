@@ -6,7 +6,7 @@ import { StandardAvatar } from "@ui-components/avatar"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@ui-components/dropdown-menu";
 import { Separator } from "@ui-components/separator";
 import { nFormatter } from "@/lib/utils";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
 import { Input } from "./ui/input";
 import { useForm } from "react-hook-form";
 import { Logotype, LogotypeProps } from "./ui/logotype";
@@ -25,6 +25,7 @@ interface UserAccountActions {
 interface Balance {
     balance: number;
     unReadTransaction?: boolean;
+    currencyImageSrc?: string;
     openTransactions?: () => void;
     buy?: () => void;
     transaction?: () => void;
@@ -51,26 +52,13 @@ const HeaderSearch: React.FC<{ search: (text: string) => void; appName?: string 
 
     return (
         <>
-            {/* <form onSubmit={handleSubmit(({ search: text }) => search(text))} className="hidden sm:flex flex-row items-center gap-1">
-                <Input type="search" {...register("search")} className="w-52 max-w-full" placeholder="Поиск" />
-                <Tooltip>
-                    <TooltipTrigger asChild>
-                        <Button type="submit" size={"icon"} variant={"secondary"}>
-                            <Search className="h-[1.2rem] w-[1.2rem]" />
-                        </Button>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                        <p>Найти</p>
-                    </TooltipContent>
-                </Tooltip>
-            </form> */}
             <Dialog>
                 <Tooltip>
                     <TooltipTrigger asChild>
                         <DialogTrigger asChild>
-                            <Button type="submit" size={"icon"} className="sm:w-52 sm:px-3 sm:py-2 sm:justify-start" variant={"outline"}>
-                                <Search className="h-[1.2rem] w-[1.2rem] sm:mr-3" />
-                                <span className="text-muted-foreground hidden sm:inline">Поиск</span>
+                            <Button type="submit" size={"icon"} className="sm:ms-w-52 sm:ms-px-3 sm:ms-py-2 sm:ms-justify-start" variant={"outline"}>
+                                <Search className="ms-h-[1.2rem] ms-w-[1.2rem] sm:ms-mr-3" />
+                                <span className="ms-text-muted-foreground ms-hidden sm:ms-inline">Поиск</span>
                             </Button>
                         </DialogTrigger>
                     </TooltipTrigger>
@@ -83,13 +71,15 @@ const HeaderSearch: React.FC<{ search: (text: string) => void; appName?: string 
                         <DialogTitle>Поиск</DialogTitle>
                         <DialogDescription>Найти сущность на {appName || "НБМ"}</DialogDescription>
                     </DialogHeader>
-                    <form onSubmit={handleSubmit(({ search: text }) => search(text))} className="flex-row flex items-center gap-1">
-                        <Input type="search" {...register("search")} placeholder="Поиск" />
-                        <Button type="submit" variant={"secondary"}>
-                            <Search className="h-4 w-4 mr-2" />
-                            Найти
-                        </Button>
-                    </form>
+                    <DialogFooter>
+                        <form onSubmit={handleSubmit(({ search: text }) => search(text))} className="ms-flex-row ms-flex ms-w-full ms-items-center ms-gap-1">
+                            <Input {...register("search")} placeholder="Поиск" />
+                            <Button type="submit" variant={"secondary"}>
+                                <Search className="ms-h-4 ms-w-4 ms-mr-2" />
+                                Найти
+                            </Button>
+                        </form>
+                    </DialogFooter>
                 </DialogContent>
             </Dialog>
         </>
@@ -103,9 +93,9 @@ const ThemeSwitcher: React.FC<{ themeSwitch: (theme: 'light' | 'dark' | 'system'
                 <TooltipTrigger asChild>
                     <DropdownMenuTrigger asChild>
                         <Button variant="outline" size="icon">
-                            <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                            <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-                            <span className="sr-only">Тема</span>
+                            <Sun className="ms-h-[1.2rem] ms-w-[1.2rem] ms-rotate-0 ms-scale-100 ms-transition-all dark:ms--rotate-90 dark:ms-scale-0" />
+                            <Moon className="ms-absolute ms-h-[1.2rem] ms-w-[1.2rem] ms-rotate-90 ms-scale-0 ms-transition-all dark:ms-rotate-0 dark:ms-scale-100" />
+                            <span className="ms-sr-only">Тема</span>
                         </Button>
                     </DropdownMenuTrigger>
                 </TooltipTrigger>
@@ -117,15 +107,15 @@ const ThemeSwitcher: React.FC<{ themeSwitch: (theme: 'light' | 'dark' | 'system'
                 <DropdownMenuLabel>Тема</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={() => themeSwitch?.('light')}>
-                    <Sun className="h-4 w-4 rotate-0 scale-100 transition-all mr-2" />
+                    <Sun className="ms-h-4 ms-w-4 ms-rotate-0 ms-scale-100 ms-transition-all ms-mr-2" />
                     Светлая
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => themeSwitch?.('dark')}>
-                    <Moon className="h-4 w-4 rotate-0 scale-100 transition-all mr-2" />
+                    <Moon className="ms-h-4 ms-w-4 ms-rotate-0 ms-scale-100 ms-transition-all ms-mr-2" />
                     Тёмная
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => themeSwitch?.('system')}>
-                    <Computer className="h-4 w-4 rotate-0 scale-100 transition-all mr-2" />
+                    <Computer className="ms-h-4 ms-w-4 ms-rotate-0 ms-scale-100 ms-transition-all ms-mr-2" />
                     Системная
                 </DropdownMenuItem>
             </DropdownMenuContent>
@@ -139,8 +129,8 @@ const NotificationDialog: React.FC<{ unReadNotify?: boolean; Notifications?: Rea
             <Tooltip>
                 <TooltipTrigger asChild>
                     <DialogTrigger asChild>
-                        <Button variant="outline" className={unReadNotify ? "relative after:animate-bounce after:-right-1 after:-bottom-1 after:border-2 after:border-background after:absolute after:rounded-full after:h-3 after:aspect-square after:bg-primary" : undefined} size={"icon"}>
-                            <Bell className="h-[1.2rem] w-[1.2rem]" />
+                        <Button variant="outline" className={unReadNotify ? "ms-relative after:ms-animate-bounce after:-ms-right-1 after:-ms-bottom-1 after:ms-border-2 after:ms-border-background after:ms-absolute after:ms-rounded-full after:ms-h-3 after:ms-aspect-square after:ms-bg-primary" : undefined} size={"icon"}>
+                            <Bell className="ms-h-[1.2rem] ms-w-[1.2rem]" />
                         </Button>
                     </DialogTrigger>
                 </TooltipTrigger>
@@ -151,9 +141,9 @@ const NotificationDialog: React.FC<{ unReadNotify?: boolean; Notifications?: Rea
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>
-                        <p className="flex flex-row gap-2 items-center">
-                            <div className={unReadNotify ? "relative after:animate-bounce after:-left-1 after:-top-1 after:border-2 after:border-background after:absolute after:rounded-full after:h-3 after:aspect-square after:bg-primary" : undefined}>
-                                <Bell className={"h-4 w-4 relative"} />
+                        <p className="ms-flex ms-flex-row ms-gap-2 ms-items-center ms-justify-center sm:ms-justify-start">
+                            <div className={unReadNotify ? "ms-relative after:ms-animate-bounce after:-ms-left-1 after:-ms-top-1 after:ms-border-2 after:ms-border-background after:ms-absolute after:ms-rounded-full after:ms-h-3 after:ms-aspect-square after:ms-bg-primary" : undefined}>
+                                <Bell className={"ms-h-4 ms-w-4 ms-relative"} />
                             </div>
                             Уведомления
                         </p>
@@ -174,10 +164,10 @@ const BalanceMenu: React.FC<Balance> = (balance) => {
             <Tooltip>
                 <TooltipTrigger asChild>
                     <DropdownMenuTrigger asChild>
-                        <Button variant={"outline"}>
-                            <Wallet className="w-4 h-4 mr-2" />
-                            <p className="text-ellipsis overflow-hidden whitespace-nowrap w-8 max-w-full">{balance?.balance && nFormatter(balance.balance)}</p>
-                            <p className="ml-2">L</p>
+                        <Button variant={"outline"} className="ms-flex ms-items-center">
+                            <Wallet className="ms-w-4 ms-h-4 ms-mr-2" />
+                            <p className="ms-text-ellipsis ms-overflow-hidden ms-whitespace-nowrap ms-w-8 ms-max-w-full">{balance?.balance && nFormatter(balance.balance)}</p>
+                            <img src={balance.currencyImageSrc} alt="Balance Currency" className="dark:ms-invert ms-brightness-0 ms-w-3 ms-h-3" />
                         </Button>
                     </DropdownMenuTrigger>
                 </TooltipTrigger>
@@ -191,15 +181,15 @@ const BalanceMenu: React.FC<Balance> = (balance) => {
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={balance?.transaction}>
-                    <Coins className="mr-2 h-4 w-4" />
+                    <Coins className="ms-mr-2 ms-h-4 ms-w-4" />
                     Перевести
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={balance?.openTransactions}>
-                    <Receipt className="mr-2 h-4 w-4" />
+                    <Receipt className="ms-mr-2 ms-h-4 ms-w-4" />
                     Транзакции
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={balance?.buy}>
-                    <RussianRuble className="mr-2 h-4 w-4" />
+                    <RussianRuble className="ms-mr-2 ms-h-4 ms-w-4" />
                     Купить
                 </DropdownMenuItem>
             </DropdownMenuContent>
@@ -213,9 +203,9 @@ const AuthMenu: React.FC<{ user: UserAccount; userActions: UserAccountActions; s
             <Tooltip>
                 <TooltipTrigger asChild>
                     <DropdownMenuTrigger asChild>
-                        <Button variant={"outline"} className="p-1.5 px-2 flex items-center gap-1" >
-                            <StandardAvatar className="h-7 w-7" src={user.avatarSrc} fallback={user.displayName} />
-                            <p className="hidden md:block text-xs text-ellipsis overflow-hidden whitespace-nowrap w-20 max-w-full">{user.displayName}</p>
+                        <Button variant={"outline"} size={"none"} className="ms-p-0 ms-h-10 ms-overflow-hidden hover:ms-opacity-70 hover:md:ms-opacity-100 md:ms-p-1.5 md:ms-px-2 ms-items-center ms-gap-1" >
+                            <StandardAvatar className="ms-h-10 md:ms-w-7 ms-w-10 md:ms-h-7 ms-rounded-none md:ms-rounded-full" src={user.avatarSrc} fallback={user.displayName} />
+                            <p className="ms-hidden md:ms-block ms-text-xs ms-text-ellipsis ms-overflow-hidden ms-whitespace-nowrap ms-w-20 ms-max-w-full">{user.displayName}</p>
                         </Button>
                     </DropdownMenuTrigger>
                 </TooltipTrigger>
@@ -224,31 +214,31 @@ const AuthMenu: React.FC<{ user: UserAccount; userActions: UserAccountActions; s
                 </TooltipContent>
             </Tooltip>
             <DropdownMenuContent>
-                <DropdownMenuLabel>
-                    <div className="flex gap-2 h-12 items-center">
-                        <StandardAvatar src={user.avatarSrc} fallback={user.displayName} />
-                        <Separator orientation="vertical" />
-                        <div className="flex flex-col gap-[2px]">
-                            <p>{user.displayName}</p>
-                            <p className="text-xs text-muted-foreground">@{user.tag}</p>
+                <DropdownMenuLabel className="ms-rounded-xl ms-flex ms-justify-center md:ms-rounded ms-p-2 ms-m-2 md:ms-m-0" style={{ background: `url("https://sun9-6.userapi.com/impf/Y3wjEu05luVib6V9H-B_q8HyJpnROsnNa0ePXw/I7446H6ZaIE.jpg?size=1024x1024&quality=95&sign=06f1234cd4ee782250fa3ec21d69e7f4&type=album")`, backgroundSize: "cover", backgroundPosition: "center" }}>
+                    <div className="ms-flex ms-text-center ms-aspect-square md:ms-aspect-auto md:ms-text-left ms-flex-col md:ms-flex-row ms-bg-background/75 ms-backdrop-blur ms-p-3 ms-rounded-xl md:ms-rounded ms-gap-2 ms-items-center ms-justify-center">
+                        <StandardAvatar src={user.avatarSrc} fallback={user.displayName} className="ms-h-16 ms-w-16 md:ms-h-10 md:ms-w-10" />
+                        <Separator className="ms-w-12 md:ms-w-px md:ms-h-12" />
+                        <div className="ms-flex ms-flex-col">
+                            <p className="ms-font-vksans ms-font-semibold">{user.displayName}</p>
+                            <p className="ms-text-xs ms-text-muted-foreground">@{user.tag}</p>
                         </div>
                     </div>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={userActions?.open}>
-                    <User className="mr-2 h-4 w-4" />
+                    <User className="ms-mr-2 ms-h-4 ms-w-4" />
                     Профиль
                 </DropdownMenuItem>
                 {sanctumShow && <DropdownMenuItem onClick={userActions?.openMeduzaSanctum}>
-                    <Lock className="mr-2 h-4 w-4" />
+                    <Lock className="ms-mr-2 ms-h-4 ms-w-4" />
                     Аккаунт НБМ<sup className="text-muted-foreground">Sanctum</sup>
                 </DropdownMenuItem>}
                 <DropdownMenuItem onClick={userActions?.goverment}>
-                    <Flag className="mr-2 h-4 w-4" />
+                    <Flag className="ms-mr-2 ms-h-4 ms-w-4" />
                     Государство
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={userActions?.logOut} className="text-red-500 focus:text-red-500">
-                    <LogOut className="mr-2 h-4 w-4" />
+                <DropdownMenuItem onClick={userActions?.logOut} className="ms-text-red-500 focus:ms-text-red-500">
+                    <LogOut className="ms-mr-2 ms-h-4 ms-w-4" />
                     Выйти
                 </DropdownMenuItem>
             </DropdownMenuContent>
@@ -257,13 +247,13 @@ const AuthMenu: React.FC<{ user: UserAccount; userActions: UserAccountActions; s
 }
 
 export const Header: React.FC<HeaderProps> = ({ returnToBank, search, unReadNotify = false, sanctumShow, logo, Notifications, user, login, userActions, themeSwitch, useTooltipProvider = true, balance, homePage }) => {
-    const Component = <div className="w-full top-0 left-0 h-14 fixed z-50">
-        <div className="flex bg-background/90 rounded-b-md backdrop-blur-sm shadow-md flex-row border border-t-0 justify-between h-full gap-1 p-2 container">
-            <div className="flex flex-row items-center gap-1">
+    const Component = <div className="ms-w-full ms-top-0 ms-left-0 ms-h-14 ms-fixed ms-z-50">
+        <div className="ms-flex ms-bg-background/90 ms-rounded-b-md ms-backdrop-blur-sm ms-shadow-md ms-flex-row ms-border ms-border-t-0 ms-justify-between ms-h-full ms-gap-1 ms-p-2 ms-container">
+            <div className="ms-flex ms-flex-row ms-items-center ms-gap-1">
                 {returnToBank && <Tooltip>
                     <TooltipTrigger asChild>
                         <Button onClick={returnToBank} size={"icon"} variant={"ghost"}>
-                            <X className="h-[1.2rem] w-[1.2rem]" />
+                            <X className="ms-h-[1.2rem] ms-w-[1.2rem]" />
                         </Button>
                     </TooltipTrigger>
                     <TooltipContent>
@@ -272,7 +262,7 @@ export const Header: React.FC<HeaderProps> = ({ returnToBank, search, unReadNoti
                 </Tooltip>}
                 <Tooltip>
                     <TooltipTrigger asChild>
-                        <Button variant={"ghost"} onClick={homePage} className="px-1.5">
+                        <Button variant={"ghost"} onClick={homePage} className="ms-px-1.5">
                             <Logotype
                                 {...logo}
                             />
@@ -284,7 +274,7 @@ export const Header: React.FC<HeaderProps> = ({ returnToBank, search, unReadNoti
                 </Tooltip>
                 {search && <HeaderSearch search={search} appName={logo?.appName} />}
             </div>
-            <div className="flex flex-row items-center gap-1">
+            <div className="ms-flex ms-flex-row ms-items-center ms-gap-1">
                 {themeSwitch && <ThemeSwitcher themeSwitch={themeSwitch} />}
                 {user && <>
                     <NotificationDialog Notifications={Notifications} unReadNotify={unReadNotify} />
@@ -292,7 +282,7 @@ export const Header: React.FC<HeaderProps> = ({ returnToBank, search, unReadNoti
                     <AuthMenu user={user} userActions={userActions || {}} sanctumShow={sanctumShow} />
                 </>}
                 {(!user && login) && <Button onClick={login} variant={"outline"}>
-                    <LogIn className="mr-2 h-4 w-4" />
+                    <LogIn className="ms-mr-2 ms-h-4 ms-w-4" />
                     Войти
                 </Button>}
             </div>

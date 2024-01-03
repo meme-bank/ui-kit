@@ -80,5 +80,6 @@ module.exports = {
       },
     },
   },
+  prefix: "ms-",
   plugins: [require("tailwindcss-animate")],
 }

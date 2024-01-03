@@ -1,114 +1,132 @@
 import * as React from "react"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
+import {
+  Drawer,
+  DrawerTrigger,
+  DrawerContent,
+  DrawerHeader,
+  DrawerFooter,
+  DrawerTitle,
+  DrawerDescription,
+  DrawerProps,
+} from "./drawer";
 import { X } from "lucide-react"
 
-import { cn } from "@/lib/utils"
+import { cn, useMediaQuery } from "@/lib/utils"
+import { ReponsibilityHOC } from "@/lib/hocs";
 
-const Dialog = DialogPrimitive.Root
+const DialogNonResponsibility = DialogPrimitive.Root
 
-const DialogTrigger = DialogPrimitive.Trigger
+const DialogTriggerNonResponsibility = DialogPrimitive.Trigger
 
-const DialogPortal = ({
-  className,
-  ...props
-}: DialogPrimitive.DialogPortalProps) => (
-  <DialogPrimitive.Portal className={cn(className)} {...props} />
-)
-DialogPortal.displayName = DialogPrimitive.Portal.displayName
+const DialogPortalNonResponsibility = DialogPrimitive.Portal
 
-const DialogOverlay = React.forwardRef<
+const DialogOverlayNonResponsibility = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Overlay>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Overlay
     ref={ref}
     className={cn(
-      "fixed inset-0 z-50 bg-background/80 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+      "ms-fixed ms-inset-0 ms-z-50 ms-bg-background/80 ms-backdrop-blur-sm ms-data-[state=open]:animate-in ms-data-[state=closed]:animate-out ms-data-[state=closed]:fade-out-0 ms-data-[state=open]:fade-in-0",
       className
     )}
     {...props}
   />
 ))
-DialogOverlay.displayName = DialogPrimitive.Overlay.displayName
+DialogOverlayNonResponsibility.displayName = DialogPrimitive.Overlay.displayName
 
-const DialogContent = React.forwardRef<
+const DialogContentNonResponsibility = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & { autoClose?: boolean }
 >(({ className, children, autoClose = false, ...props }, ref) => (
-  <DialogPortal>
-    <DialogOverlay />
+  <DialogPortalNonResponsibility>
+    <DialogOverlayNonResponsibility />
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        "fixed left-[50%] top-[50%] z-50 grid w-full max-h-screen overflow-y-auto max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg md:w-full",
+        "ms-fixed ms-left-[50%] ms-top-[50%] ms-z-50 ms-grid ms-w-full ms-max-h-screen ms-overflow-y-auto ms-max-w-lg ms-translate-x-[-50%] ms-translate-y-[-50%] ms-gap-4 ms-border ms-bg-background ms-p-6 ms-shadow-lg ms-duration-200 data-[state=open]:ms-animate-in data-[state=closed]:ms-animate-out data-[state=closed]:ms-fade-out-0 data-[state=open]:ms-fade-in-0 data-[state=closed]:ms-zoom-out-95 data-[state=open]:ms-zoom-in-95 data-[state=closed]:ms-slide-out-to-left-1/2 data-[state=closed]:ms-slide-out-to-top-[48%] data-[state=open]:ms-slide-in-from-left-1/2 data-[state=open]:ms-slide-in-from-top-[48%] sm:ms-rounded-lg md:ms-w-full",
         className
       )}
       {...props}
     >
       {children}
-      {!autoClose && <DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
-        <X className="h-4 w-4" />
-        <span className="sr-only">Close</span>
+      {!autoClose && <DialogPrimitive.Close className={cn("ms-absolute ms-right-4 ms-top-4 ms-rounded-sm ms-opacity-70 ms-ring-offset-background ms-transition-opacity hover:ms-opacity-100 focus:ms-outline-none focus:ms-ring-2 focus:ms-ring-ring focus:ms-ring-offset-2 disabled:ms-pointer-events-none data-[state=open]:ms-bg-accent data-[state=open]:ms-text-muted-foreground")}>
+        <X className="ms-h-4 ms-w-4" />
+        <span className="ms-sr-only">Close</span>
       </DialogPrimitive.Close>}
     </DialogPrimitive.Content>
-  </DialogPortal>
+  </DialogPortalNonResponsibility>
 ))
-DialogContent.displayName = DialogPrimitive.Content.displayName
+DialogContentNonResponsibility.displayName = DialogPrimitive.Content.displayName
 
-const DialogHeader = ({
+const DialogHeaderNonResponsibility = ({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
-      "flex flex-col space-y-1.5 text-center sm:text-left",
+      "ms-flex ms-flex-col ms-space-y-1.5 ms-text-center sm:ms-text-left",
       className
     )}
     {...props}
   />
 )
-DialogHeader.displayName = "DialogHeader"
+DialogHeaderNonResponsibility.displayName = "DialogHeader"
 
-const DialogFooter = ({
+const DialogFooterNonResponsibility = ({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
-      "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
+      "ms-flex ms-flex-col-reverse sm:ms-flex-row sm:ms-justify-end sm:ms-space-x-2",
       className
     )}
     {...props}
   />
 )
-DialogFooter.displayName = "DialogFooter"
+DialogFooterNonResponsibility.displayName = "DialogFooter"
 
-const DialogTitle = React.forwardRef<
+const DialogTitleNonResponsibility = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Title>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Title
     ref={ref}
     className={cn(
-      "text-lg font-semibold leading-none tracking-tight",
+      "ms-text-lg ms-font-semibold ms-leading-none ms-tracking-tight",
       className
     )}
     {...props}
   />
 ))
-DialogTitle.displayName = DialogPrimitive.Title.displayName
+DialogTitleNonResponsibility.displayName = DialogPrimitive.Title.displayName
 
-const DialogDescription = React.forwardRef<
+const DialogDescriptionNonResponsibility = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Description>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Description
     ref={ref}
-    className={cn("text-sm text-muted-foreground", className)}
+    className={cn("ms-text-sm ms-text-muted-foreground", className)}
     {...props}
   />
 ))
-DialogDescription.displayName = DialogPrimitive.Description.displayName
+DialogDescriptionNonResponsibility.displayName = DialogPrimitive.Description.displayName
+
+const DialogContent = ReponsibilityHOC("(min-width: 768px)", DialogContentNonResponsibility, DrawerContent);
+const DialogTrigger = ReponsibilityHOC("(min-width: 768px)", DialogTriggerNonResponsibility, DrawerTrigger);
+const DialogHeader = ReponsibilityHOC("(min-width: 768px)", DialogHeaderNonResponsibility, DrawerHeader);
+const DialogFooter = ReponsibilityHOC("(min-width: 768px)", DialogFooterNonResponsibility, DrawerFooter);
+const DialogTitle = ReponsibilityHOC("(min-width: 768px)", DialogTitleNonResponsibility, DrawerTitle);
+const DialogDescription = ReponsibilityHOC("(min-width: 768px)", DialogDescriptionNonResponsibility, DrawerDescription);
+const Dialog: React.FC<DialogPrimitive.DialogProps & DrawerProps> = (props) => {
+  const [open, setOpen] = React.useState(false)
+  const isDesktop = useMediaQuery("(min-width: 768px)")
+
+  return isDesktop ? <DialogNonResponsibility shouldScaleBackground open={open} onOpenChange={setOpen} {...props} /> : <Drawer open={open} onOpenChange={setOpen} {...props} />
+}
 
 export {
   Dialog,
@@ -118,4 +136,11 @@ export {
   DialogFooter,
   DialogTitle,
   DialogDescription,
+  DialogNonResponsibility,
+  DialogTriggerNonResponsibility,
+  DialogContentNonResponsibility,
+  DialogHeaderNonResponsibility,
+  DialogFooterNonResponsibility,
+  DialogTitleNonResponsibility,
+  DialogDescriptionNonResponsibility
 }
