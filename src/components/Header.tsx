@@ -168,7 +168,7 @@ const BalanceMenu: React.FC<Balance> = (balance) => {
                     <DropdownMenuTrigger asChild>
                         <Button variant={"outline"} className="ms-flex ms-items-center">
                             <Wallet className="ms-w-4 ms-h-4 ms-mr-2" />
-                            <p className="ms-whitespace-nowrap ms-flex ms-gap-0.5 ms-w-8 ms-max-w-full">
+                            <p className="ms-whitespace-nowrap ms-flex ms-items-center ms-gap-0.5 ms-w-8 ms-max-w-full">
                                 <span className="ms-text-ellipsis ms-overflow-hidden">
                                     {balance?.balance && (nFormatter(balance.balance))}
                                 </span>
