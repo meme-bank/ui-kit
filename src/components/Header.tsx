@@ -27,6 +27,7 @@ interface Balance {
     balance: number;
     unReadTransaction?: boolean;
     currencyImageSrc?: string;
+    currencyId?: string;
     openTransactions?: () => void;
     buy?: () => void;
     transaction?: () => void;
@@ -167,8 +168,12 @@ const BalanceMenu: React.FC<Balance> = (balance) => {
                     <DropdownMenuTrigger asChild>
                         <Button variant={"outline"} className="ms-flex ms-items-center">
                             <Wallet className="ms-w-4 ms-h-4 ms-mr-2" />
-                            <p className="ms-text-ellipsis ms-overflow-hidden ms-whitespace-nowrap ms-w-8 ms-max-w-full">{balance?.balance && nFormatter(balance.balance)}</p>
-                            <img src={balance.currencyImageSrc} alt="Balance Currency" className="dark:ms-invert ms-brightness-0 ms-w-3 ms-h-3" />
+                            <p className="ms-whitespace-nowrap ms-flex ms-gap-0.5 ms-w-8 ms-max-w-full">
+                                <span className="ms-text-ellipsis ms-overflow-hidden">
+                                    {balance?.balance && (nFormatter(balance.balance))}
+                                </span>
+                                <img src={balance.currencyImageSrc} alt={balance.currencyId} className="dark:ms-invert ms-brightness-0 ms-w-3 ms-h-3" />
+                            </p>
                         </Button>
                     </DropdownMenuTrigger>
                 </TooltipTrigger>
