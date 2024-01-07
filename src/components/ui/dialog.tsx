@@ -9,6 +9,7 @@ import {
   DrawerTitle,
   DrawerDescription,
   DrawerProps,
+  NestedDrawer
 } from "./drawer";
 import { X } from "lucide-react"
 
@@ -125,7 +126,11 @@ const Dialog: React.FC<DialogPrimitive.DialogProps & DrawerProps> = (props) => {
   const [open, setOpen] = React.useState(false)
   const isDesktop = useMediaQuery("(min-width: 768px)")
 
-  return isDesktop ? <DialogNonResponsibility shouldScaleBackground open={open} onOpenChange={setOpen} {...props} /> : <Drawer open={open} onOpenChange={setOpen} {...props} />
+  return (
+    isDesktop ? <DialogNonResponsibility open={open} onOpenChange={setOpen} {...props} /> :
+      props.nested ? <NestedDrawer open={open} shouldScaleBackground onOpenChange={setOpen} {...props} /> :
+        <Drawer open={open} shouldScaleBackground onOpenChange={setOpen} {...props} />
+  )
 }
 
 export {

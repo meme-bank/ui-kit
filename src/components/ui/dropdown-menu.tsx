@@ -6,7 +6,7 @@ import { cn, useMediaQuery } from "@/lib/utils"
 import { Drawer, DrawerContent, DrawerHeader, DrawerPortal, DrawerProps, DrawerTitle, DrawerTrigger, DrawerClose, DrawerFooter, NestedDrawer } from "./drawer"
 import { ResponsibilityHOC } from "@/lib/hocs"
 import { Button } from "./button"
-import { DialogTitleProps } from "@radix-ui/react-dialog"
+import { DialogTitleProps, DialogTriggerProps } from "@radix-ui/react-dialog"
 
 const DropdownMenuNonResponsibility = DropdownMenuPrimitive.Root
 
@@ -29,7 +29,7 @@ const DropdownMenuSubTriggerNonResponsibility = React.forwardRef<
   <DropdownMenuPrimitive.SubTrigger
     ref={ref}
     className={cn(
-      "ms-flex ms-cursor-default ms-select-none ms-items-center ms-rounded-sm ms-px-2 ms-py-1.5 ms-text-sm ms-outline-none focus:ms-bg-accent data-[state=open]:ms-bg-accent",
+      "ms-flex ms-select-none ms-items-center ms-rounded-sm ms-duration-150 ms-px-2 ms-py-1.5 data-[disabled]:ms-pointer-events-none data-[disabled]:ms-opacity-50 ms-text-sm ms-outline-none focus:ms-text-accent-foreground focus:ms-bg-accent data-[state=open]:ms-bg-accent",
       inset && "ms-pl-8",
       className
     )}
@@ -208,7 +208,7 @@ export const DropdownMenuSub: React.FC<DropdownMenuPrimitive.DropdownMenuProps &
     <NestedDrawer shouldScaleBackground open={!isDesktop && open} onOpenChange={setOpen} {...props} children={children} />
   </DropdownMenuSubNonResponsibility>
 }
-export const DropdownMenuSubTrigger = ResponsibilityHOC("(min-width: 768px)", DropdownMenuSubTriggerNonResponsibility, DrawerTrigger)
+export const DropdownMenuSubTrigger = ResponsibilityHOC("(min-width: 768px)", DropdownMenuSubTriggerNonResponsibility, (props: DialogTriggerProps & React.RefAttributes<HTMLButtonElement>) => <DrawerTrigger className="ms-flex ms-select-none ms-items-center ms-rounded-sm ms-duration-150 ms-px-2 ms-py-1.5 data-[disabled]:ms-pointer-events-none data-[disabled]:ms-opacity-50 ms-text-sm ms-outline-none focus:ms-text-accent-foreground focus:ms-bg-accent data-[state=open]:ms-bg-accent" {...props} />)
 export const DropdownMenuSubContent = ResponsibilityHOC("(min-width: 768px)", DropdownMenuSubContentNonResponsibility, DrawerContent)
 export const DropdownMenuPortal = ResponsibilityHOC("(min-width: 768px)", DropdownMenuPortalNonResponsibility, DrawerPortal)
 export const DropdownMenuLabel = ResponsibilityHOC("(min-width: 768px)", DropdownMenuLabelNonResponsibility, (props: React.HTMLAttributes<HTMLDivElement>) => <DrawerHeader className="ms-text-lg ms-font-semibold ms-leading-none ms-tracking-tight" {...props} />)

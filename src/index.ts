@@ -39,6 +39,8 @@ export * from "@ui-components/vk-auth-button";
 export * from "@ui-components/vk-icon";
 export * from "@ui-components/line-block";
 export * from "@ui-components/profile-block";
+export * from "@ui-components/command";
+export * from "@ui-components/popover";
 export * from "@ui-components/navigator-block";
 
 // Libs
