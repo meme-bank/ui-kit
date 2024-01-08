@@ -37,7 +37,7 @@ export const ComboBox: React.FC<PropsWithChildren<
                         aria-expanded={open}
                     >
                         {Icon && <Icon className="ms-mr-2 ms-h-4 ms-w-4 ms-shrink-0 ms-opacity-50" />}
-                        <span>{placeholder}</span>
+                        {value ? <span>{value.label}</span> : <span className="ms-text-muted-foreground">{placeholder}</span>}
                         <ChevronsUpDown className="ms-ml-2 ms-h-4 ms-w-4 ms-shrink-0 ms-opacity-50" />
                     </Button>
                 </PopoverTrigger>
