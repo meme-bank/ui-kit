@@ -8,6 +8,7 @@ export * from "@components/Layout";
 export * from "@components/VKAuthRequireDialog";
 export * from "@components/NavigationLayout";
 export * from "@components/BackButton";
+export * from "@components/ComboBox";
 
 // UI Components
 export * from "@ui-components/table";
