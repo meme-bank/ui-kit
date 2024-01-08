@@ -29,10 +29,12 @@ export const ComboBox: React.FC<PropsWithChildren<
             }
         }>
             <Popover open={open} onOpenChange={setOpen}>
-                <PopoverTrigger>
+                <PopoverTrigger asChild>
                     <Button
                         variant="outline"
                         className="ms-justify-between"
+                        role="combobox"
+                        aria-expanded={open}
                     >
                         {Icon && <Icon className="ms-mr-2 ms-h-4 ms-w-4 ms-shrink-0 ms-opacity-50" />}
                         <span>{placeholder}</span>
