@@ -252,7 +252,7 @@ const AuthMenu: React.FC<{ user: UserAccount; userActions: UserAccountActions; s
     )
 }
 
-export const Header: React.FC<HeaderProps> = ({ returnToBank, search, unReadNotify = false, sanctumShow, logo, Notifications, user, login, userActions, themeSwitch, useTooltipProvider = true, balance, homePage }) => {
+export const Header: React.FC<React.PropsWithChildren<HeaderProps>> = ({ returnToBank, children, search, unReadNotify = false, sanctumShow, logo, Notifications, user, login, userActions, themeSwitch, useTooltipProvider = true, balance, homePage }) => {
     const Component = <div className="ms-w-full ms-top-0 ms-left-0 ms-h-14 ms-fixed ms-z-50">
         <div className="ms-flex ms-bg-background/90 ms-rounded-b-md ms-backdrop-blur-sm ms-shadow-md ms-flex-row ms-border ms-border-t-0 ms-justify-between ms-h-full ms-gap-1 ms-p-2 ms-container">
             <div className="ms-flex ms-flex-row ms-items-center ms-gap-1">
@@ -279,6 +279,9 @@ export const Header: React.FC<HeaderProps> = ({ returnToBank, search, unReadNoti
                     </TooltipContent>
                 </Tooltip>
                 {search && <HeaderSearch search={search} appName={logo?.appName} />}
+            </div>
+            <div className="ms-flex-1">
+                {children}
             </div>
             <div className="ms-flex ms-flex-row ms-items-center ms-gap-1">
                 {themeSwitch && <ThemeSwitcher themeSwitch={themeSwitch} />}
