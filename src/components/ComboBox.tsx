@@ -109,7 +109,7 @@ export const MultiselectComboBox = forwardRef<HTMLInputElement, PropsWithChildre
     const [open, setOpen] = useState(defaultOpen || false);
     const [options, setOptions] = useState<OptionType[]>([]);
 
-    let currentOptions = options.filter((option) => option && values.includes(option.value));
+    let currentOptions = options.filter((option) => values.includes(option?.value as string));
 
     return (
         <ComboBoxContext.Provider value={
@@ -180,7 +180,7 @@ export const ComboBoxItem = forwardRef<React.ElementRef<typeof CommandItem>, Rea
 
     return (
         <CommandItem
-            value={value}
+            value={value || id}
             onSelect={(currentValue) => {
                 if (!selectedValue) {
                     if (multiselect)
@@ -200,7 +200,7 @@ export const ComboBoxItem = forwardRef<React.ElementRef<typeof CommandItem>, Rea
             <Check
                 className={cn(
                     "ms-mr-2 ms-h-4 ms-w-4",
-                    value === selectedValue ? "ms-opacity-100" : "ms-opacity-0"
+                    (selectedValue instanceof Array && selectedValue.includes(value || id)) || (typeof selectedValue === "string" && selectedValue === value) ? "ms-opacity-100" : "ms-opacity-0"
                 )}
             />
             {children}
