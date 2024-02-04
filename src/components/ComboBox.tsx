@@ -174,7 +174,9 @@ export const ComboBoxItem = forwardRef<React.ElementRef<typeof CommandItem>, Rea
     const { setOpen, setValue, value: selectedValue, setOptions, multiselect } = useComboBox();
     const id = useId()
 
-    setOptions((options) => options.some(option => option?.value === (value || id)) ? options : [...options, { label: children, value: value || id }]);
+    useEffect(() => {
+        setOptions((options) => options.some(option => option?.value === (value || id)) ? options : [...options, { label: children, value: value || id }]);
+    }, [value, children]);
 
     return (
         <CommandItem
