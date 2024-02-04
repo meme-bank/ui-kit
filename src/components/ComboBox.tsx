@@ -28,8 +28,9 @@ export const ComboBox = forwardRef<HTMLInputElement, PropsWithChildren<
     {
         Icon?: LucideIcon, placeholder: string, empty?: ReactNode, loadingElement?: ReactNode, value?: string; setValue?: Dispatch<SetStateAction<string | null>>;
         onOpenChange?: Dispatch<SetStateAction<boolean>>; open?: boolean; onSearchChange?: (search: string) => void; name?: string; required?: boolean;
-        loading?: boolean; defaultValue?: string; notCloseOnSelect?: boolean; onChange?: ChangeHandler; listRef?: React.Ref<HTMLDivElement>;
-    } & ButtonProps & React.RefAttributes<HTMLButtonElement>
+        loading?: boolean; defaultValue?: string; notCloseOnSelect?: boolean; listRef?: React.Ref<HTMLDivElement>;
+        onChange?: React.ChangeEventHandler<HTMLInputElement>
+    } & Omit<ButtonProps, "onChange"> & React.RefAttributes<HTMLButtonElement>
 >>(({
     Icon, placeholder, empty, value: defaultValue, defaultValue: defVal, setValue: defaultSetValue,
     open: defaultOpen, onOpenChange, onSearchChange, name, loading, loadingElement, notCloseOnSelect,
@@ -37,11 +38,9 @@ export const ComboBox = forwardRef<HTMLInputElement, PropsWithChildren<
 }, ref) => {
     const [value, setValue] = useState(defaultValue || defVal || null);
     const [open, setOpen] = useState(defaultOpen || false);
-    const [values, setOptions] = useState<OptionType[]>([]);
+    const [options, setOptions] = useState<OptionType[]>([]);
 
-    useEffect(() => {
-        onChange && onChange({ target: { value } });
-    }, [onChange, value])
+    let currentOption = options.find((option) => value === option?.value);
 
     return (
         <ComboBoxContext.Provider value={
@@ -64,13 +63,13 @@ export const ComboBox = forwardRef<HTMLInputElement, PropsWithChildren<
                         {...props}
                     >
                         {Icon && <Icon className="ms-mr-2 ms-h-4 ms-w-4 ms-shrink-0 ms-opacity-50" />}
-                        {values.find((item) => value === item?.value) ? <span className="ms-overflow-hidden ms-text-ellipsis">{values.find((item) => value === item?.value)?.label}</span> : <span className="ms-text-muted-foreground ms-overflow-hidden ms-text-ellipsis">{placeholder}</span>}
+                        {currentOption ? <span className="ms-overflow-hidden ms-text-ellipsis">{currentOption.label}</span> : <span className="ms-text-muted-foreground ms-overflow-hidden ms-text-ellipsis">{placeholder}</span>}
                         <ChevronsUpDown className="ms-ml-2 ms-h-4 ms-w-4 ms-shrink-0 ms-opacity-50" />
                     </Button>
                 </PopoverTrigger>
                 <PopoverContent className="ms-p-0">
                     <Command filter={(optionValue, search) => {
-                        const option = values.find((option) => option?.value === optionValue);
+                        const option = options.find((option) => option?.value === optionValue);
                         if (!option) return 0;
                         if (
                             option.value.toLowerCase().includes(search.toLowerCase()) ||
@@ -86,7 +85,7 @@ export const ComboBox = forwardRef<HTMLInputElement, PropsWithChildren<
                         </CommandList>
                     </Command>
                 </PopoverContent>
-                <input type="hidden" ref={ref} required={required} name={name} value={value || undefined} />
+                <input type="hidden" onChange={onChange} ref={ref} required={required} name={name} value={value || undefined} />
             </Popover>
         </ComboBoxContext.Provider>
     )
