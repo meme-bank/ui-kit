@@ -133,7 +133,7 @@ export const MultiselectComboBox = forwardRef<HTMLInputElement, PropsWithChildre
                         {...props}
                     >
                         {Icon && <Icon className="ms-mr-2 ms-h-4 ms-w-4 ms-shrink-0 ms-opacity-50" />}
-                        {currentOptions.length > 0 ? <span className="ms-overflow-hidden ms-text-ellipsis">{currentOptions.map((option) => option?.label)}</span> : <span className="ms-text-muted-foreground ms-overflow-hidden ms-text-ellipsis">{placeholder}</span>}
+                        {currentOptions.length > 0 ? <span className="ms-overflow-hidden ms-text-ellipsis">{currentOptions.map((option, index) => <>{option?.label}{index < currentOptions.length - 1 ? ", " : null}</>)}</span> : <span className="ms-text-muted-foreground ms-overflow-hidden ms-text-ellipsis">{placeholder}</span>}
                         <ChevronsUpDown className="ms-ml-2 ms-h-4 ms-w-4 ms-shrink-0 ms-opacity-50" />
                     </Button>
                 </PopoverTrigger>
