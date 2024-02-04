@@ -101,7 +101,7 @@ const useComboBox = () => {
 };
 
 export const ComboBoxItem = forwardRef<React.ElementRef<typeof CommandItem>, React.ComponentPropsWithoutRef<typeof CommandItem>>(({ value, children, ...props }, ref) => {
-    const { setOpen, setValue, value: contextValue, setOptions } = useComboBox();
+    const { setOpen, setValue, value: selectedValue, setOptions } = useComboBox();
     const id = useId()
 
     useEffect(() => {
@@ -112,7 +112,7 @@ export const ComboBoxItem = forwardRef<React.ElementRef<typeof CommandItem>, Rea
         <CommandItem
             value={value}
             onSelect={(currentValue) => {
-                setValue(currentValue === value ? null : currentValue)
+                setValue(currentValue === selectedValue ? null : currentValue)
                 setOpen(false)
             }}
             ref={ref}
@@ -121,7 +121,7 @@ export const ComboBoxItem = forwardRef<React.ElementRef<typeof CommandItem>, Rea
             <Check
                 className={cn(
                     "ms-mr-2 ms-h-4 ms-w-4",
-                    value === contextValue ? "ms-opacity-100" : "ms-opacity-0"
+                    value === selectedValue ? "ms-opacity-100" : "ms-opacity-0"
                 )}
             />
             {children}
