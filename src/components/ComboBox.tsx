@@ -26,7 +26,7 @@ const ComboBoxContext = createContext<{
 
 export const ComboBox = forwardRef<HTMLInputElement, PropsWithChildren<
     {
-        Icon?: LucideIcon, placeholder: string, empty?: ReactElement | string, loadingElement?: ReactElement | string, value?: string; setValue?: Dispatch<SetStateAction<string | null>>;
+        Icon?: LucideIcon, placeholder: string, empty?: ReactNode, loadingElement?: ReactNode, value?: string; setValue?: Dispatch<SetStateAction<string | null>>;
         onOpenChange?: Dispatch<SetStateAction<boolean>>; open?: boolean; onSearchChange?: (search: string) => void; name?: string; required?: boolean;
         loading?: boolean; defaultValue?: string; notCloseOnSelect?: boolean; onChange?: ChangeHandler; listRef?: React.Ref<HTMLDivElement>;
     } & ButtonProps & React.RefAttributes<HTMLButtonElement>
@@ -96,7 +96,7 @@ const useComboBox = () => {
     const value = useContext(ComboBoxContext);
 
     if (!value)
-        throw new Error("useComboBox avaible only on </ComboBoxContext.Provider>");
+        throw new Error("<ComboBoxItem /> avaible only on <ComboBox />");
 
     return value;
 };
