@@ -194,8 +194,8 @@ export const DropdownMenu: React.FC<DropdownMenuPrimitive.DropdownMenuProps & Dr
   const [open, setOpen] = React.useState(false)
   const isDesktop = useMediaQuery("(min-width: 768px)")
 
-  return <DropdownMenuNonResponsibility open={isDesktop && open} onOpenChange={setOpen} {...props}>
-    <Drawer shouldScaleBackground open={!isDesktop && open} onOpenChange={setOpen} {...props} children={children} />
+  return <DropdownMenuNonResponsibility open={isDesktop && open} onOpenChange={isDesktop ? setOpen : undefined} {...props}>
+    <Drawer shouldScaleBackground open={!isDesktop && open} onOpenChange={!isDesktop ? setOpen : undefined} {...props} children={children} />
   </DropdownMenuNonResponsibility>
 }
 export const DropdownMenuTrigger = ResponsibilityHOC("(min-width: 768px)", DropdownMenuTriggerNonResponsibility, DrawerTrigger)
@@ -204,8 +204,8 @@ export const DropdownMenuSub: React.FC<DropdownMenuPrimitive.DropdownMenuProps &
   const [open, setOpen] = React.useState(false)
   const isDesktop = useMediaQuery("(min-width: 768px)")
 
-  return <DropdownMenuSubNonResponsibility open={isDesktop && open} onOpenChange={setOpen} {...props}>
-    <NestedDrawer shouldScaleBackground open={!isDesktop && open} onOpenChange={setOpen} {...props} children={children} />
+  return <DropdownMenuSubNonResponsibility open={isDesktop && open} onOpenChange={isDesktop ? setOpen : undefined} {...props}>
+    <NestedDrawer shouldScaleBackground open={!isDesktop && open} onOpenChange={!isDesktop ? setOpen : undefined} {...props} children={children} />
   </DropdownMenuSubNonResponsibility>
 }
 export const DropdownMenuSubTrigger = ResponsibilityHOC("(min-width: 768px)", DropdownMenuSubTriggerNonResponsibility, (props: DialogTriggerProps & React.RefAttributes<HTMLButtonElement>) => <DrawerTrigger className="ms-flex ms-select-none ms-items-center ms-rounded-sm ms-duration-150 ms-px-2 ms-py-1.5 data-[disabled]:ms-pointer-events-none data-[disabled]:ms-opacity-50 ms-text-sm ms-outline-none focus:ms-text-accent-foreground focus:ms-bg-accent data-[state=open]:ms-bg-accent" {...props} />)

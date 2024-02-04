@@ -30,13 +30,14 @@ PopoverContentNonResponsibility.displayName = PopoverPrimitive.Content.displayNa
 
 export const PopoverContent = ResponsibilityHOC("(min-width: 768px)", PopoverContentNonResponsibility, DrawerContent);
 export const PopoverTrigger = ResponsibilityHOC("(min-width: 768px)", PopoverTriggerNonResponsibility, DrawerTrigger);
-export const Popover: React.FC<PopoverPrimitive.PopoverProps & DrawerProps> = (props) => {
+export const Popover: React.FC<PopoverPrimitive.PopoverProps & DrawerProps> = ({ children, ...props }) => {
   const [open, setOpen] = React.useState(false)
   const isDesktop = useMediaQuery("(min-width: 768px)")
 
   return (
-    isDesktop ? <PopoverNonResponsibility open={open} onOpenChange={setOpen} {...props} /> :
-      <Drawer open={open} shouldScaleBackground onOpenChange={setOpen} {...props} />
+    <PopoverNonResponsibility open={isDesktop && open} onOpenChange={isDesktop ? setOpen : undefined} {...props}>
+      <Drawer open={isDesktop && open} shouldScaleBackground onOpenChange={!isDesktop ? setOpen : undefined} {...props} children={children} />
+    </PopoverNonResponsibility>
   )
 }
 
