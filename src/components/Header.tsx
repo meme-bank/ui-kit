@@ -10,6 +10,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Input } from "./ui/input";
 import { useForm } from "react-hook-form";
 import { Logotype, LogotypeProps } from "./ui/logotype";
+import { DialogClose } from "@radix-ui/react-dialog";
 
 interface UserAccount {
     displayName: string;
@@ -76,10 +77,12 @@ const HeaderSearch: React.FC<{ search: (text: string) => void; appName?: string 
                     <DialogFooter>
                         <form onSubmit={handleSubmit(({ search: text }) => search(text))} className="ms-flex-row ms-flex ms-w-full ms-items-center ms-gap-1">
                             <Input {...register("search")} placeholder="Поиск" />
-                            <Button type="submit" variant={"secondary"}>
-                                <Search className="ms-h-4 ms-w-4 ms-mr-2" />
-                                Найти
-                            </Button>
+                            <DialogClose asChild>
+                                <Button type="submit" variant={"secondary"}>
+                                    <Search className="ms-h-4 ms-w-4 ms-mr-2" />
+                                    Найти
+                                </Button>
+                            </DialogClose>
                         </form>
                     </DialogFooter>
                 </DialogContent>

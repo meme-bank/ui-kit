@@ -8,12 +8,7 @@ import { cn } from "@/lib/utils";
 import { CommandLoading } from "cmdk";
 import { extractStringFromNode } from "@/lib/extract-string-from-element";
 
-type OptionType = { value: string; label: ReactNode; } | null;
-
-type ChangeHandler = (event: {
-    target: any;
-    type?: any;
-}) => Promise<void | boolean>;
+export type OptionType = { value: string; label: ReactNode; } | null;
 
 const ComboBoxContext = createContext<{
     value: string | string[] | null;
@@ -65,7 +60,7 @@ export const ComboBox = forwardRef<HTMLInputElement, PropsWithChildren<
                         {...props}
                     >
                         {Icon && <Icon className="ms-mr-2 ms-h-4 ms-w-4 ms-shrink-0 ms-opacity-50" />}
-                        {currentOption ? <span className="ms-overflow-hidden ms-text-ellipsis">{currentOption.label}</span> : <span className="ms-text-muted-foreground ms-overflow-hidden ms-text-ellipsis">{placeholder}</span>}
+                        {currentOption ? <span className="ms-overflow-hidden ms-text-ellipsis ms-text-nowrap">{currentOption.label}</span> : <span className="ms-text-nowrap ms-text-muted-foreground ms-overflow-hidden ms-text-ellipsis">{placeholder}</span>}
                         <ChevronsUpDown className="ms-ml-2 ms-h-4 ms-w-4 ms-shrink-0 ms-opacity-50" />
                     </Button>
                 </PopoverTrigger>
@@ -133,7 +128,7 @@ export const MultiselectComboBox = forwardRef<HTMLInputElement, PropsWithChildre
                         {...props}
                     >
                         {Icon && <Icon className="ms-mr-2 ms-h-4 ms-w-4 ms-shrink-0 ms-opacity-50" />}
-                        {currentOptions.length > 0 ? <span className="ms-overflow-hidden ms-text-ellipsis">{currentOptions.map((option, index) => <>{option?.label}{index < currentOptions.length - 1 ? ", " : null}</>)}</span> : <span className="ms-text-muted-foreground ms-overflow-hidden ms-text-ellipsis">{placeholder}</span>}
+                        {currentOptions.length > 0 ? <span className="ms-overflow-hidden ms-text-nowrap ms-text-ellipsis">{currentOptions.map((option, index) => <>{option?.label}{index < currentOptions.length - 1 ? ", " : null}</>)}</span> : <span className="ms-text-muted-foreground ms-text-nowrap ms-overflow-hidden ms-text-ellipsis">{placeholder}</span>}
                         <ChevronsUpDown className="ms-ml-2 ms-h-4 ms-w-4 ms-shrink-0 ms-opacity-50" />
                     </Button>
                 </PopoverTrigger>
@@ -171,7 +166,7 @@ const useComboBox = () => {
 };
 
 export const ComboBoxItem = forwardRef<React.ElementRef<typeof CommandItem>, React.ComponentPropsWithoutRef<typeof CommandItem>>(({ value, children, ...props }, ref) => {
-    const { setOpen, setValue, value: selectedValue, setOptions, multiselect } = useComboBox();
+    const { setOpen, setValue, value: selectedValue, setOptions, multiselect, notCloseOnSelect } = useComboBox();
     const id = useId()
 
     useEffect(() => {
@@ -192,7 +187,7 @@ export const ComboBoxItem = forwardRef<React.ElementRef<typeof CommandItem>, Rea
                     (setValue as Dispatch<SetStateAction<string | null>>)((selectedValue) => selectedValue === currentValue ? null : currentValue);
                 if (selectedValue instanceof Array)
                     (setValue as Dispatch<SetStateAction<string[]>>)((selectedValue) => !selectedValue.includes(currentValue) ? [...selectedValue, currentValue] : selectedValue.filter((val) => val !== currentValue));
-                setOpen(false)
+                !notCloseOnSelect && setOpen(false)
             }}
             ref={ref}
             {...props}
