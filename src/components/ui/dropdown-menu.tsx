@@ -7,6 +7,7 @@ import { Drawer, DrawerContent, DrawerHeader, DrawerPortal, DrawerProps, DrawerT
 import { ResponsibilityHOC } from "@/lib/hocs"
 import { Button } from "./button"
 import { DialogTitleProps, DialogTriggerProps } from "@radix-ui/react-dialog"
+import clsx from "clsx"
 
 const DropdownMenuNonResponsibility = DropdownMenuPrimitive.Root
 
@@ -208,7 +209,7 @@ export const DropdownMenuSub: React.FC<DropdownMenuPrimitive.DropdownMenuProps &
     <NestedDrawer shouldScaleBackground open={!isDesktop && open} onOpenChange={!isDesktop ? setOpen : undefined} {...props} children={children} />
   </DropdownMenuSubNonResponsibility>
 }
-export const DropdownMenuSubTrigger = ResponsibilityHOC("(min-width: 768px)", DropdownMenuSubTriggerNonResponsibility, (props: DialogTriggerProps & React.RefAttributes<HTMLButtonElement>) => <DrawerTrigger className="ms-flex ms-select-none ms-items-center ms-rounded-sm ms-duration-150 ms-px-2 ms-py-1.5 data-[disabled]:ms-pointer-events-none data-[disabled]:ms-opacity-50 ms-text-sm ms-outline-none focus:ms-text-accent-foreground focus:ms-bg-accent data-[state=open]:ms-bg-accent" {...props} />)
+export const DropdownMenuSubTrigger = ResponsibilityHOC("(min-width: 768px)", DropdownMenuSubTriggerNonResponsibility, (props: DialogTriggerProps & React.RefAttributes<HTMLButtonElement>) => <DrawerTrigger {...props} className={clsx("ms-flex ms-select-none ms-items-center ms-rounded-sm ms-duration-150 ms-px-2 ms-py-1.5 data-[disabled]:ms-pointer-events-none data-[disabled]:ms-opacity-50 ms-text-sm ms-outline-none focus:ms-text-accent-foreground focus:ms-bg-accent data-[state=open]:ms-bg-accent", props.className)} />)
 export const DropdownMenuSubContent = ResponsibilityHOC("(min-width: 768px)", DropdownMenuSubContentNonResponsibility, DrawerContent)
 export const DropdownMenuPortal = ResponsibilityHOC("(min-width: 768px)", DropdownMenuPortalNonResponsibility, DrawerPortal)
 export const DropdownMenuLabel = ResponsibilityHOC("(min-width: 768px)", DropdownMenuLabelNonResponsibility, (props: React.HTMLAttributes<HTMLDivElement>) => <DrawerHeader className="ms-text-lg ms-font-semibold ms-leading-none ms-tracking-tight" {...props} />)
