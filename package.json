@@ -14,7 +14,8 @@
     "build": "rollup -c --bundleConfigAsCjs && npm run css-build",
     "prepare": "ts-patch install -s",
     "prebuild": "rimraf dist",
-    "css-build": "npx tailwindcss -i ./src-style.css -o ./style.css"
+    "css-build": "npx tailwindcss -i ./src-style.css -o ./style.css",
+    "install-peers": "install-peers"
   },
   "keywords": [
     "Meme World",
@@ -26,6 +27,7 @@
     "@babel/preset-env": "^7.21.5",
     "@babel/preset-react": "^7.18.6",
     "@babel/preset-typescript": "^7.21.5",
+    "@hookform/resolvers": "^3.9.0",
     "@rollup/plugin-alias": "^5.0.0",
     "@rollup/plugin-commonjs": "^25.0.4",
     "@rollup/plugin-image": "^3.0.2",
@@ -42,12 +44,18 @@
     "@storybook/testing-library": "^0.2.0",
     "@svgr/webpack": "^8.1.0",
     "@types/react": "^18.2.6",
+    "@types/react-dom": "^18",
     "autoprefixer": "^10.4.15",
     "css-loader": "^6.8.1",
     "dts-bundle-generator": "^8.0.1",
+    "install-peers-cli": "^2.2.0",
+    "lucide-react": "^0.400.0",
     "postcss": "^8.4.28",
     "postcss-loader": "^7.3.3",
     "prop-types": "^15.8.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-hook-form": "^7.52.1",
     "rollup": "^3.28.1",
     "rollup-plugin-dts": "^6.0.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
@@ -62,14 +70,15 @@
     "typescript": "^5.0.4",
     "typescript-transform-paths": "^3.4.6",
     "webpack": "^5.83.1",
-    "webpack-cli": "^5.1.1"
+    "webpack-cli": "^5.1.1",
+    "zod": "^3.23.8"
   },
   "peerDependencies": {
     "@hookform/resolvers": "^3.3.0",
-    "lucide-react": "^0.268.0",
+    "lucide-react": "*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hook-form": "7.45.4",
+    "react-hook-form": "*",
     "zod": "^3.22.2"
   },
   "files": [
@@ -97,6 +106,7 @@
     "@radix-ui/react-switch": "^1.0.3",
     "@radix-ui/react-toast": "^1.1.4",
     "@radix-ui/react-tooltip": "^1.0.6",
+    "@tailwindcss/container-queries": "^0.1.1",
     "@vkontakte/vk-qr": "^2.0.13",
     "buffer": "^6.0.3",
     "class-variance-authority": "^0.7.0",

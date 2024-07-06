@@ -81,5 +81,7 @@ module.exports = {
     },
   },
   prefix: "ms-",
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"), require('@tailwindcss/container-queries')
+  ],
 }
