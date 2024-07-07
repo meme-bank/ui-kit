@@ -1,4 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
+const plugin = require('tailwindcss/plugin');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -82,6 +83,13 @@ module.exports = {
   },
   prefix: "ms-",
   plugins: [
-    require("tailwindcss-animate"), require('@tailwindcss/container-queries')
+    require("tailwindcss-animate"),
+    require('@tailwindcss/container-queries'),
+    plugin(({ addVariant }) => {
+      addVariant('hover', [
+        '@media (hover: hover) { &:hover }',
+        '@media (hover: none) { &:active }',
+      ]);
+    }),
   ],
 }
