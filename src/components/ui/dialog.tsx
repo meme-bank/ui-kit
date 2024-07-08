@@ -46,7 +46,7 @@ const DialogContentNonResponsibility = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        "ms-fixed ms-left-[50%] ms-top-[50%] ms-z-50 ms-grid ms-w-full ms-max-h-screen ms-overflow-y-auto ms-max-w-lg ms-translate-x-[-50%] ms-translate-y-[-50%] ms-gap-4 ms-border ms-bg-background ms-p-6 ms-shadow-lg ms-duration-200 data-[state=open]:ms-animate-in data-[state=closed]:ms-animate-out data-[state=closed]:ms-fade-out-0 data-[state=open]:ms-fade-in-0 data-[state=closed]:ms-zoom-out-95 data-[state=open]:ms-zoom-in-95 data-[state=closed]:ms-slide-out-to-left-1/2 data-[state=closed]:ms-slide-out-to-top-[48%] data-[state=open]:ms-slide-in-from-left-1/2 data-[state=open]:ms-slide-in-from-top-[48%] sm:ms-rounded-lg md:ms-w-full",
+        "ms-fixed ms-left-1/2 ms-top-1/2 ms-z-50 ms-flex ms-flex-col ms-w-full ms-max-h-screen ms-overflow-y-auto ms-max-w-lg -ms-translate-x-1/2 -ms-translate-y-1/2 ms-gap-4 ms-border ms-bg-background ms-p-6 ms-shadow-lg ms-duration-200 data-[state=open]:ms-animate-in data-[state=closed]:ms-animate-out data-[state=closed]:ms-fade-out-0 data-[state=open]:ms-fade-in-0 data-[state=closed]:ms-zoom-out-95 data-[state=open]:ms-zoom-in-95 data-[state=closed]:ms-slide-out-to-left-1/2 data-[state=closed]:ms-slide-out-to-top-[48%] data-[state=open]:ms-slide-in-from-left-1/2 data-[state=open]:ms-slide-in-from-top-[48%] sm:ms-rounded-lg md:ms-w-full",
         className
       )}
       {...props}

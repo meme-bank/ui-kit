@@ -43,6 +43,8 @@ export * from "@ui-components/profile-block";
 export * from "@ui-components/command";
 export * from "@ui-components/popover";
 export * from "@ui-components/navigator-block";
+export * from "@ui-components/cropper-controls";
+export * from "@ui-components/slider";
 
 // Libs
 export * from "@lib/utils";

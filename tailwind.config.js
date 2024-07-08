@@ -90,6 +90,7 @@ module.exports = {
         '@media (hover: hover) { &:hover }',
         '@media (hover: none) { &:active }',
       ]);
+      addVariant("no-hover", "@media (hover: none)")
     }),
   ],
 }

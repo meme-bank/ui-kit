@@ -20,7 +20,11 @@ export const Default: Story = {
             displayname: "Уртёмка",
             tag: "urtyom"
         },
-        setAvatar() { },
-        setBg() { },
+        setAvatar(file, area) {
+            console.log(area)
+        },
+        setBg(file, area) {
+            console.log(area)
+        },
     }
 };
