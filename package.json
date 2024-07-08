@@ -13,7 +13,7 @@
     "build-tsc": "tsc && tsc-alias",
     "build": "yarn prebuild && rollup -c --bundleConfigAsCjs && npm run css-build",
     "prepare": "ts-patch install -s",
-    "prebuild": "rimraf dist",
+    "prebuild": "rm dist",
     "css-build": "npx tailwindcss -i ./src-style.css -o ./style.css",
     "install-peers": "install-peers"
   },
