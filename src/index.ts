@@ -45,6 +45,7 @@ export * from "@ui-components/popover";
 export * from "@ui-components/navigator-block";
 export * from "@ui-components/cropper-controls";
 export * from "@ui-components/slider";
+export * from "@ui-components/input-otp";
 
 // Libs
 export * from "@lib/utils";

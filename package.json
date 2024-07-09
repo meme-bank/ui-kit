@@ -113,6 +113,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "cmdk": "^0.2.0",
+    "input-otp": "^1.2.4",
     "react-dropzone": "^14.2.3",
     "react-easy-crop": "^5.0.7",
     "tailwind-merge": "^1.14.0",

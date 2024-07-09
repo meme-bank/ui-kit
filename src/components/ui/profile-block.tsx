@@ -31,6 +31,7 @@ export interface ProfileBlockProps {
 }
 
 export const ProfileBlockBackground: React.FC<React.PropsWithChildren<Pick<ProfileBlockProps, "className" | "setBg" | "skeletonLoad" | "noFullWidth" | "mobileForce"> & { backgroundUrl?: string }>> = ({ children, className, setBg, skeletonLoad, noFullWidth, backgroundUrl }) => {
+    const [cropperDialog, setCropperDialog] = React.useState(false);
     if (skeletonLoad) return (
         <Skeleton className={cn("ms-@container/main ms-max-w-full ms-rounded-md", noFullWidth && "ms-w-[42rem]")}>
             <div className="@md/main:ms-aspect-[5/2] @md/main:ms-relative">
@@ -44,11 +45,11 @@ export const ProfileBlockBackground: React.FC<React.PropsWithChildren<Pick<Profi
         <div className={clsx("ms-@container/main ms-max-w-full", noFullWidth && "ms-w-[42rem]")}>
             <div className={cn("@md/main:ms-aspect-[5/2] @md/main:ms-relative ms-border @md/main:ms-py-2 ms-rounded-md ms-overflow-hidden @md/main:ms-flex @md/main:ms-justify-center @md/main:ms-items-center", className)}>
                 <div className={cn("ms-aspect-[5/2] @md/main:ms-absolute ms-border-b @md/main:ms-border-0 @md/main:ms-top-0 @md/main:ms-left-0 ms-group/profilebg ms-relative w-full ms-bg-cover ms-bg-center ms-bg-secondary")} style={{ backgroundImage: `url("${backgroundUrl}")` }}>
-                    {setBg && <Dialog>
+                    {setBg && <Dialog onOpenChange={setCropperDialog} open={cropperDialog}>
                         <DialogTrigger className="ms-hidden ms-right-2 ms-top-2 ms-bg-background/90 group-hover/profilebg:ms-flex ms-duration-150 ms-justify-center ms-items-center ms-cursor-pointer ms-h-8 ms-w-8 ms-rounded-full ms-absolute ms-border ms-backdrop-blur-sm">
                             <Pencil className="ms-h-4 ms-w-4" />
                         </DialogTrigger>
-                        <CropperDialogContent onUpload={setBg} type="background" />
+                        <CropperDialogContent openState={cropperDialog} onUpload={setBg} type="background" />
                     </Dialog>}
                 </div>
                 {children}
@@ -62,14 +63,15 @@ export const ProfileInfoBlock: React.FC<{
     tagClassName?: ClassNameValue; nameBlockClassName?: ClassNameValue; avatarClassName?: ClassNameValue,
     account?: Pick<UserType, "backgroundUrl" | "avatarUrl" | "displayname" | "tag">; setAvatar?: OnUpload; className?: ClassNameValue;
 }> = ({ className, setAvatar, account, avatarClassName, displaynameClassName, tagClassName, nameBlockClassName }) => {
+    const [cropperDialog, setCropperDialog] = React.useState(false);
     return (
         <div className={cn("@md/main:ms-border @md/main:ms-h-40 @3xl/main:ms-h-60 ms-max-h-full @md/main:ms-aspect-square ms-flex ms-items-center @md/main:ms-flex-col ms-gap-3 @md/main:ms-gap-1.5 @md/main:ms-justify-evenly ms-p-2 ms-bg-background/90 ms-backdrop-blur-[2px] ms-rounded-md", className)}>
             <StandardAvatar className={cn("ms-w-16 ms-h-16 @md/main:ms-h-20 @md/main:ms-w-20 @3xl/main:ms-h-28 @3xl/main:ms-w-28 ms-border ms-group/avatar ms-relative ms-aspect-square ms-max-h-full", avatarClassName)} fallback={account?.displayname} src={account?.avatarUrl}>
-                {setAvatar && <Dialog>
+                {setAvatar && <Dialog onOpenChange={setCropperDialog} open={cropperDialog}>
                     <DialogTrigger className="ms-hidden ms-inset-0 ms-m-auto ms-bg-background/90 group-hover/avatar:ms-flex ms-duration-150 ms-justify-center ms-items-center ms-cursor-pointer ms-h-8 ms-w-8 ms-rounded-full ms-absolute ms-border ms-backdrop-blur-sm">
                         <Pencil className="ms-h-4 ms-w-4" />
                     </DialogTrigger>
-                    <CropperDialogContent onUpload={setAvatar} type="avatar" />
+                    <CropperDialogContent openState={cropperDialog} onUpload={setAvatar} type="avatar" />
                 </Dialog>}
             </StandardAvatar>
             <div className={cn("ms-flex @md/main:ms-items-center ms-flex-col", nameBlockClassName)}>
