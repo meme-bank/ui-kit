@@ -19,7 +19,7 @@ export default [
         file: packageJson.main,
         format: "cjs",
         sourcemap: true,
-        interop: "esModule"
+        interop: "compat"
       },
       {
         file: packageJson.module,
@@ -39,7 +39,6 @@ export default [
       }),
       external(),
       resolve(),
-      //interop(),
       commonjs(),
       image(),
       typescript({ tsconfig: "./tsconfig.json" }),
