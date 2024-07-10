@@ -27,7 +27,7 @@ export default [
         sourcemap: true,
       },
     ],
-    external: ["react-textarea-autosize"],
+    external: ["react-textarea-autosize", "sonner"],
     plugins: [
       alias({
         entries: [
