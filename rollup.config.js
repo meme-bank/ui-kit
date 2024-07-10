@@ -11,10 +11,6 @@ import postcss from 'rollup-plugin-postcss';
 
 const packageJson = require("./package.json");
 
-const notResolve = [
-  "react-textarea-autosize"
-];
-
 export default [
   {
     input: "src/index.ts",
@@ -23,6 +19,7 @@ export default [
         file: packageJson.main,
         format: "cjs",
         sourcemap: true,
+        interop: "esModule"
       },
       {
         file: packageJson.module,
@@ -30,6 +27,7 @@ export default [
         sourcemap: true,
       },
     ],
+    external: ["react-textarea-autosize"],
     plugins: [
       alias({
         entries: [
@@ -40,10 +38,9 @@ export default [
         ]
       }),
       external(),
-      resolve({ resolveOnly: (name) => !notResolve.includes(name) }),
-      commonjs({
-        requireReturnsDefault: "preferred"
-      }),
+      resolve(),
+      //interop(),
+      commonjs(),
       image(),
       typescript({ tsconfig: "./tsconfig.json" }),
       postcss(),
