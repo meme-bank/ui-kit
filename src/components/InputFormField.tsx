@@ -40,7 +40,7 @@ export const InputFormField: React.FC<InputFormFieldProps> = ({ label, name, ske
             <div className="ms-space-y-2">
                 <Label className={error && "ms-text-destructive"}>
                     <span className="ms-flex ms-items-center ms-gap-2">
-                        {LabelIcon && <LabelIcon className="h-4 w-4" />}
+                        {LabelIcon && <LabelIcon className="ms-h-4 ms-w-4" />}
                         {label}
                     </span>
                 </Label>
@@ -62,7 +62,7 @@ export const InputFormField: React.FC<InputFormFieldProps> = ({ label, name, ske
                 {label &&
                     <FormLabel>
                         <span className="ms-flex ms-items-center ms-gap-2">
-                            {LabelIcon && <LabelIcon className="h-4 w-4" />}
+                            {LabelIcon && <LabelIcon className="ms-h-4 ms-w-4" />}
                             {label}
                         </span>
                     </FormLabel>
