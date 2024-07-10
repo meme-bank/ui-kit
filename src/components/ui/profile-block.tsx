@@ -5,8 +5,8 @@ import { StandardAvatar } from "./avatar";
 import { cn } from "@lib/utils";
 import { ClassNameValue } from "tailwind-merge";
 import clsx from "clsx";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "./dialog";
-import { CropperControls, CropperDialogContent, OnUpload } from "./cropper-controls";
+import { Dialog, DialogTrigger } from "./dialog";
+import { CropperDialogContent, OnUpload } from "./cropper-controls";
 
 interface UserType {
     backgroundUrl?: string;
