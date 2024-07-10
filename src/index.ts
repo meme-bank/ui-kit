@@ -46,6 +46,7 @@ export * from "@ui-components/navigator-block";
 export * from "@ui-components/cropper-controls";
 export * from "@ui-components/slider";
 export * from "@ui-components/input-otp";
+export * from "@ui-components/textarea";
 
 // Libs
 export * from "@lib/utils";
