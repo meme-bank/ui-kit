@@ -1,207 +1,387 @@
-import { Dispatch, PropsWithChildren, ReactElement, ReactNode, SetStateAction, createContext, forwardRef, useContext, useEffect, useId, useState } from "react";
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
-import React from "react";
-import { Check, ChevronsUpDown, LucideIcon } from "lucide-react";
-import { Button, ButtonProps } from "./ui/button";
-import { CommandItem, CommandEmpty, CommandInput, CommandList, Command, CommandGroup } from "./ui/command";
+import { extractStringFromNode } from "@/lib/extract-string-from-element";
 import { cn } from "@/lib/utils";
 import { CommandLoading } from "cmdk";
-import { extractStringFromNode } from "@/lib/extract-string-from-element";
+import debounce from "lodash.debounce";
+import { Check, ChevronsUpDown, LucideIcon } from "lucide-react";
+import React, {
+  Dispatch,
+  PropsWithChildren,
+  ReactNode,
+  SetStateAction,
+  createContext,
+  forwardRef,
+  useCallback,
+  useContext,
+  useEffect,
+  useId,
+  useState,
+} from "react";
+import { Button, ButtonProps } from "./ui/button";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "./ui/command";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 
-export type OptionType = { value: string; label: ReactNode; } | null;
+export type OptionType = { value: string; label: ReactNode } | null;
 
 const ComboBoxContext = createContext<{
-    value: string | string[] | null;
-    setValue: Dispatch<SetStateAction<string | null>> | Dispatch<SetStateAction<string[]>>;
-    open: boolean;
-    setOpen: Dispatch<SetStateAction<boolean>>;
-    setOptions: Dispatch<SetStateAction<OptionType[]>>;
-    notCloseOnSelect: boolean;
-    multiselect: boolean;
+  value: string | string[] | null;
+  setValue:
+    | Dispatch<SetStateAction<string | null>>
+    | Dispatch<SetStateAction<string[]>>;
+  open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+  setOptions: Dispatch<SetStateAction<OptionType[]>>;
+  notCloseOnSelect: boolean;
+  multiselect: boolean;
 } | null>(null);
 
-export const ComboBox = forwardRef<HTMLInputElement, PropsWithChildren<
+export interface ComboBoxProps
+  extends Omit<ButtonProps, "onChange">,
+    React.RefAttributes<HTMLButtonElement> {
+  Icon?: LucideIcon;
+  placeholder: string;
+  empty?: ReactNode;
+  loadingElement?: ReactNode;
+  value?: string;
+  setValue?: Dispatch<SetStateAction<string | null>>;
+  onOpenChange?: Dispatch<SetStateAction<boolean>>;
+  open?: boolean;
+  onSearchChange?: (search: string) => void;
+  name?: string;
+  required?: boolean;
+  loading?: boolean;
+  defaultValue?: string;
+  notCloseOnSelect?: boolean;
+  listRef?: React.Ref<HTMLDivElement>;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+}
+
+export const ComboBox = forwardRef<
+  HTMLInputElement,
+  PropsWithChildren<ComboBoxProps>
+>(
+  (
     {
-        Icon?: LucideIcon, placeholder: string, empty?: ReactNode, loadingElement?: ReactNode, value?: string; setValue?: Dispatch<SetStateAction<string | null>>;
-        onOpenChange?: Dispatch<SetStateAction<boolean>>; open?: boolean; onSearchChange?: (search: string) => void; name?: string; required?: boolean;
-        loading?: boolean; defaultValue?: string; notCloseOnSelect?: boolean; listRef?: React.Ref<HTMLDivElement>;
-        onChange?: React.ChangeEventHandler<HTMLInputElement>
-    } & Omit<ButtonProps, "onChange"> & React.RefAttributes<HTMLButtonElement>
->>(({
-    Icon, placeholder, empty, value: defaultValue, defaultValue: defVal, setValue: defaultSetValue,
-    open: defaultOpen, onOpenChange, onSearchChange, name, loading, loadingElement, notCloseOnSelect,
-    children, onChange, required, listRef, ...props
-}, ref) => {
+      Icon,
+      placeholder,
+      empty,
+      value: defaultValue,
+      defaultValue: defVal,
+      setValue: defaultSetValue,
+      open: defaultOpen,
+      onOpenChange,
+      onSearchChange,
+      name,
+      loading,
+      loadingElement,
+      notCloseOnSelect,
+      children,
+      onChange,
+      required,
+      listRef,
+      ...props
+    },
+    ref
+  ) => {
     const [value, setValue] = useState(defaultValue || defVal || null);
     const [open, setOpen] = useState(defaultOpen || false);
     const [options, setOptions] = useState<OptionType[]>([]);
+    const inputSearch = useCallback(
+      onSearchChange ? debounce(onSearchChange, 500) : () => {},
+      []
+    );
 
-    let currentOption = options.find((option) => value === option?.value);
+    let currentOption = options.find(option => value === option?.value);
 
     return (
-        <ComboBoxContext.Provider value={
-            {
-                value: defaultSetValue && defaultValue ? defaultValue : value,
-                setValue: defaultSetValue && defaultValue ? defaultSetValue : setValue,
-                open: onOpenChange && defaultOpen ? defaultOpen : open,
-                setOpen: onOpenChange && defaultOpen ? onOpenChange : setOpen,
-                setOptions: setOptions,
-                notCloseOnSelect: notCloseOnSelect || false,
-                multiselect: false
-            }
-        }>
-            <Popover open={open} onOpenChange={setOpen}>
-                <PopoverTrigger asChild>
-                    <Button
-                        variant="outline"
-                        className="ms-justify-between"
-                        role="combobox"
-                        aria-expanded={open}
-                        {...props}
-                    >
-                        {Icon && <Icon className="ms-mr-2 ms-h-4 ms-w-4 ms-shrink-0 ms-opacity-50" />}
-                        {currentOption ? <span className="ms-overflow-hidden ms-text-ellipsis ms-text-nowrap">{currentOption.label}</span> : <span className="ms-text-nowrap ms-text-muted-foreground ms-overflow-hidden ms-text-ellipsis">{placeholder}</span>}
-                        <ChevronsUpDown className="ms-ml-2 ms-h-4 ms-w-4 ms-shrink-0 ms-opacity-50" />
-                    </Button>
-                </PopoverTrigger>
-                <PopoverContent className="ms-p-0">
-                    <Command filter={(optionValue, search) => {
-                        const option = options.find((option) => option?.value === optionValue);
-                        if (!option) return 0;
-                        if (
-                            option.value.toLowerCase().includes(search.toLowerCase()) ||
-                            extractStringFromNode(option.label).toLowerCase().includes(search.toLowerCase())
-                        ) return 1;
-                        return 0;
-                    }} className="ms-mt-4 md:ms-mt-0 ms-border-t md:ms-border-t-none">
-                        <CommandInput onValueChange={onSearchChange} placeholder={placeholder} />
-                        <CommandList ref={listRef}>
-                            {empty && <CommandEmpty>{empty}</CommandEmpty>}
-                            {loading && <CommandLoading>{loadingElement}</CommandLoading>}
-                            {children}
-                        </CommandList>
-                    </Command>
-                </PopoverContent>
-                <input type="hidden" onChange={onChange} ref={ref} required={required} name={name} value={value || undefined} />
-            </Popover>
-        </ComboBoxContext.Provider>
-    )
-});
+      <ComboBoxContext.Provider
+        value={{
+          value: defaultSetValue && defaultValue ? defaultValue : value,
+          setValue:
+            defaultSetValue && defaultValue ? defaultSetValue : setValue,
+          open: onOpenChange && defaultOpen ? defaultOpen : open,
+          setOpen: onOpenChange && defaultOpen ? onOpenChange : setOpen,
+          setOptions: setOptions,
+          notCloseOnSelect: notCloseOnSelect || false,
+          multiselect: false,
+        }}
+      >
+        <Popover open={open} onOpenChange={setOpen}>
+          <PopoverTrigger asChild>
+            <Button
+              variant="outline"
+              className="ms-justify-between"
+              role="combobox"
+              aria-expanded={open}
+              {...props}
+            >
+              {Icon && (
+                <Icon className="ms-mr-2 ms-h-4 ms-w-4 ms-shrink-0 ms-opacity-50" />
+              )}
+              {currentOption ? (
+                <span className="ms-overflow-hidden ms-text-ellipsis ms-text-nowrap">
+                  {currentOption.label}
+                </span>
+              ) : (
+                <span className="ms-text-nowrap ms-text-muted-foreground ms-overflow-hidden ms-text-ellipsis">
+                  {placeholder}
+                </span>
+              )}
+              <ChevronsUpDown className="ms-ml-2 ms-h-4 ms-w-4 ms-shrink-0 ms-opacity-50" />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="ms-p-0">
+            <Command
+              filter={(optionValue, search) => {
+                const option = options.find(
+                  option => option?.value === optionValue
+                );
+                if (!option) return 0;
+                if (
+                  option.value.toLowerCase().includes(search.toLowerCase()) ||
+                  extractStringFromNode(option.label)
+                    .toLowerCase()
+                    .includes(search.toLowerCase())
+                )
+                  return 1;
+                return 0;
+              }}
+              shouldFilter={!onSearchChange}
+              className="ms-mt-4 md:ms-mt-0 ms-border-t md:ms-border-t-none"
+            >
+              <CommandInput
+                onValueChange={inputSearch}
+                placeholder={placeholder}
+                loading={loading}
+              />
+              <CommandList ref={listRef}>
+                {empty && <CommandEmpty>{empty}</CommandEmpty>}
+                {loading && <CommandLoading>{loadingElement}</CommandLoading>}
+                {children}
+              </CommandList>
+            </Command>
+          </PopoverContent>
+          <input
+            type="hidden"
+            onChange={onChange}
+            ref={ref}
+            required={required}
+            name={name}
+            value={value || undefined}
+          />
+        </Popover>
+      </ComboBoxContext.Provider>
+    );
+  }
+);
 
-export const MultiselectComboBox = forwardRef<HTMLInputElement, PropsWithChildren<
+export const MultiselectComboBox = forwardRef<
+  HTMLInputElement,
+  PropsWithChildren<
+    ComboBoxProps & { value?: string[]; defaultValue?: string[] }
+  >
+>(
+  (
     {
-        Icon?: LucideIcon, placeholder: string, empty?: ReactNode, loadingElement?: ReactNode, value?: string[]; setValue?: Dispatch<SetStateAction<string[]>>;
-        onOpenChange?: Dispatch<SetStateAction<boolean>>; open?: boolean; onSearchChange?: (search: string) => void; name?: string; required?: boolean;
-        loading?: boolean; defaultValue?: string[]; notCloseOnSelect?: boolean; listRef?: React.Ref<HTMLDivElement>;
-        onChange?: React.ChangeEventHandler<HTMLInputElement>
-    } & Omit<ButtonProps, "onChange"> & React.RefAttributes<HTMLButtonElement>
->>(({
-    Icon, placeholder, empty, value: defaultValue, defaultValue: defVal, setValue: defaultSetValue,
-    open: defaultOpen, onOpenChange, onSearchChange, name, loading, loadingElement, notCloseOnSelect,
-    children, onChange, required, listRef, ...props
-}, ref) => {
-    const [values, setValues] = useState<string[]>(defaultValue || defVal || []);
+      Icon,
+      placeholder,
+      empty,
+      value: defaultValue,
+      defaultValue: defVal,
+      setValue: defaultSetValue,
+      open: defaultOpen,
+      onOpenChange,
+      onSearchChange,
+      name,
+      loading,
+      loadingElement,
+      notCloseOnSelect,
+      children,
+      onChange,
+      required,
+      listRef,
+      ...props
+    },
+    ref
+  ) => {
+    const [values, setValues] = useState<string[]>(
+      defaultValue || defVal || []
+    );
     const [open, setOpen] = useState(defaultOpen || false);
     const [options, setOptions] = useState<OptionType[]>([]);
+    const inputSearch = useCallback(
+      onSearchChange ? debounce(onSearchChange, 500) : () => {},
+      []
+    );
 
-    let currentOptions = options.filter((option) => values.includes(option?.value as string));
+    let currentOptions = options.filter(option =>
+      values.includes(option?.value as string)
+    );
 
     return (
-        <ComboBoxContext.Provider value={
-            {
-                value: defaultSetValue && defaultValue ? defaultValue : values,
-                setValue: defaultSetValue && defaultValue ? defaultSetValue : setValues,
-                open: onOpenChange && defaultOpen ? defaultOpen : open,
-                setOpen: onOpenChange && defaultOpen ? onOpenChange : setOpen,
-                setOptions: setOptions,
-                notCloseOnSelect: notCloseOnSelect !== undefined && notCloseOnSelect !== null ? notCloseOnSelect : true,
-                multiselect: true
-            }
-        }>
-            <Popover open={open} onOpenChange={setOpen}>
-                <PopoverTrigger asChild>
-                    <Button
-                        variant="outline"
-                        className="ms-justify-between"
-                        role="combobox"
-                        aria-expanded={open}
-                        {...props}
-                    >
-                        {Icon && <Icon className="ms-mr-2 ms-h-4 ms-w-4 ms-shrink-0 ms-opacity-50" />}
-                        {currentOptions.length > 0 ? <span className="ms-overflow-hidden ms-text-nowrap ms-text-ellipsis">{currentOptions.map((option, index) => <>{option?.label}{index < currentOptions.length - 1 ? ", " : null}</>)}</span> : <span className="ms-text-muted-foreground ms-text-nowrap ms-overflow-hidden ms-text-ellipsis">{placeholder}</span>}
-                        <ChevronsUpDown className="ms-ml-2 ms-h-4 ms-w-4 ms-shrink-0 ms-opacity-50" />
-                    </Button>
-                </PopoverTrigger>
-                <PopoverContent className="ms-p-0">
-                    <Command filter={(optionValue, search) => {
-                        const option = options.find((option) => option?.value === optionValue);
-                        if (!option) return 0;
-                        if (
-                            option.value.toLowerCase().includes(search.toLowerCase()) ||
-                            extractStringFromNode(option.label).toLowerCase().includes(search.toLowerCase())
-                        ) return 1;
-                        return 0;
-                    }} className="ms-mt-4 md:ms-mt-0 ms-border-t md:ms-border-t-none">
-                        <CommandInput onValueChange={onSearchChange} placeholder={placeholder} />
-                        <CommandList ref={listRef}>
-                            {empty && <CommandEmpty>{empty}</CommandEmpty>}
-                            {loading && <CommandLoading>{loadingElement}</CommandLoading>}
-                            {children}
-                        </CommandList>
-                    </Command>
-                </PopoverContent>
-                <input type="hidden" onChange={onChange} ref={ref} required={required} name={name} value={values} />
-            </Popover>
-        </ComboBoxContext.Provider>
-    )
-});
+      <ComboBoxContext.Provider
+        value={{
+          value: defaultSetValue && defaultValue ? defaultValue : values,
+          setValue:
+            defaultSetValue && defaultValue ? defaultSetValue : setValues,
+          open: onOpenChange && defaultOpen ? defaultOpen : open,
+          setOpen: onOpenChange && defaultOpen ? onOpenChange : setOpen,
+          setOptions: setOptions,
+          notCloseOnSelect:
+            notCloseOnSelect !== undefined && notCloseOnSelect !== null
+              ? notCloseOnSelect
+              : true,
+          multiselect: true,
+        }}
+      >
+        <Popover open={open} onOpenChange={setOpen}>
+          <PopoverTrigger asChild>
+            <Button
+              variant="outline"
+              className="ms-justify-between"
+              role="combobox"
+              aria-expanded={open}
+              {...props}
+            >
+              {Icon && (
+                <Icon className="ms-mr-2 ms-h-4 ms-w-4 ms-shrink-0 ms-opacity-50" />
+              )}
+              {currentOptions.length > 0 ? (
+                <span className="ms-overflow-hidden ms-text-nowrap ms-text-ellipsis">
+                  {currentOptions.map((option, index) => (
+                    <>
+                      {option?.label}
+                      {index < currentOptions.length - 1 ? ", " : null}
+                    </>
+                  ))}
+                </span>
+              ) : (
+                <span className="ms-text-muted-foreground ms-text-nowrap ms-overflow-hidden ms-text-ellipsis">
+                  {placeholder}
+                </span>
+              )}
+              <ChevronsUpDown className="ms-ml-2 ms-h-4 ms-w-4 ms-shrink-0 ms-opacity-50" />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="ms-p-0">
+            <Command
+              filter={(optionValue, search) => {
+                const option = options.find(
+                  option => option?.value === optionValue
+                );
+                if (!option) return 0;
+                if (
+                  option.value.toLowerCase().includes(search.toLowerCase()) ||
+                  extractStringFromNode(option.label)
+                    .toLowerCase()
+                    .includes(search.toLowerCase())
+                )
+                  return 1;
+                return 0;
+              }}
+              shouldFilter={!onSearchChange}
+              className="ms-mt-4 md:ms-mt-0 ms-border-t md:ms-border-t-none"
+            >
+              <CommandInput
+                onValueChange={inputSearch}
+                placeholder={placeholder}
+              />
+              <CommandList ref={listRef}>
+                {empty && <CommandEmpty>{empty}</CommandEmpty>}
+                {loading && <CommandLoading>{loadingElement}</CommandLoading>}
+                {children}
+              </CommandList>
+            </Command>
+          </PopoverContent>
+          <input
+            type="hidden"
+            onChange={onChange}
+            ref={ref}
+            required={required}
+            name={name}
+            value={values}
+          />
+        </Popover>
+      </ComboBoxContext.Provider>
+    );
+  }
+);
 
 const useComboBox = () => {
-    const value = useContext(ComboBoxContext);
+  const value = useContext(ComboBoxContext);
 
-    if (!value)
-        throw new Error("<ComboBoxItem /> avaible only on <ComboBox />");
+  if (!value) throw new Error("<ComboBoxItem /> avaible only on <ComboBox />");
 
-    return value;
+  return value;
 };
 
-export const ComboBoxItem = forwardRef<React.ElementRef<typeof CommandItem>, React.ComponentPropsWithoutRef<typeof CommandItem>>(({ value, children, ...props }, ref) => {
-    const { setOpen, setValue, value: selectedValue, setOptions, multiselect, notCloseOnSelect } = useComboBox();
-    const id = useId()
+export const ComboBoxItem = forwardRef<
+  React.ElementRef<typeof CommandItem>,
+  React.ComponentPropsWithoutRef<typeof CommandItem>
+>(({ value, children, ...props }, ref) => {
+  const {
+    setOpen,
+    setValue,
+    value: selectedValue,
+    setOptions,
+    multiselect,
+    notCloseOnSelect,
+  } = useComboBox();
+  const id = useId();
 
-    useEffect(() => {
-        setOptions((options) => options.some(option => option?.value === (value || id)) ? options : [...options, { label: children, value: value || id }]);
-    }, [value, children]);
+  useEffect(() => {
+    setOptions(options =>
+      options.some(option => option?.value === (value || id))
+        ? options
+        : [...options, { label: children, value: value || id }]
+    );
+  }, [value, children]);
 
-    return (
-        <CommandItem
-            value={value || id}
-            onSelect={(currentValue) => {
-                if (!selectedValue) {
-                    if (multiselect)
-                        (setValue as Dispatch<SetStateAction<string[]>>)([currentValue]);
-                    else
-                        (setValue as Dispatch<SetStateAction<string | null>>)(currentValue);
-                }
-                if (typeof selectedValue === "string")
-                    (setValue as Dispatch<SetStateAction<string | null>>)((selectedValue) => selectedValue === currentValue ? null : currentValue);
-                if (selectedValue instanceof Array)
-                    (setValue as Dispatch<SetStateAction<string[]>>)((selectedValue) => !selectedValue.includes(currentValue) ? [...selectedValue, currentValue] : selectedValue.filter((val) => val !== currentValue));
-                !notCloseOnSelect && setOpen(false)
-            }}
-            ref={ref}
-            {...props}
-        >
-            <Check
-                className={cn(
-                    "ms-mr-2 ms-h-4 ms-w-4",
-                    (selectedValue instanceof Array && selectedValue.includes(value || id)) || (typeof selectedValue === "string" && selectedValue === value) ? "ms-opacity-100" : "ms-opacity-0"
-                )}
-            />
-            {children}
-        </CommandItem>
-    )
-})
+  return (
+    <CommandItem
+      value={value || id}
+      onSelect={currentValue => {
+        if (!selectedValue) {
+          if (multiselect)
+            (setValue as Dispatch<SetStateAction<string[]>>)([currentValue]);
+          else
+            (setValue as Dispatch<SetStateAction<string | null>>)(currentValue);
+        }
+        if (typeof selectedValue === "string")
+          (setValue as Dispatch<SetStateAction<string | null>>)(selectedValue =>
+            selectedValue === currentValue ? null : currentValue
+          );
+        if (selectedValue instanceof Array)
+          (setValue as Dispatch<SetStateAction<string[]>>)(selectedValue =>
+            !selectedValue.includes(currentValue)
+              ? [...selectedValue, currentValue]
+              : selectedValue.filter(val => val !== currentValue)
+          );
+        !notCloseOnSelect && setOpen(false);
+      }}
+      ref={ref}
+      {...props}
+    >
+      <Check
+        className={cn(
+          "ms-mr-2 ms-h-4 ms-w-4",
+          (selectedValue instanceof Array &&
+            selectedValue.includes(value || id)) ||
+            (typeof selectedValue === "string" && selectedValue === value)
+            ? "ms-opacity-100"
+            : "ms-opacity-0"
+        )}
+      />
+      {children}
+    </CommandItem>
+  );
+});
 
 export const ComboBoxGroup = CommandGroup;
 ComboBoxGroup.displayName = "ComboBoxGroup";
