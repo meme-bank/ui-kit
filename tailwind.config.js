@@ -1,15 +1,15 @@
-const defaultTheme = require('tailwindcss/defaultTheme')
-const plugin = require('tailwindcss/plugin');
+const defaultTheme = require("tailwindcss/defaultTheme");
+const plugin = require("tailwindcss/plugin");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class", '[data-mode="dark"]'],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   theme: {
     container: {
       center: true,
@@ -20,9 +20,22 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        "vksans": ["VK Sans Display", "SF UI Display", "SF UI Text", ...defaultTheme.fontFamily.sans],
-        "sf-display": ["SF UI Display", "SF UI Text", ...defaultTheme.fontFamily.sans],
-        "sf-text": ["SF UI Text", "SF UI Display", ...defaultTheme.fontFamily.sans],
+        vksans: [
+          "VK Sans Display",
+          "SF UI Display",
+          "SF UI Text",
+          ...defaultTheme.fontFamily.sans,
+        ],
+        "sf-display": [
+          "SF UI Display",
+          "SF UI Text",
+          ...defaultTheme.fontFamily.sans,
+        ],
+        "sf-text": [
+          "SF UI Text",
+          "SF UI Display",
+          ...defaultTheme.fontFamily.sans,
+        ],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -74,6 +87,14 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: 0 },
         },
+        "opacity-in": {
+          from: { opacity: 0 },
+          to: { opacity: 1 },
+        },
+        "opacity-out": {
+          from: { opacity: 1 },
+          to: { opacity: 0 },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -84,13 +105,13 @@ module.exports = {
   prefix: "ms-",
   plugins: [
     require("tailwindcss-animate"),
-    require('@tailwindcss/container-queries'),
+    require("@tailwindcss/container-queries"),
     plugin(({ addVariant }) => {
-      addVariant('hover', [
-        '@media (hover: hover) { &:hover }',
-        '@media (hover: none) { &:active }',
+      addVariant("hover", [
+        "@media (hover: hover) { &:hover }",
+        "@media (hover: none) { &:active }",
       ]);
-      addVariant("no-hover", "@media (hover: none)")
+      addVariant("no-hover", "@media (hover: none)");
     }),
   ],
-}
+};
