@@ -50,7 +50,7 @@ export const CropperControls = React.forwardRef<
       "ms-bg-background ms-absolute ms-left-0 ms-top-0 ms-bottom-0 ms-right-0 ms-overflow-hidden ms-select-none ms-touch-none ms-cursor-move ms-flex ms-items-center ms-justify-items"
     ),
     cropAreaClassName: cn(
-      "ms-absolute ms-border-border ms-text-background/50 ms-left-1/2 ms-top-1/2 -ms-translate-y-1/2 ms-overflow-hidden ms-shadow-[0_0_0_calc(100vw_+_100vh)] -ms-translate-x-1/2",
+      "ms-absolute ms-border-foreground ms-border-2 ms-text-background/50 ms-left-1/2 ms-top-1/2 ms-border-solid -ms-translate-y-1/2 ms-overflow-hidden ms-shadow-[0_0_0_calc(100vw_+_100vh)] -ms-translate-x-1/2",
       aspect[props.type] === 1 / 1 ? "ms-rounded-full" : "ms-rounded-md"
     ),
     mediaClassName: cn(
