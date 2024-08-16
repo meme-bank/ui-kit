@@ -82,11 +82,11 @@ export const CropperControls = React.forwardRef<
               height:
                 mediaSize.width >= mediaSize.height
                   ? mediaSize.height
-                  : mediaSize.width * aspect[props.type],
+                  : mediaSize.width / aspect[props.type],
               width:
-                mediaSize.width < mediaSize.height
-                  ? mediaSize.width
-                  : mediaSize.height * aspect[props.type],
+                mediaSize.width >= mediaSize.height
+                  ? mediaSize.height * aspect[props.type]
+                  : mediaSize.width,
             }
           }
           onMediaLoaded={({ height, width }) => {
