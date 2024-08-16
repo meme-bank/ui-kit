@@ -13,11 +13,11 @@ export interface InputFormFieldProps extends InputProps {
     placeholder?: string;
     description?: string;
     LabelIcon?: LucideIcon;
-    nonControl?: boolean;
+    rhmControl?: boolean;
     error?: string;
 }
 
-export const InputFormField: React.FC<InputFormFieldProps> = ({ label, name, skeletonLoad, placeholder, description, nonControl, error, LabelIcon, ...props }) => {
+export const InputFormField: React.FC<InputFormFieldProps> = ({ label, name, skeletonLoad, placeholder, description, rhmControl, error, LabelIcon, ...props }) => {
     if (skeletonLoad) {
         return (
             <div className="ms-space-y-2">
@@ -35,7 +35,7 @@ export const InputFormField: React.FC<InputFormFieldProps> = ({ label, name, ske
         )
     }
 
-    if (nonControl)
+    if (!rhmControl)
         return (
             <div className="ms-space-y-2">
                 <Label className={error && "ms-text-destructive"}>
