@@ -134,7 +134,7 @@ export const ProfileInfoBlock: React.FC<{
       >
         {setAvatar && (
           <Dialog onOpenChange={setCropperDialog} open={cropperDialog}>
-            <DialogTrigger className="ms-opacity-0 group-hover/profilebg:ms-opacity-100 ms-inset-0 ms-m-auto ms-bg-background/90 ms-flex ms-duration-150 ms-justify-center ms-items-center ms-cursor-pointer ms-h-8 ms-w-8 ms-rounded-full ms-absolute ms-border ms-backdrop-blur-sm">
+            <DialogTrigger className="ms-opacity-0 group-hover/avatar:ms-opacity-100 ms-inset-0 ms-m-auto ms-bg-background/90 ms-flex ms-duration-150 ms-justify-center ms-items-center ms-cursor-pointer ms-h-8 ms-w-8 ms-rounded-full ms-absolute ms-border ms-backdrop-blur-sm">
               <Pencil className="ms-h-4 ms-w-4" />
             </DialogTrigger>
             <CropperDialogContent

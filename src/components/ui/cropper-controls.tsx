@@ -58,6 +58,14 @@ export const CropperControls = React.forwardRef<
     ),
   };
 
+  const getCropSize = (mediaSize: Size): Size => {
+    const { width } = mediaSize;
+    return {
+      height: width / aspect[props.type],
+      width,
+    };
+  };
+
   return (
     <div className="ms-flex ms-flex-col ms-min-h-96 ms-h-full ms-gap-2">
       <div className="ms-relative ms-flex-1 ms-rounded-md ms-overflow-hidden ms-border-border">
@@ -76,19 +84,7 @@ export const CropperControls = React.forwardRef<
           onCropComplete={(_, area) => {
             setArea(area);
           }}
-          objectFit="contain"
-          cropSize={
-            mediaSize && {
-              height:
-                mediaSize.width >= mediaSize.height
-                  ? mediaSize.height
-                  : mediaSize.width / aspect[props.type],
-              width:
-                mediaSize.width >= mediaSize.height
-                  ? mediaSize.height * aspect[props.type]
-                  : mediaSize.width,
-            }
-          }
+          cropSize={mediaSize && getCropSize(mediaSize)}
           onMediaLoaded={({ height, width }) => {
             setMediaSize({
               height,
