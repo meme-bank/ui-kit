@@ -16,18 +16,19 @@ import {
 } from "./dialog";
 import { Slider } from "./slider";
 
-export type CropperType = "background" | "avatar";
+export type CropArea = Area;
+export type CropAreaAspectType = "background" | "avatar";
 type OnDrop = <T extends File>(
   acceptedFiles: T[],
   fileRejections: FileRejection[],
   event: DropEvent
 ) => void;
-export type OnUpload = (file: File, area: Area) => void;
+export type OnUpload = (file: File, area: CropArea) => void;
 
 export const CropperControls = React.forwardRef<
   unknown,
   {
-    type: CropperType;
+    type: CropAreaAspectType;
     image: string;
     onDrop?: OnDrop;
     onUpload: (area: Area) => void;
@@ -40,7 +41,7 @@ export const CropperControls = React.forwardRef<
   const [openReupload, setReupload] = useState(false);
   const [mediaSize, setMediaSize] = useState<Size>();
 
-  const aspect: Record<CropperType, number> = {
+  const aspect: Record<CropAreaAspectType, number> = {
     avatar: 1 / 1,
     background: 5 / 2,
   };
@@ -157,7 +158,7 @@ export const CropperControls = React.forwardRef<
 CropperControls.defaultProps = { type: "avatar" };
 
 export const CropperDialogContent: React.FC<{
-  type: CropperType;
+  type: CropAreaAspectType;
   onUpload: OnUpload;
   openState?: boolean;
   image?: string;
