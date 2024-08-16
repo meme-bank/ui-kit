@@ -59,10 +59,15 @@ export const CropperControls = React.forwardRef<
   };
 
   const getCropSize = (mediaSize: Size): Size => {
-    const { width } = mediaSize;
+    const { height, width } = mediaSize;
+    if (height * aspect[props.type] > width)
+      return {
+        height: width / aspect[props.type],
+        width,
+      };
     return {
-      height: width / aspect[props.type],
-      width,
+      height,
+      width: height * aspect[props.type],
     };
   };
 
