@@ -1,9 +1,9 @@
-import * as React from "react"
-import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu"
-import { cva } from "class-variance-authority"
-import { ChevronDown } from "lucide-react"
+import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
+import { cva } from "cva";
+import { ChevronDown } from "lucide-react";
+import * as React from "react";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
 const NavigationMenu = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Root>,
@@ -20,8 +20,8 @@ const NavigationMenu = React.forwardRef<
     {children}
     <NavigationMenuViewport />
   </NavigationMenuPrimitive.Root>
-))
-NavigationMenu.displayName = NavigationMenuPrimitive.Root.displayName
+));
+NavigationMenu.displayName = NavigationMenuPrimitive.Root.displayName;
 
 const NavigationMenuList = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.List>,
@@ -35,14 +35,14 @@ const NavigationMenuList = React.forwardRef<
     )}
     {...props}
   />
-))
-NavigationMenuList.displayName = NavigationMenuPrimitive.List.displayName
+));
+NavigationMenuList.displayName = NavigationMenuPrimitive.List.displayName;
 
-const NavigationMenuItem = NavigationMenuPrimitive.Item
+const NavigationMenuItem = NavigationMenuPrimitive.Item;
 
-const navigationMenuTriggerStyle = cva(
-  "ms-group ms-inline-flex ms-h-10 ms-w-max ms-items-center ms-justify-center ms-rounded-md ms-bg-background ms-px-4 ms-py-2 ms-text-sm ms-font-medium ms-transition-colors hover:ms-bg-accent hover:ms-text-accent-foreground focus:ms-bg-accent focus:ms-text-accent-foreground focus:ms-outline-none disabled:ms-pointer-events-none disabled:ms-opacity-50 data-[active]:ms-bg-accent/50 data-[state=open]:ms-bg-accent/50"
-)
+const navigationMenuTriggerStyle = cva({
+  base: "ms-group ms-inline-flex ms-h-10 ms-w-max ms-items-center ms-justify-center ms-rounded-md ms-bg-background ms-px-4 ms-py-2 ms-text-sm ms-font-medium ms-transition-colors hover:ms-bg-accent hover:ms-text-accent-foreground focus:ms-bg-accent focus:ms-text-accent-foreground focus:ms-outline-none disabled:ms-pointer-events-none disabled:ms-opacity-50 data-[active]:ms-bg-accent/50 data-[state=open]:ms-bg-accent/50",
+});
 
 const NavigationMenuTrigger = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Trigger>,
@@ -59,8 +59,8 @@ const NavigationMenuTrigger = React.forwardRef<
       aria-hidden="true"
     />
   </NavigationMenuPrimitive.Trigger>
-))
-NavigationMenuTrigger.displayName = NavigationMenuPrimitive.Trigger.displayName
+));
+NavigationMenuTrigger.displayName = NavigationMenuPrimitive.Trigger.displayName;
 
 const NavigationMenuContent = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Content>,
@@ -74,16 +74,20 @@ const NavigationMenuContent = React.forwardRef<
     )}
     {...props}
   />
-))
-NavigationMenuContent.displayName = NavigationMenuPrimitive.Content.displayName
+));
+NavigationMenuContent.displayName = NavigationMenuPrimitive.Content.displayName;
 
-const NavigationMenuLink = NavigationMenuPrimitive.Link
+const NavigationMenuLink = NavigationMenuPrimitive.Link;
 
 const NavigationMenuViewport = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Viewport>,
   React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Viewport>
 >(({ className, ...props }, ref) => (
-  <div className={cn("ms-absolute ms-left-0 ms-top-full ms-flex ms-justify-center")}>
+  <div
+    className={cn(
+      "ms-absolute ms-left-0 ms-top-full ms-flex ms-justify-center"
+    )}
+  >
     <NavigationMenuPrimitive.Viewport
       className={cn(
         "ms-origin-top-center ms-relative ms-mt-1.5 ms-h-[var(--radix-navigation-menu-viewport-height)] ms-w-full ms-overflow-hidden ms-rounded-md ms-border ms-bg-popover ms-text-popover-foreground ms-shadow-lg data-[state=open]:ms-animate-in data-[state=closed]:ms-animate-out data-[state=closed]:ms-zoom-out-95 data-[state=open]:ms-zoom-in-90 md:ms-w-[var(--radix-navigation-menu-viewport-width)]",
@@ -93,9 +97,9 @@ const NavigationMenuViewport = React.forwardRef<
       {...props}
     />
   </div>
-))
+));
 NavigationMenuViewport.displayName =
-  NavigationMenuPrimitive.Viewport.displayName
+  NavigationMenuPrimitive.Viewport.displayName;
 
 const NavigationMenuIndicator = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Indicator>,
@@ -111,18 +115,18 @@ const NavigationMenuIndicator = React.forwardRef<
   >
     <div className="ms-relative ms-top-[60%] ms-h-2 ms-w-2 ms-rotate-45 ms-rounded-tl-sm ms-bg-border ms-shadow-md" />
   </NavigationMenuPrimitive.Indicator>
-))
+));
 NavigationMenuIndicator.displayName =
-  NavigationMenuPrimitive.Indicator.displayName
+  NavigationMenuPrimitive.Indicator.displayName;
 
 export {
-  navigationMenuTriggerStyle,
   NavigationMenu,
-  NavigationMenuList,
-  NavigationMenuItem,
   NavigationMenuContent,
-  NavigationMenuTrigger,
-  NavigationMenuLink,
   NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
   NavigationMenuViewport,
-}
+  navigationMenuTriggerStyle,
+};

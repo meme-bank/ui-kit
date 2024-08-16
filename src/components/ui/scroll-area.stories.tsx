@@ -11,7 +11,7 @@ const ScrollAreaMeta: Meta<ScrollAreaType> = {
     children: (
       <>
         <div className="ms-flex ms-w-max ms-space-x-4 ms-p-4">
-          {[1, 2, 3, 4, 5, 6, 7, 8].map(id => (
+          {[1, 2, 3, 4, 5, 6, 7, 8].map((id) => (
             <figure key={id} className="ms-shrink-0">
               <div className="ms-overflow-hidden ms-rounded-md">
                 <img

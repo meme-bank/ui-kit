@@ -82,7 +82,7 @@ export const ProfileBlockBackground: React.FC<
         >
           {setBg && (
             <Dialog onOpenChange={setCropperDialog} open={cropperDialog}>
-              <DialogTrigger className="ms-hidden ms-right-2 ms-top-2 ms-bg-background/90 group-hover/profilebg:ms-flex ms-duration-150 ms-justify-center ms-items-center ms-cursor-pointer ms-h-8 ms-w-8 ms-rounded-full ms-absolute ms-border ms-backdrop-blur-sm">
+              <DialogTrigger className="ms-flex ms-opacity-0 ms-right-2 ms-top-2 ms-bg-background/90 group-hover/profilebg:ms-opacity-100 ms-justify-center ms-items-center ms-cursor-pointer ms-h-8 ms-w-8 ms-rounded-full ms-absolute ms-border ms-backdrop-blur-sm ms-duration-150">
                 <Pencil className="ms-h-4 ms-w-4" />
               </DialogTrigger>
               <CropperDialogContent
@@ -134,7 +134,7 @@ export const ProfileInfoBlock: React.FC<{
       >
         {setAvatar && (
           <Dialog onOpenChange={setCropperDialog} open={cropperDialog}>
-            <DialogTrigger className="ms-hidden ms-inset-0 ms-m-auto ms-bg-background/90 group-hover/avatar:ms-flex ms-duration-150 ms-justify-center ms-items-center ms-cursor-pointer ms-h-8 ms-w-8 ms-rounded-full ms-absolute ms-border ms-backdrop-blur-sm">
+            <DialogTrigger className="ms-opacity-0 group-hover/profilebg:ms-opacity-100 ms-inset-0 ms-m-auto ms-bg-background/90 ms-flex ms-duration-150 ms-justify-center ms-items-center ms-cursor-pointer ms-h-8 ms-w-8 ms-rounded-full ms-absolute ms-border ms-backdrop-blur-sm">
               <Pencil className="ms-h-4 ms-w-4" />
             </DialogTrigger>
             <CropperDialogContent

@@ -4,6 +4,7 @@ import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 
 const config: StorybookConfig = {
   stories: ["../src/components/**/*.stories.tsx"],
+
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
@@ -16,15 +17,18 @@ const config: StorybookConfig = {
         },
       },
 
-    }
+    },
+    "@storybook/addon-webpack5-compiler-swc",
+    "@chromatic-com/storybook"
   ],
+
   framework: {
     name: "@storybook/react-webpack5",
     options: {},
   },
-  docs: {
-    autodocs: "tag",
-  },
+
+  docs: {},
+
   webpack(cfg) {
     return {
       ...cfg,
@@ -40,6 +44,10 @@ const config: StorybookConfig = {
         ]
       }
     }
+  },
+
+  typescript: {
+    reactDocgen: "react-docgen-typescript"
   }
 };
 export default config;
