@@ -1,7 +1,7 @@
-import { type ClassValue, clsx } from "clsx"
+import { clsx, type ClassValue } from "clsx";
 import { useEffect, useState } from "react";
 import { Area } from "react-easy-crop";
-import { twMerge } from "tailwind-merge"
+import { twMerge } from "tailwind-merge";
  
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(
@@ -133,7 +133,7 @@ export async function getPreviewPhoto(
   pixelCrop: Area,
   rotation = 0,
   flip = { horizontal: false, vertical: false }
-) {
+): Promise<string | null> {
   const image = await createImage(imageSrc)
   const canvas = document.createElement('canvas')
   const ctx = canvas.getContext('2d')

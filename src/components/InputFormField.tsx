@@ -1,10 +1,10 @@
-import * as React from "react";
-import { Skeleton } from "@ui-components/skeleton";
+import { cn } from "@/lib/utils";
 import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@ui-components/form";
 import { Input, InputProps } from "@ui-components/input";
+import { Skeleton } from "@ui-components/skeleton";
 import { LucideIcon } from "lucide-react";
+import * as React from "react";
 import { Label } from "./ui/label";
-import { cn } from "@/lib/utils";
 
 export interface InputFormFieldProps extends InputProps {
     label?: string;
@@ -44,7 +44,7 @@ export const InputFormField: React.FC<InputFormFieldProps> = ({ label, name, ske
                         {label}
                     </span>
                 </Label>
-                <Input {...props} placeholder={placeholder} />
+                <Input {...props} name={name} placeholder={placeholder} />
                 {description && <p className="ms-text-sm ms-text-muted-foreground">
                     {description}
                 </p>}
