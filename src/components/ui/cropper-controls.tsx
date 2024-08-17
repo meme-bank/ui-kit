@@ -199,14 +199,17 @@ export const CropperDialogContent: React.FC<{
 
   if (imageUrl && file)
     return (
-      <DialogContent className="ms-h-full md:ms-h-[50rem]">
+      <DialogContent
+        noScroll
+        className="ms-h-full ms-flex ms-flex-col md:ms-h-[50rem]"
+      >
         <DialogHeader>
           <DialogTitle>Выберите отображаемую область</DialogTitle>
           <DialogDescription>
             НБМ вам предоставит удобный интерфейс для выбора
           </DialogDescription>
         </DialogHeader>
-        <div className="ms-p-2 md:ms-p-0 ms-h-full ms-flex-1">
+        <div className="ms-p-2 md:ms-p-0 ms-h-full ms-flex-1" data-vaul-no-drag>
           <CropperControls
             image={imageUrl}
             type={type}

@@ -1,7 +1,8 @@
-import * as React from "react"
-import { Drawer as DrawerPrimitive } from "vaul"
+import * as React from "react";
+import { Drawer as DrawerPrimitive } from "vaul";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
+import { ScrollArea } from "./scroll-area";
 
 export type DrawerProps = React.ComponentProps<typeof DrawerPrimitive.Root>;
 
@@ -47,23 +48,31 @@ DrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName
 
 const DrawerContent = React.forwardRef<
   React.ElementRef<typeof DrawerPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content> & { autoClose?: boolean }
->(({ className, children, autoClose = false, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content> & { autoClose?: boolean; noScroll?: boolean }
+>(({ className, children, autoClose = false, noScroll = false, ...props }, ref) => {
+  const Child = (
+    <>
+    {!autoClose && <div className="ms-mx-auto ms-mt-4 ms-h-2 ms-w-[100px] ms-rounded-full ms-bg-muted" />}
+    {children}</>
+  )
+  
+  return (
   <DrawerPortal>
     <DrawerOverlay />
     <DrawerPrimitive.Content
       ref={ref}
       className={cn(
-        "ms-fixed ms-inset-x-0 ms-max-h-screen ms-overflow-y-auto ms-bottom-0 ms-z-50 ms-mt-24 ms-flex ms-h-auto ms-flex-col ms-rounded-t-lg ms-border ms-bg-background",
+        "ms-fixed ms-inset-x-0 ms-max-h-screen ms-overflow-hidden ms-bottom-0 ms-z-50 ms-mt-24 ms-flex ms-h-auto ms-flex-col ms-rounded-t-lg ms-border ms-bg-background",
         className
       )}
       {...props}
     >
-      {!autoClose && <div className="ms-mx-auto ms-mt-4 ms-h-2 ms-w-[100px] ms-rounded-full ms-bg-muted" />}
-      {children}
+      {!noScroll ? <ScrollArea className="ms-h-full">
+        {Child}
+      </ScrollArea> : Child}
     </DrawerPrimitive.Content>
   </DrawerPortal>
-))
+)})
 DrawerContent.displayName = "DrawerContent"
 
 const DrawerHeader = ({
@@ -116,15 +125,7 @@ const DrawerDescription = React.forwardRef<
 DrawerDescription.displayName = DrawerPrimitive.Description.displayName
 
 export {
-  Drawer,
-  DrawerPortal,
-  DrawerOverlay,
-  DrawerTrigger,
-  DrawerClose,
-  DrawerContent,
-  DrawerHeader,
-  DrawerFooter,
-  DrawerTitle,
-  DrawerDescription,
-  NestedDrawer
-}
+  Drawer, DrawerClose,
+  DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerOverlay, DrawerPortal, DrawerTitle, DrawerTrigger, NestedDrawer
+};
+

@@ -6,6 +6,7 @@ import * as React from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 import clsx from "clsx";
+import { ScrollArea } from "./scroll-area";
 
 const Command = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive>,
@@ -79,15 +80,19 @@ CommandInput.displayName = CommandPrimitive.Input.displayName;
 const CommandList = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.List>,
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.List>
->(({ className, ...props }, ref) => (
+>(({ className, children, ...props }, ref) => (
   <CommandPrimitive.List
     ref={ref}
     className={cn(
-      "ms-max-h-[300px] ms-overflow-y-auto ms-overflow-x-hidden",
+      "ms-overflow-hidden",
       className
     )}
     {...props}
-  />
+  >
+    <ScrollArea className="md:ms-max-h-[300px] ms-h-[350px] ms-px-3">
+      {children}
+    </ScrollArea>
+  </CommandPrimitive.List>
 ));
 
 CommandList.displayName = CommandPrimitive.List.displayName;
@@ -174,5 +179,6 @@ export {
   CommandItem,
   CommandList,
   CommandSeparator,
-  CommandShortcut,
+  CommandShortcut
 };
+
