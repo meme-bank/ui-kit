@@ -48,7 +48,7 @@ export const CropperControls = React.forwardRef<
 
   const classes = {
     containerClassName: cn(
-      "ms-bg-background ms-absolute ms-left-0 ms-top-0 ms-bottom-0 ms-right-0 ms-overflow-hidden ms-select-none ms-touch-none ms-cursor-move ms-flex ms-items-center ms-justify-items"
+      "ms-bg-background ms-h-full ms-w-full ms-overflow-hidden ms-select-none ms-touch-none ms-cursor-move ms-flex ms-items-center ms-justify-items"
     ),
     cropAreaClassName: cn(
       "ms-absolute ms-text-background/50 ms-left-1/2 ms-top-1/2 ms-outline-2 ms-outline-foreground ms-outline -ms-translate-y-1/2 ms-overflow-hidden ms-shadow-[0_0_0_calc(100vw_+_100vh)] -ms-translate-x-1/2",
@@ -58,6 +58,17 @@ export const CropperControls = React.forwardRef<
       "ms-bg-background ms-max-w-full ms-max-h-full ms-border-border ms-m-auto ms-absolute ms-left-0 ms-top-0 ms-bottom-0 ms-right-0"
     ),
   };
+
+  useEffect(() => {
+    if (mediaSize) {
+      const container = document.querySelector(`.reactEasyCrop_Container`);
+      container?.setAttribute("data-vaul-no-drag", "true");
+      const cropper = container?.querySelector(`.reactEasyCrop_CropArea`);
+      cropper?.setAttribute("data-vaul-no-drag", "true");
+      const image = container?.querySelector(`.reactEasyCrop_Image`);
+      image?.setAttribute("data-vaul-no-drag", "true");
+    }
+  }, [mediaSize]);
 
   const getCropSize = (mediaSize: Size): Size => {
     const { height, width } = mediaSize;
@@ -73,83 +84,93 @@ export const CropperControls = React.forwardRef<
   };
 
   return (
-    <div className="ms-flex ms-flex-col ms-min-h-96 ms-h-full ms-gap-2">
-      <div className="ms-relative ms-flex-1 ms-rounded-md ms-overflow-hidden ms-border-border">
-        <Cropper
-          crop={crop}
-          onCropChange={setCrop}
-          image={props.image}
-          disableAutomaticStylesInjection
-          zoom={zoom}
-          aspect={aspect[props.type]}
-          classes={classes}
-          rotation={rotate}
-          zoomWithScroll={false}
-          onZoomChange={setZoom}
-          maxZoom={2.5}
-          onCropComplete={(_, area) => {
-            setArea(area);
-          }}
-          cropSize={mediaSize && getCropSize(mediaSize)}
-          onMediaLoaded={({ height, width }) => {
-            setMediaSize({
-              height,
-              width,
-            });
-          }}
-          mediaProps={{
-            ...mediaSize,
-          }}
-        />
-      </div>
-      <div className="ms-flex ms-gap-2">
-        {props.onDrop && (
-          <Dialog nested open={openReupload} onOpenChange={setReupload}>
-            <DialogTrigger asChild>
-              <Button size={"icon"} variant={"outline"}>
-                <Upload className="ms-h-[1.2rem] ms-w-[1.2rem]" />
-              </Button>
-            </DialogTrigger>
-            <DropDialogContent
-              close={() => setReupload(false)}
-              onDrop={props.onDrop}
-            />
-          </Dialog>
-        )}
-        <Button
-          type="button"
-          onClick={() => setRotate(val => val + 90)}
-          variant={"outline"}
-          size={"icon"}
+    <div data-vaul-no-drag className="ms-h-full ms-min-h-96">
+      <div data-vaul-no-drag className="ms-flex ms-flex-col ms-h-full ms-gap-2">
+        <div
+          data-vaul-no-drag
+          className="ms-relative ms-flex-1 ms-overflow-hidden"
         >
-          <RotateCcwSquare className="ms-h-[1.2rem] ms-w-[1.2rem]" />
-        </Button>
-        <Button
-          type="button"
-          onClick={() => setRotate(val => val - 90)}
-          variant={"outline"}
-          size={"icon"}
-        >
-          <RotateCwSquare className="ms-h-[1.2rem] ms-w-[1.2rem]" />
-        </Button>
-        <Slider
-          className="ms-flex-1 no-hover:ms-hidden"
-          step={0.25}
-          max={2.5}
-          min={1}
-          defaultValue={[1]}
-          value={[zoom]}
-          onValueChange={val => setZoom(val[0])}
-        />
-        <DialogClose asChild onClick={() => props.onUpload(area as Area)}>
-          <Button
-            size={"icon"}
-            className="sm:ms-px-3 no-hover:ms-ml-auto sm:ms-w-auto sm:ms-py-2 sm:ms-justify-start"
+          <div
+            data-vaul-no-drag
+            className="ms-absolute ms-top-0 ms-bottom-0 ms-left-0 ms-right-0"
           >
-            <Check className="ms-h-[1.2rem] ms-w-[1.2rem] sm:ms-w-4 sm:ms-h-4 sm:ms-mr-3" />
-            <span className="ms-hidden sm:ms-inline">Отправить</span>
+            <Cropper
+              crop={crop}
+              onCropChange={setCrop}
+              image={props.image}
+              disableAutomaticStylesInjection
+              zoom={zoom}
+              aspect={aspect[props.type]}
+              classes={classes}
+              rotation={rotate}
+              zoomWithScroll={false}
+              onZoomChange={setZoom}
+              maxZoom={2.5}
+              onCropComplete={(_, area) => {
+                setArea(area);
+              }}
+              cropSize={mediaSize && getCropSize(mediaSize)}
+              onMediaLoaded={({ height, width }) => {
+                setMediaSize({
+                  height,
+                  width,
+                });
+              }}
+              mediaProps={{
+                ...mediaSize,
+              }}
+            />
+          </div>
+        </div>
+        <div className="ms-flex ms-gap-2">
+          {props.onDrop && (
+            <Dialog nested open={openReupload} onOpenChange={setReupload}>
+              <DialogTrigger asChild>
+                <Button size={"icon"} variant={"outline"}>
+                  <Upload className="ms-h-[1.2rem] ms-w-[1.2rem]" />
+                </Button>
+              </DialogTrigger>
+              <DropDialogContent
+                close={() => setReupload(false)}
+                onDrop={props.onDrop}
+              />
+            </Dialog>
+          )}
+          <Button
+            type="button"
+            onClick={() => setRotate(val => val + 90)}
+            variant={"outline"}
+            size={"icon"}
+          >
+            <RotateCcwSquare className="ms-h-[1.2rem] ms-w-[1.2rem]" />
           </Button>
-        </DialogClose>
+          <Button
+            type="button"
+            onClick={() => setRotate(val => val - 90)}
+            variant={"outline"}
+            size={"icon"}
+          >
+            <RotateCwSquare className="ms-h-[1.2rem] ms-w-[1.2rem]" />
+          </Button>
+          <Slider
+            className="ms-flex-1 no-hover:ms-hidden"
+            step={0.25}
+            max={2.5}
+            min={1}
+            defaultValue={[1]}
+            value={[zoom]}
+            onValueChange={val => setZoom(val[0])}
+          />
+          <DialogClose asChild onClick={() => props.onUpload(area as Area)}>
+            <Button
+              size={"icon"}
+              className="sm:ms-px-3 no-hover:ms-ml-auto sm:ms-w-auto sm:ms-py-2 sm:ms-justify-start"
+            >
+              <Check className="ms-h-[1.2rem] ms-w-[1.2rem] sm:ms-w-4 sm:ms-h-4 sm:ms-mr-3" />
+              <span className="ms-hidden sm:ms-inline">Отправить</span>
+            </Button>
+          </DialogClose>
+        </div>
       </div>
     </div>
   );
@@ -203,19 +224,24 @@ export const CropperDialogContent: React.FC<{
         noScroll
         className="ms-h-full ms-flex ms-flex-col md:ms-h-[50rem]"
       >
-        <DialogHeader>
-          <DialogTitle>Выберите отображаемую область</DialogTitle>
-          <DialogDescription>
-            НБМ вам предоставит удобный интерфейс для выбора
-          </DialogDescription>
-        </DialogHeader>
-        <div className="ms-p-2 md:ms-p-0 ms-h-full ms-flex-1" data-vaul-no-drag>
-          <CropperControls
-            image={imageUrl}
-            type={type}
-            onDrop={onDrop}
-            onUpload={area => onUpload(file, area)}
-          />
+        <div className="ms-h-full ms-flex ms-flex-col">
+          <DialogHeader>
+            <DialogTitle>Выберите отображаемую область</DialogTitle>
+            <DialogDescription>
+              НБМ вам предоставит удобный интерфейс для выбора
+            </DialogDescription>
+          </DialogHeader>
+          <div
+            data-vaul-no-drag
+            className="ms-p-2 md:ms-p-0 ms-h-full ms-flex-1"
+          >
+            <CropperControls
+              image={imageUrl}
+              type={type}
+              onDrop={onDrop}
+              onUpload={area => onUpload(file, area)}
+            />
+          </div>
         </div>
       </DialogContent>
     );
