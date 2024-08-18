@@ -1,13 +1,12 @@
-import * as React from "react"
-import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu"
-import { Check, ChevronRight, Circle } from "lucide-react"
+import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
+import { Check, ChevronRight, Circle } from "lucide-react";
+import * as React from "react";
 
-import { cn, useMediaQuery } from "@/lib/utils"
-import { Drawer, DrawerContent, DrawerHeader, DrawerPortal, DrawerProps, DrawerTitle, DrawerTrigger, DrawerClose, DrawerFooter, NestedDrawer } from "./drawer"
-import { ResponsibilityHOC } from "@/lib/hocs"
-import { Button } from "./button"
-import { DialogTitleProps, DialogTriggerProps } from "@radix-ui/react-dialog"
-import clsx from "clsx"
+import { ResponsibilityHOC } from "@/lib/hocs";
+import { cn, useMediaQuery } from "@/lib/utils";
+import { DialogTriggerProps } from "@radix-ui/react-dialog";
+import clsx from "clsx";
+import { Drawer, DrawerClose, DrawerContent, DrawerHeader, DrawerPortal, DrawerProps, DrawerTrigger, NestedDrawer } from "./drawer";
 
 const DropdownMenuNonResponsibility = DropdownMenuPrimitive.Root
 
@@ -90,9 +89,9 @@ const DropdownMenuItem = React.forwardRef<
       // @ts-ignore
       ref={ref}
       className={cn(
-        "ms-relative ms-flex ms-cursor-pointer ms-select-none ms-items-center ms-rounded-sm ms-text-sm ms-outline-none ms-transition-colors focus:ms-bg-accent focus:ms-text-accent-foreground data-[disabled]:ms-pointer-events-none data-[disabled]:ms-opacity-50",
+        "ms-relative ms-flex ms-w-full ms-cursor-pointer ms-select-none ms-items-center ms-rounded-sm ms-text-sm ms-outline-none ms-transition-colors focus:ms-bg-accent focus:ms-text-accent-foreground data-[disabled]:ms-pointer-events-none data-[disabled]:ms-opacity-50",
         inset && "ms-pl-8",
-        !match && "ms-m-1 ms-mb-0 last:ms-mb-1 ms-py-2 ms-px-3",
+        !match && "ms-mb-0 last:ms-mb-1 ms-py-2 ms-px-3",
         match && "ms-px-2 ms-py-1.5",
         className
       )}
@@ -219,19 +218,7 @@ export const DropdownMenuLabel = ResponsibilityHOC("(min-width: 768px)", Dropdow
 //   DropdownMenuRadioGroup,
 
 export {
-  DropdownMenuNonResponsibility,
-  DropdownMenuTriggerNonResponsibility,
-  DropdownMenuContentNonResponsibility,
-  DropdownMenuItem,
-  DropdownMenuCheckboxItem,
-  DropdownMenuRadioItem,
-  DropdownMenuLabelNonResponsibility,
-  DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuGroup,
-  DropdownMenuPortalNonResponsibility,
-  DropdownMenuSubNonResponsibility,
-  DropdownMenuSubContentNonResponsibility,
-  DropdownMenuSubTriggerNonResponsibility,
-  DropdownMenuRadioGroup,
-}
+  DropdownMenuCheckboxItem, DropdownMenuContentNonResponsibility, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabelNonResponsibility, DropdownMenuNonResponsibility, DropdownMenuPortalNonResponsibility, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator,
+  DropdownMenuShortcut, DropdownMenuSubContentNonResponsibility, DropdownMenuSubNonResponsibility, DropdownMenuSubTriggerNonResponsibility, DropdownMenuTriggerNonResponsibility
+};
+

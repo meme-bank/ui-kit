@@ -67,7 +67,7 @@ const DrawerContent = React.forwardRef<
       )}
       {...props}
     >
-      {!noScroll ? <ScrollArea className="ms-h-full">
+      {!noScroll ? <ScrollArea viewPortClassName="ms-px-3" className="ms-h-full ms-max-h-screen">
         {Child}
       </ScrollArea> : Child}
     </DrawerPrimitive.Content>
@@ -91,6 +91,7 @@ const DrawerFooter = ({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
+    data-vaul-no-drag
     className={cn("ms-mt-auto ms-flex ms-flex-col ms-gap-2 ms-p-4", className)}
     {...props}
   />
@@ -104,7 +105,7 @@ const DrawerTitle = React.forwardRef<
   <DrawerPrimitive.Title
     ref={ref}
     className={cn(
-      "ms-text-lg ms-font-semibold ms-leading-none ms-tracking-tight",
+      "ms-text-lg ms-font-semibold ms-mx-auto ms-leading-none ms-tracking-tight",
       className
     )}
     {...props}
