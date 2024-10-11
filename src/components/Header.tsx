@@ -239,17 +239,22 @@ const BalanceMenu: React.FC<Balance> = balance => {
       <Tooltip>
         <TooltipTrigger asChild>
           <DropdownMenuTrigger asChild>
-            <Button variant={"outline"} className="ms-flex ms-justify-between ms-items-center">
+            <Button
+              variant={"outline"}
+              className="ms-flex ms-justify-between ms-items-center"
+            >
               <Wallet className="ms-w-4 ms-h-4 ms-mr-2" />
               <p className="ms-whitespace-nowrap ms-justify-end ms-flex ms-items-center ms-gap-0.5 ms-w-14 ms-max-w-full">
                 <span className="ms-text-ellipsis ms-overflow-hidden">
                   {balance?.balance && nFormatter(balance.balance)}
                 </span>
-                {(balance.currencyImageSrc || balance.currencyId) && <img
-                  src={balance.currencyImageSrc}
-                  alt={balance.currencyId}
-                  className="dark:ms-invert ms-brightness-0 ms-w-3 ms-h-3"
-                />}
+                {(balance.currencyImageSrc || balance.currencyId) && (
+                  <img
+                    src={balance.currencyImageSrc}
+                    alt={balance.currencyId}
+                    className="dark:ms-invert ms-brightness-0 ms-w-3 ms-h-3"
+                  />
+                )}
               </p>
             </Button>
           </DropdownMenuTrigger>
@@ -349,7 +354,7 @@ const AuthMenu: React.FC<{
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={userActions?.logOut}
-          className="ms-text-red-500 focus:ms-text-red-500"
+          className="ms-text-destructive focus:ms-text-destructive"
         >
           <LogOut className="ms-mr-2 ms-h-4 ms-w-4" />
           Выйти

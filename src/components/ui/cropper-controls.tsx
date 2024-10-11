@@ -142,7 +142,7 @@ export const CropperControls = React.forwardRef<
             variant={"outline"}
             size={"icon"}
           >
-            <RotateCcwSquare className="ms-h-[1.2rem] ms-w-[1.2rem]" />
+            <RotateCwSquare className="ms-h-[1.2rem] ms-w-[1.2rem]" />
           </Button>
           <Button
             type="button"
@@ -150,12 +150,12 @@ export const CropperControls = React.forwardRef<
             variant={"outline"}
             size={"icon"}
           >
-            <RotateCwSquare className="ms-h-[1.2rem] ms-w-[1.2rem]" />
+            <RotateCcwSquare className="ms-h-[1.2rem] ms-w-[1.2rem]" />
           </Button>
           <Slider
             className="ms-flex-1 no-hover:ms-hidden"
-            step={0.25}
-            max={2.5}
+            step={0.125}
+            max={2.75}
             min={1}
             defaultValue={[1]}
             value={[zoom]}
