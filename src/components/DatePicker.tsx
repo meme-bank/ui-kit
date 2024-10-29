@@ -11,7 +11,7 @@ import { Calendar as CalendarIcon } from "lucide-react";
 import * as React from "react";
 
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
+import { Calendar, CalendarProps } from "@/components/ui/calendar";
 import {
   Popover,
   PopoverContent,
@@ -20,20 +20,23 @@ import {
 import { cn, generateRangeArray } from "@/lib/utils";
 import { ComboBox, ComboBoxItem } from "./ComboBox";
 
-export const DatePicker: React.FC<{
-  onSelect?: React.Dispatch<React.SetStateAction<Date | undefined>>;
-  selected?: Date;
-  withTime?: boolean;
-  open?: boolean;
-  onOpenChange?: React.Dispatch<React.SetStateAction<boolean>>;
-  format?: "relative" | "absolute";
-}> = ({
+export const DatePicker: React.FC<
+  Omit<CalendarProps, "mode"> & {
+    onSelect?: React.Dispatch<React.SetStateAction<Date | undefined>>;
+    selected?: Date;
+    withTime?: boolean;
+    open?: boolean;
+    onOpenChange?: React.Dispatch<React.SetStateAction<boolean>>;
+    format?: "relative" | "absolute";
+  }
+> = ({
   onSelect,
   selected,
   format,
   withTime,
   open: defOpen,
   onOpenChange,
+  ...props
 }) => {
   const [date, setDate] = React.useState<Date | undefined>(selected);
   const [timeValue, setTimeValue] = React.useState<string>("00:00");
@@ -82,6 +85,8 @@ export const DatePicker: React.FC<{
       <PopoverContent className="ms-w-auto ms-p-0">
         <Calendar
           mode="single"
+          initialFocus
+          {...props}
           selected={date}
           onSelect={date => {
             if (!timeValue || !date) {
@@ -100,7 +105,6 @@ export const DatePicker: React.FC<{
             );
             setDate(newDate);
           }}
-          initialFocus
         />
         <div className="ms-items-center ms-flex-row-reverse md:ms-flex-row md:ms-justify-between ms-p-2 ms-flex ms-gap-4">
           <Button onClick={() => setOpen(false)} size="sm">
