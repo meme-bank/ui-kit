@@ -1,6 +1,7 @@
 // Components
 export * from "@components/BackButton";
 export * from "@components/ComboBox";
+export * from "@components/DatePicker";
 export * from "@components/Footer";
 export * from "@components/Header";
 export * from "@components/InputFormField";

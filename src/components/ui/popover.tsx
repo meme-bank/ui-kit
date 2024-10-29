@@ -1,13 +1,13 @@
-import * as React from "react"
-import * as PopoverPrimitive from "@radix-ui/react-popover"
+import * as PopoverPrimitive from "@radix-ui/react-popover";
+import * as React from "react";
 
-import { cn, useMediaQuery } from "@/lib/utils"
-import { Drawer, DrawerContent, DrawerProps, DrawerTrigger } from "./drawer"
-import { ResponsibilityHOC } from "@/index"
+import { ResponsibilityHOC } from "@/index";
+import { cn, useMediaQuery } from "@/lib/utils";
+import { Drawer, DrawerContent, DrawerProps, DrawerTrigger } from "./drawer";
 
-const PopoverNonResponsibility = PopoverPrimitive.Root
+const PopoverNonResponsibility = PopoverPrimitive.Root;
 
-const PopoverTriggerNonResponsibility = PopoverPrimitive.Trigger
+const PopoverTriggerNonResponsibility = PopoverPrimitive.Trigger;
 
 const PopoverContentNonResponsibility = React.forwardRef<
   React.ElementRef<typeof PopoverPrimitive.Content>,
@@ -25,20 +25,46 @@ const PopoverContentNonResponsibility = React.forwardRef<
       {...props}
     />
   </PopoverPrimitive.Portal>
-))
-PopoverContentNonResponsibility.displayName = PopoverPrimitive.Content.displayName
+));
+PopoverContentNonResponsibility.displayName =
+  PopoverPrimitive.Content.displayName;
 
-export const PopoverContent = ResponsibilityHOC("(min-width: 768px)", PopoverContentNonResponsibility, DrawerContent);
-export const PopoverTrigger = ResponsibilityHOC("(min-width: 768px)", PopoverTriggerNonResponsibility, DrawerTrigger);
-export const Popover: React.FC<PopoverPrimitive.PopoverProps & DrawerProps> = ({ children, ...props }) => {
-  const [open, setOpen] = React.useState(false)
-  const isDesktop = useMediaQuery("(min-width: 768px)")
+export const PopoverContent = ResponsibilityHOC(
+  "(min-width: 768px)",
+  PopoverContentNonResponsibility,
+  DrawerContent
+);
+export const PopoverTrigger = ResponsibilityHOC(
+  "(min-width: 768px)",
+  PopoverTriggerNonResponsibility,
+  DrawerTrigger
+);
+export const Popover: React.FC<PopoverPrimitive.PopoverProps & DrawerProps> = ({
+  children,
+  ...props
+}) => {
+  const [open, setOpen] = React.useState(false);
+  const isDesktop = useMediaQuery("(min-width: 768px)");
 
   return (
-    <PopoverNonResponsibility open={isDesktop && open} onOpenChange={isDesktop ? setOpen : undefined} {...props}>
-      <Drawer open={isDesktop && open} shouldScaleBackground onOpenChange={!isDesktop ? setOpen : undefined} {...props} children={children} />
+    <PopoverNonResponsibility
+      open={isDesktop && open}
+      onOpenChange={isDesktop ? setOpen : undefined}
+      {...props}
+    >
+      <Drawer
+        open={!isDesktop && open}
+        shouldScaleBackground
+        onOpenChange={!isDesktop ? setOpen : undefined}
+        {...props}
+        children={children}
+      />
     </PopoverNonResponsibility>
-  )
-}
+  );
+};
 
-export { PopoverNonResponsibility, PopoverTriggerNonResponsibility, PopoverContentNonResponsibility }
+export {
+  PopoverContentNonResponsibility,
+  PopoverNonResponsibility,
+  PopoverTriggerNonResponsibility,
+};

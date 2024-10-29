@@ -39,10 +39,11 @@ const ComboBoxContext = createContext<{
   setOptions: Dispatch<SetStateAction<OptionType[]>>;
   notCloseOnSelect: boolean;
   multiselect: boolean;
+  unselectable: boolean;
 } | null>(null);
 
 export interface ComboBoxProps
-  extends Omit<ButtonProps, "onChange">,
+  extends Omit<ButtonProps, "onChange" | "unselectable">,
     React.RefAttributes<HTMLButtonElement> {
   Icon?: LucideIcon;
   placeholder: string;
@@ -59,6 +60,7 @@ export interface ComboBoxProps
   defaultValue?: string;
   notCloseOnSelect?: boolean;
   listRef?: React.Ref<HTMLDivElement>;
+  unselectable?: boolean;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
@@ -85,6 +87,7 @@ export const ComboBox = forwardRef<
       onChange,
       required,
       listRef,
+      unselectable,
       ...props
     },
     ref
@@ -97,19 +100,32 @@ export const ComboBox = forwardRef<
       []
     );
 
+    useEffect(() => {
+      if (defaultSetValue) defaultSetValue(value);
+    }, [value]);
+    useEffect(() => {
+      if (onOpenChange) onOpenChange(open);
+    }, [open]);
+    useEffect(() => {
+      setValue(defaultValue || null);
+    }, [defaultValue]);
+    useEffect(() => {
+      setOpen(defaultOpen || false);
+    }, [defaultOpen]);
+
     let currentOption = options.find(option => value === option?.value);
 
     return (
       <ComboBoxContext.Provider
         value={{
-          value: defaultSetValue && defaultValue ? defaultValue : value,
-          setValue:
-            defaultSetValue && defaultValue ? defaultSetValue : setValue,
-          open: onOpenChange && defaultOpen ? defaultOpen : open,
-          setOpen: onOpenChange && defaultOpen ? onOpenChange : setOpen,
+          value: value,
+          setValue: setValue,
+          open: open,
+          setOpen: setOpen,
           setOptions: setOptions,
           notCloseOnSelect: notCloseOnSelect || false,
           multiselect: false,
+          unselectable: unselectable || false,
         }}
       >
         <Popover open={open} onOpenChange={setOpen}>
@@ -167,15 +183,15 @@ export const ComboBox = forwardRef<
               </CommandList>
             </Command>
           </PopoverContent>
-          <input
-            type="hidden"
-            onChange={onChange}
-            ref={ref}
-            required={required}
-            name={name}
-            value={value || undefined}
-          />
         </Popover>
+        <input
+          type="hidden"
+          onChange={onChange}
+          ref={ref}
+          required={required}
+          name={name}
+          value={value || undefined}
+        />
       </ComboBoxContext.Provider>
     );
   }
@@ -184,7 +200,11 @@ export const ComboBox = forwardRef<
 export const MultiselectComboBox = forwardRef<
   HTMLInputElement,
   PropsWithChildren<
-    ComboBoxProps & { value?: string[]; defaultValue?: string[] }
+    ComboBoxProps & {
+      value?: string[];
+      defaultValue?: string[];
+      setValue: React.Dispatch<React.SetStateAction<string[]>>;
+    }
   >
 >(
   (
@@ -206,6 +226,7 @@ export const MultiselectComboBox = forwardRef<
       onChange,
       required,
       listRef,
+      unselectable,
       ...props
     },
     ref
@@ -220,6 +241,19 @@ export const MultiselectComboBox = forwardRef<
       []
     );
 
+    useEffect(() => {
+      if (defaultSetValue) defaultSetValue(values);
+    }, [values]);
+    useEffect(() => {
+      if (onOpenChange) onOpenChange(open);
+    }, [open]);
+    useEffect(() => {
+      setValues(defaultValue || []);
+    }, [defaultValue]);
+    useEffect(() => {
+      setOpen(defaultOpen || false);
+    }, [defaultOpen]);
+
     let currentOptions = options.filter(option =>
       values.includes(option?.value as string)
     );
@@ -227,17 +261,17 @@ export const MultiselectComboBox = forwardRef<
     return (
       <ComboBoxContext.Provider
         value={{
-          value: defaultSetValue && defaultValue ? defaultValue : values,
-          setValue:
-            defaultSetValue && defaultValue ? defaultSetValue : setValues,
-          open: onOpenChange && defaultOpen ? defaultOpen : open,
-          setOpen: onOpenChange && defaultOpen ? onOpenChange : setOpen,
+          value: values,
+          setValue: setValues,
+          open: open,
+          setOpen: setOpen,
           setOptions: setOptions,
           notCloseOnSelect:
             notCloseOnSelect !== undefined && notCloseOnSelect !== null
               ? notCloseOnSelect
               : true,
           multiselect: true,
+          unselectable: unselectable || false,
         }}
       >
         <Popover open={open} onOpenChange={setOpen}>
@@ -332,6 +366,7 @@ export const ComboBoxItem = forwardRef<
     setOptions,
     multiselect,
     notCloseOnSelect,
+    unselectable,
   } = useComboBox();
   const id = useId();
 
@@ -354,8 +389,11 @@ export const ComboBoxItem = forwardRef<
             (setValue as Dispatch<SetStateAction<string | null>>)(currentValue);
         }
         if (typeof selectedValue === "string")
-          (setValue as Dispatch<SetStateAction<string | null>>)(selectedValue =>
-            selectedValue === currentValue ? null : currentValue
+          (setValue as Dispatch<SetStateAction<string | null>>)(
+            selectedValue =>
+              selectedValue === currentValue && unselectable
+                ? null
+                : currentValue
           );
         if (selectedValue instanceof Array)
           (setValue as Dispatch<SetStateAction<string[]>>)(selectedValue =>
