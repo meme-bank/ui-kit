@@ -10,7 +10,7 @@ import { ru } from "date-fns/locale";
 import { Calendar as CalendarIcon } from "lucide-react";
 import * as React from "react";
 
-import { Button } from "@/components/ui/button";
+import { Button, ButtonVariants } from "@/components/ui/button";
 import { Calendar, CalendarProps } from "@/components/ui/calendar";
 import {
   Popover,
@@ -21,14 +21,16 @@ import { cn, generateRangeArray } from "@/lib/utils";
 import { ComboBox, ComboBoxItem } from "./ComboBox";
 
 export const DatePicker: React.FC<
-  Omit<CalendarProps, "mode"> & {
-    onSelect?: React.Dispatch<React.SetStateAction<Date | undefined>>;
-    selected?: Date;
-    withTime?: boolean;
-    open?: boolean;
-    onOpenChange?: React.Dispatch<React.SetStateAction<boolean>>;
-    format?: "relative" | "absolute";
-  }
+  Omit<CalendarProps, "mode" | "className"> &
+    Pick<ButtonVariants, "size"> & {
+      onSelect?: React.Dispatch<React.SetStateAction<Date | undefined>>;
+      selected?: Date;
+      withTime?: boolean;
+      open?: boolean;
+      onOpenChange?: React.Dispatch<React.SetStateAction<boolean>>;
+      format?: "relative" | "absolute";
+      className?: string;
+    }
 > = ({
   onSelect,
   selected,
@@ -36,6 +38,8 @@ export const DatePicker: React.FC<
   withTime,
   open: defOpen,
   onOpenChange,
+  className,
+  size,
   ...props
 }) => {
   const [date, setDate] = React.useState<Date | undefined>(selected);
@@ -44,7 +48,7 @@ export const DatePicker: React.FC<
 
   React.useEffect(() => {
     if (onOpenChange) onOpenChange(open);
-  }, [open]);
+  }, [open, onOpenChange]);
   React.useEffect(() => {
     setOpen(defOpen || false);
   }, [defOpen]);
@@ -65,9 +69,11 @@ export const DatePicker: React.FC<
       <PopoverTrigger asChild>
         <Button
           variant={"outline"}
+          size={size}
           className={cn(
             "ms-w-[220px] ms-max-w-full ms-justify-start ms-text-left ms-font-normal",
-            !date && "ms-text-muted-foreground"
+            !date && "ms-text-muted-foreground",
+            className
           )}
         >
           <CalendarIcon className="ms-mr-2 ms-h-4 ms-w-4" />
