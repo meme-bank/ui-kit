@@ -57,14 +57,14 @@ export const Popover: React.FC<PopoverPrimitive.PopoverProps & DrawerProps> = ({
 
   return (
     <Drawer
-      open={isDesktop && open}
-      onOpenChange={isDesktop ? setOpen : undefined}
+      open={!isDesktop && open}
+      onOpenChange={!isDesktop ? setOpen : undefined}
       shouldScaleBackground
       {...props}
     >
       <PopoverNonResponsibility
-        open={!isDesktop && open}
-        onOpenChange={!isDesktop ? setOpen : undefined}
+        open={isDesktop && open}
+        onOpenChange={isDesktop ? setOpen : undefined}
         {...props}
         children={children}
       />
