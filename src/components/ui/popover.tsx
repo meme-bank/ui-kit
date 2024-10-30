@@ -41,25 +41,34 @@ export const PopoverTrigger = ResponsibilityHOC(
 );
 export const Popover: React.FC<PopoverPrimitive.PopoverProps & DrawerProps> = ({
   children,
+  open: defOpen,
+  onOpenChange,
   ...props
 }) => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState<boolean>(!!defOpen);
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
+  React.useEffect(() => {
+    if (onOpenChange) onOpenChange(open);
+  }, [open, onOpenChange]);
+  React.useEffect(() => {
+    setOpen(!!defOpen);
+  }, [defOpen]);
+
   return (
-    <PopoverNonResponsibility
+    <Drawer
       open={isDesktop && open}
       onOpenChange={isDesktop ? setOpen : undefined}
+      shouldScaleBackground
       {...props}
     >
-      <Drawer
+      <PopoverNonResponsibility
         open={!isDesktop && open}
-        shouldScaleBackground
         onOpenChange={!isDesktop ? setOpen : undefined}
         {...props}
         children={children}
       />
-    </PopoverNonResponsibility>
+    </Drawer>
   );
 };
 
