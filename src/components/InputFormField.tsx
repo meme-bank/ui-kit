@@ -9,7 +9,6 @@ import {
 } from "@ui-components/form";
 import { Input, InputProps } from "@ui-components/input";
 import { Skeleton } from "@ui-components/skeleton";
-import { LucideIcon } from "lucide-react";
 import * as React from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 import { Label } from "./ui/label";
@@ -19,7 +18,7 @@ export interface InputFormFieldProps extends InputProps {
   name: string;
   skeletonLoad?: boolean;
   description?: string;
-  LabelIcon?: LucideIcon;
+  LabelIcon?: Iconable;
   rhfControl?: boolean | UseFormRegisterReturn;
   error?: string;
 }

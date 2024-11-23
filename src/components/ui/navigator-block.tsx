@@ -1,9 +1,6 @@
+import { Iconable } from "@/lib/types";
 import { cn } from "@lib/utils";
-import {
-  ChevronLeftCircle,
-  ChevronRightCircle,
-  LucideIcon,
-} from "lucide-react";
+import { ChevronLeftCircle, ChevronRightCircle } from "lucide-react";
 import React, {
   FC,
   MouseEventHandler,
@@ -18,7 +15,7 @@ export interface NavigatorType extends FC<PropsWithChildren> {
   Button: FC<
     PropsWithChildren<{
       action: MouseEventHandler;
-      Icon?: LucideIcon;
+      Icon?: Iconable;
       IconRender?: React.FC;
       iconClassName?: string;
       className?: string;
@@ -28,7 +25,7 @@ export interface NavigatorType extends FC<PropsWithChildren> {
   ButtonNoAdaptive: FC<
     PropsWithChildren<{
       action: MouseEventHandler;
-      Icon?: LucideIcon;
+      Icon?: Iconable;
       IconRender?: React.FC;
       iconClassName?: string;
       className?: string;

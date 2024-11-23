@@ -1,8 +1,9 @@
 import { extractStringFromNode } from "@/lib/extract-string-from-element";
+import { Iconable } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { CommandLoading } from "cmdk";
 import debounce from "lodash.debounce";
-import { Check, ChevronsUpDown, LucideIcon } from "lucide-react";
+import { Check, ChevronsUpDown } from "lucide-react";
 import React, {
   Dispatch,
   PropsWithChildren,
@@ -27,7 +28,11 @@ import {
 } from "./ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 
-export type OptionType = { value: string; label: ReactNode } | null;
+export type OptionType = {
+  value: string;
+  label: ReactNode;
+  Icon?: Iconable;
+} | null;
 
 const ComboBoxContext = createContext<{
   value: string | string[] | null;
@@ -45,7 +50,7 @@ const ComboBoxContext = createContext<{
 export interface ComboBoxProps
   extends Omit<ButtonProps, "onChange" | "unselectable">,
     React.RefAttributes<HTMLButtonElement> {
-  Icon?: LucideIcon;
+  Icon?: Iconable;
   placeholder: string;
   empty?: ReactNode;
   loadingElement?: ReactNode;
@@ -99,7 +104,11 @@ export const ComboBox = forwardRef<
       onSearchChange ? debounce(onSearchChange, 500) : () => {},
       []
     );
+    const [isFirstRender, setIsFirstRender] = useState(true);
 
+    useEffect(() => {
+      setIsFirstRender(false);
+    }, []);
     useEffect(() => {
       if (defaultSetValue) defaultSetValue(value);
     }, [value]);
@@ -137,8 +146,11 @@ export const ComboBox = forwardRef<
               aria-expanded={open}
               {...props}
             >
-              {Icon && (
+              {Icon && !currentOption?.Icon && (
                 <Icon className="ms-mr-2 ms-h-4 ms-w-4 ms-shrink-0 ms-opacity-50" />
+              )}
+              {currentOption?.Icon && (
+                <currentOption.Icon className="ms-mr-2 ms-h-4 ms-w-4 ms-shrink-0 ms-opacity-50" />
               )}
               {currentOption ? (
                 <span className="ms-overflow-hidden ms-text-ellipsis ms-text-nowrap">
@@ -177,12 +189,23 @@ export const ComboBox = forwardRef<
                 loading={loading}
               />
               <CommandList ref={listRef}>
-                {empty && <CommandEmpty>{empty}</CommandEmpty>}
-                {loading && <CommandLoading>{loadingElement}</CommandLoading>}
+                {empty && <CommandEmpty>{empty || "Не найдено"}</CommandEmpty>}
+                {loading && (
+                  <CommandLoading>
+                    {loadingElement || "Загрузка..."}
+                  </CommandLoading>
+                )}
                 {children}
               </CommandList>
             </Command>
           </PopoverContent>
+          {!open && value && isFirstRender && (
+            <div className="ms-hidden">
+              <Command>
+                <CommandList>{children}</CommandList>
+              </Command>
+            </div>
+          )}
         </Popover>
         <input
           type="hidden"
@@ -240,6 +263,11 @@ export const MultiselectComboBox = forwardRef<
       onSearchChange ? debounce(onSearchChange, 500) : () => {},
       []
     );
+    const [isFirstRender, setIsFirstRender] = useState(true);
+
+    useEffect(() => {
+      setIsFirstRender(false);
+    }, []);
 
     useEffect(() => {
       if (defaultSetValue) defaultSetValue(values);
@@ -327,12 +355,25 @@ export const MultiselectComboBox = forwardRef<
                 placeholder={placeholder}
               />
               <CommandList ref={listRef}>
-                {empty && <CommandEmpty>{empty}</CommandEmpty>}
-                {loading && <CommandLoading>{loadingElement}</CommandLoading>}
+                {empty && (
+                  <CommandEmpty>{empty || "Нет элементов"}</CommandEmpty>
+                )}
+                {loading && (
+                  <CommandLoading>
+                    {loadingElement || "Загрузка..."}
+                  </CommandLoading>
+                )}
                 {children}
               </CommandList>
             </Command>
           </PopoverContent>
+          {!open && values.length > 0 && isFirstRender && (
+            <div className="ms-hidden">
+              <Command>
+                <CommandList>{children}</CommandList>
+              </Command>
+            </div>
+          )}
           <input
             type="hidden"
             onChange={onChange}
@@ -357,8 +398,8 @@ const useComboBox = () => {
 
 export const ComboBoxItem = forwardRef<
   React.ElementRef<typeof CommandItem>,
-  React.ComponentPropsWithoutRef<typeof CommandItem>
->(({ value, children, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<typeof CommandItem> & { Icon?: Iconable }
+>(({ value, Icon, children, ...props }, ref) => {
   const {
     setOpen,
     setValue,
@@ -374,9 +415,14 @@ export const ComboBoxItem = forwardRef<
     setOptions(options =>
       options.some(option => option?.value === (value || id))
         ? options
-        : [...options, { label: children, value: value || id }]
+        : [...options, { label: children, Icon: Icon, value: value || id }]
     );
   }, [value, children]);
+
+  const isChecked =
+    (selectedValue instanceof Array && selectedValue.includes(value || id)) ||
+    (typeof selectedValue === "string" && selectedValue === value);
+  const CheckIcon = isChecked ? Check : Icon || Check;
 
   return (
     <CommandItem
@@ -406,14 +452,10 @@ export const ComboBoxItem = forwardRef<
       ref={ref}
       {...props}
     >
-      <Check
+      <CheckIcon
         className={cn(
           "ms-mr-2 ms-h-4 ms-w-4",
-          (selectedValue instanceof Array &&
-            selectedValue.includes(value || id)) ||
-            (typeof selectedValue === "string" && selectedValue === value)
-            ? "ms-opacity-100"
-            : "ms-opacity-0"
+          isChecked && !Icon ? "ms-opacity-100" : "ms-opacity-0"
         )}
       />
       {children}
