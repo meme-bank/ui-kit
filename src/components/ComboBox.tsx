@@ -1,6 +1,7 @@
 import { extractStringFromNode } from "@/lib/extract-string-from-element";
 import { Iconable } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import clsx from "clsx";
 import { CommandLoading } from "cmdk";
 import debounce from "lodash.debounce";
 import { Check, ChevronsUpDown } from "lucide-react";
@@ -67,6 +68,8 @@ export interface ComboBoxProps
   listRef?: React.Ref<HTMLDivElement>;
   unselectable?: boolean;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  onlyIconValue?: boolean;
+  hideChevrons?: boolean;
 }
 
 export const ComboBox = forwardRef<
@@ -93,6 +96,8 @@ export const ComboBox = forwardRef<
       required,
       listRef,
       unselectable,
+      hideChevrons,
+      onlyIconValue,
       ...props
     },
     ref
@@ -147,21 +152,34 @@ export const ComboBox = forwardRef<
               {...props}
             >
               {Icon && !currentOption?.Icon && (
-                <Icon className="ms-mr-2 ms-h-4 ms-w-4 ms-shrink-0 ms-opacity-50" />
+                <Icon
+                  className={clsx(
+                    "ms-h-4 ms-w-4 ms-shrink-0 ms-opacity-50",
+                    (!hideChevrons || !onlyIconValue) && "ms-mr-2"
+                  )}
+                />
               )}
               {currentOption?.Icon && (
-                <currentOption.Icon className="ms-mr-2 ms-h-4 ms-w-4 ms-shrink-0 ms-opacity-50" />
+                <currentOption.Icon
+                  className={clsx(
+                    "ms-h-4 ms-w-4 ms-shrink-0 ms-opacity-50",
+                    (!hideChevrons || !onlyIconValue) && "ms-mr-2"
+                  )}
+                />
               )}
-              {currentOption ? (
-                <span className="ms-overflow-hidden ms-text-ellipsis ms-text-nowrap">
-                  {currentOption.label}
-                </span>
-              ) : (
-                <span className="ms-text-nowrap ms-text-muted-foreground ms-overflow-hidden ms-text-ellipsis">
-                  {placeholder}
-                </span>
+              {!onlyIconValue &&
+                (currentOption ? (
+                  <span className="ms-overflow-hidden ms-text-ellipsis ms-text-nowrap">
+                    {currentOption.label}
+                  </span>
+                ) : (
+                  <span className="ms-text-nowrap ms-text-muted-foreground ms-overflow-hidden ms-text-ellipsis">
+                    {placeholder}
+                  </span>
+                ))}
+              {!hideChevrons && (
+                <ChevronsUpDown className="ms-ml-2 ms-h-4 ms-w-4 ms-shrink-0 ms-opacity-50" />
               )}
-              <ChevronsUpDown className="ms-ml-2 ms-h-4 ms-w-4 ms-shrink-0 ms-opacity-50" />
             </Button>
           </PopoverTrigger>
           <PopoverContent className="ms-p-0">
@@ -223,7 +241,7 @@ export const ComboBox = forwardRef<
 export const MultiselectComboBox = forwardRef<
   HTMLInputElement,
   PropsWithChildren<
-    ComboBoxProps & {
+    Omit<ComboBoxProps, "onlyIconValue"> & {
       value?: string[];
       defaultValue?: string[];
       setValue: React.Dispatch<React.SetStateAction<string[]>>;
@@ -250,6 +268,7 @@ export const MultiselectComboBox = forwardRef<
       required,
       listRef,
       unselectable,
+      hideChevrons,
       ...props
     },
     ref
@@ -328,7 +347,9 @@ export const MultiselectComboBox = forwardRef<
                   {placeholder}
                 </span>
               )}
-              <ChevronsUpDown className="ms-ml-2 ms-h-4 ms-w-4 ms-shrink-0 ms-opacity-50" />
+              {!hideChevrons && (
+                <ChevronsUpDown className="ms-ml-2 ms-h-4 ms-w-4 ms-shrink-0 ms-opacity-50" />
+              )}
             </Button>
           </PopoverTrigger>
           <PopoverContent className="ms-p-0">
