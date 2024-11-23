@@ -1,3 +1,5 @@
-import { Component } from "react";
+import { ExoticComponent, FunctionComponent } from "react";
 
-export type Iconable = Component<{ className?: string | null }>;
+export type Iconable =
+  | FunctionComponent<{ className?: string | null }>
+  | ExoticComponent<{ className?: string | null }>;
