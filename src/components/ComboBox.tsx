@@ -455,7 +455,7 @@ export const ComboBoxItem = forwardRef<
       <CheckIcon
         className={cn(
           "ms-mr-2 ms-h-4 ms-w-4",
-          isChecked && !Icon ? "ms-opacity-100" : "ms-opacity-0"
+          isChecked || Icon ? "ms-opacity-100" : "ms-opacity-0"
         )}
       />
       {children}
