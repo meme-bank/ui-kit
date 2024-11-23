@@ -426,8 +426,9 @@ export const ComboBoxItem = forwardRef<
 
   return (
     <CommandItem
-      value={value || id}
-      onSelect={currentValue => {
+      value={value?.toLowerCase() || id}
+      onSelect={selectableValue => {
+        const currentValue = selectableValue.toLowerCase();
         if (!selectedValue) {
           if (multiselect)
             (setValue as Dispatch<SetStateAction<string[]>>)([currentValue]);
