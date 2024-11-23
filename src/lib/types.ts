@@ -1,3 +1,3 @@
-import { FC } from "react";
+import { Component } from "react";
 
-export type Iconable = FC<{ className?: string | null }>;
+export type Iconable = Component<{ className?: string | null }>;
