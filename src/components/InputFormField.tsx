@@ -1,3 +1,4 @@
+import { Iconable } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import {
   FormControl,
