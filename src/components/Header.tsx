@@ -1,4 +1,4 @@
-import { nFormatter } from "@/lib/utils";
+import { nFormatter, useMediaQuery } from "@/lib/utils";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { StandardAvatar } from "@ui-components/avatar";
 import { Button } from "@ui-components/button";
@@ -184,23 +184,37 @@ const ThemeSwitcher: React.FC<{
 const NotificationDialog: React.FC<{
   unReadNotify?: boolean;
   Notifications?: React.FC;
-}> = ({ Notifications, unReadNotify }) => {
+  isDropdownItem?: boolean;
+}> = ({ Notifications, unReadNotify, isDropdownItem }) => {
   return (
     <Dialog>
       <Tooltip>
         <TooltipTrigger asChild>
           <DialogTrigger asChild>
-            <Button
-              variant="outline"
-              className={
-                unReadNotify
-                  ? "ms-relative after:ms-animate-bounce after:-ms-right-1 after:-ms-bottom-1 after:ms-border-2 after:ms-border-background after:ms-absolute after:ms-rounded-full after:ms-h-3 after:ms-aspect-square after:ms-bg-primary"
-                  : undefined
-              }
-              size={"icon"}
-            >
-              <Bell className="ms-h-[1.2rem] ms-w-[1.2rem]" />
-            </Button>
+            {!isDropdownItem ? (
+              <Button
+                variant="outline"
+                className={
+                  unReadNotify
+                    ? "ms-relative after:ms-animate-bounce after:-ms-right-1 after:-ms-bottom-1 after:ms-border-2 after:ms-border-background after:ms-absolute after:ms-rounded-full after:ms-h-3 after:ms-aspect-square after:ms-bg-primary"
+                    : undefined
+                }
+                size={"icon"}
+              >
+                <Bell className="ms-h-[1.2rem] ms-w-[1.2rem]" />
+              </Button>
+            ) : (
+              <DropdownMenuItem
+                className={
+                  unReadNotify
+                    ? "ms-relative after:ms-animate-bounce after:-ms-left-1 after:-ms-top-1 after:ms-border-2 after:ms-border-background after:ms-absolute after:ms-rounded-full after:ms-h-3 after:ms-aspect-square after:ms-bg-primary"
+                    : undefined
+                }
+              >
+                <Bell className="ms-mr-2 ms-h-4 ms-w-4" />
+                Уведомления
+              </DropdownMenuItem>
+            )}
           </DialogTrigger>
         </TooltipTrigger>
         <TooltipContent>
@@ -287,7 +301,17 @@ const AuthMenu: React.FC<{
   user: UserAccount;
   userActions: UserAccountActions;
   sanctumShow?: boolean;
-}> = ({ user, userActions, sanctumShow }) => {
+  balance?: Balance;
+  Notifications?: React.FC;
+  unReadNotify?: boolean;
+}> = ({
+  user,
+  userActions,
+  sanctumShow,
+  balance,
+  Notifications,
+  unReadNotify,
+}) => {
   return (
     <DropdownMenu>
       <Tooltip>
@@ -352,6 +376,55 @@ const AuthMenu: React.FC<{
           <Flag className="ms-mr-2 ms-h-4 ms-w-4" />
           Государство
         </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        {balance && (
+          <>
+            <DropdownMenuLabel>
+              <div className="ms-flex ms-font-light ms-text-sm ms-justify-between ms-gap-2 ms-items-center">
+                <p className="ms-flex ms-items-center">
+                  <Wallet className="ms-w-4 ms-h-4 ms-mr-2" />
+                  <span className="ms-text-ellipsis ms-overflow-hidden">
+                    Баланс
+                  </span>
+                </p>
+                <p className="ms-whitespace-nowrap ms-justify-end ms-flex ms-items-center ms-gap-0.5 ms-max-w-full">
+                  <span className="ms-text-ellipsis ms-overflow-hidden">
+                    {balance?.balance && nFormatter(balance.balance)}
+                  </span>
+                  {(balance.currencyImageSrc || balance.currencyId) && (
+                    <img
+                      src={balance.currencyImageSrc}
+                      alt={balance.currencyId}
+                      className="dark:ms-invert ms-brightness-0 ms-w-4 ms-h-4"
+                    />
+                  )}
+                </p>
+              </div>
+            </DropdownMenuLabel>
+            <DropdownMenuItem onClick={balance?.transaction}>
+              <Coins className="ms-mr-2 ms-h-4 ms-w-4" />
+              Перевести
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={balance?.openTransactions}>
+              <Receipt className="ms-mr-2 ms-h-4 ms-w-4" />
+              Транзакции
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={balance?.buy}>
+              <RussianRuble className="ms-mr-2 ms-h-4 ms-w-4" />
+              Купить
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+          </>
+        )}
+        {Notifications && (
+          <>
+            <NotificationDialog
+              Notifications={Notifications}
+              unReadNotify={unReadNotify}
+            />
+            <DropdownMenuSeparator />
+          </>
+        )}
         <DropdownMenuItem
           onClick={userActions?.logOut}
           className="ms-text-destructive focus:ms-text-destructive"
@@ -380,6 +453,9 @@ export const Header: React.FC<React.PropsWithChildren<HeaderProps>> = ({
   balance,
   homePage,
 }) => {
+  const isMobile = useMediaQuery("(max-width: 470px)");
+  console.log(isMobile);
+
   const Component = (
     <div className="ms-w-full ms-top-0 ms-left-0 ms-h-14 ms-border-b ms-border-border/60 ms-backdrop-blur ms-shadow-sm ms-fixed ms-z-50 ms-bg-background/90">
       <div className="ms-flex ms-flex-row ms-justify-between ms-h-full ms-gap-1 ms-p-2 ms-container">
@@ -417,15 +493,20 @@ export const Header: React.FC<React.PropsWithChildren<HeaderProps>> = ({
           {themeSwitch && <ThemeSwitcher themeSwitch={themeSwitch} />}
           {user && (
             <>
-              <NotificationDialog
-                Notifications={Notifications}
-                unReadNotify={unReadNotify}
-              />
-              {balance && <BalanceMenu {...balance} />}
+              {!isMobile && (
+                <NotificationDialog
+                  Notifications={Notifications}
+                  unReadNotify={unReadNotify}
+                />
+              )}
+              {balance && !isMobile && <BalanceMenu {...balance} />}
               <AuthMenu
                 user={user}
                 userActions={userActions || {}}
                 sanctumShow={sanctumShow}
+                Notifications={(isMobile && Notifications) || undefined}
+                unReadNotify={isMobile && unReadNotify}
+                balance={(isMobile && balance) || undefined}
               />
             </>
           )}

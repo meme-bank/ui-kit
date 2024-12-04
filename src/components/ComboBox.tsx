@@ -162,7 +162,7 @@ export const ComboBox = forwardRef<
               {currentOption?.Icon && (
                 <currentOption.Icon
                   className={clsx(
-                    "ms-h-4 ms-w-4 ms-shrink-0 ms-opacity-50",
+                    "ms-h-4 ms-w-4 ms-shrink-0",
                     (!hideChevrons || !onlyIconValue) && "ms-mr-2"
                   )}
                 />

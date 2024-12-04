@@ -28,7 +28,7 @@ export const Authorized: Story = {
     balance: {
       balance: 100000,
       currencyImageSrc:
-        "http://192.168.0.28:5000/api/photo/d88bf937-6737-49df-a8da-110c04d72dc5",
+        "https://api.dynamic.membank.ru/api/photo/4be1a4ed-7fdb-4eed-b966-c92f6fd857ed",
     },
     search(text) {
       console.log(text);
