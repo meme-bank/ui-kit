@@ -46,20 +46,20 @@ export const DatePicker: React.FC<
   const [timeValue, setTimeValue] = React.useState<string>("00:00");
   const [open, setOpen] = React.useState(defOpen || false);
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     if (onOpenChange) onOpenChange(open);
   }, [open, onOpenChange]);
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     setOpen(defOpen || false);
   }, [defOpen]);
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     if (selected !== date && onSelect) onSelect(date);
   }, [date, onSelect]);
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     setTimeValue(selected ? formatDate(selected, "HH:mm") : "00:00");
     if (selected !== date) setDate(selected || new Date());
   }, [selected]);
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     const [hours, minutes] = timeValue.split(":").map(str => parseInt(str, 10));
     setDate(setHours(setMinutes(date || new Date(), minutes), hours));
   }, [timeValue]);

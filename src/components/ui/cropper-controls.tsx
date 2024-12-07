@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { Check, RotateCcwSquare, RotateCwSquare, Upload } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { DropEvent, FileRejection, useDropzone } from "react-dropzone";
 import Cropper, { Area, Point, Size } from "react-easy-crop";
 import { Button } from "./button";
@@ -59,7 +59,7 @@ export const CropperControls = React.forwardRef<
     ),
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (mediaSize) {
       const container = document.querySelector(`.reactEasyCrop_Container`);
       container?.setAttribute("data-vaul-no-drag", "true");

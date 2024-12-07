@@ -16,6 +16,7 @@ import React, {
   useContext,
   useEffect,
   useId,
+  useLayoutEffect,
   useState,
 } from "react";
 import { Button, ButtonProps } from "./ui/button";
@@ -111,19 +112,19 @@ export const ComboBox = forwardRef<
     );
     const [isFirstRender, setIsFirstRender] = useState(true);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
       setIsFirstRender(false);
     }, []);
-    useEffect(() => {
+    useLayoutEffect(() => {
       if (defaultSetValue) defaultSetValue(value);
     }, [value]);
-    useEffect(() => {
+    useLayoutEffect(() => {
       if (onOpenChange) onOpenChange(open);
     }, [open]);
-    useEffect(() => {
+    useLayoutEffect(() => {
       setValue(defaultValue || null);
     }, [defaultValue]);
-    useEffect(() => {
+    useLayoutEffect(() => {
       setOpen(defaultOpen || false);
     }, [defaultOpen]);
 
@@ -284,20 +285,20 @@ export const MultiselectComboBox = forwardRef<
     );
     const [isFirstRender, setIsFirstRender] = useState(true);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
       setIsFirstRender(false);
     }, []);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
       if (defaultSetValue) defaultSetValue(values);
     }, [values]);
-    useEffect(() => {
+    useLayoutEffect(() => {
       if (onOpenChange) onOpenChange(open);
     }, [open]);
-    useEffect(() => {
+    useLayoutEffect(() => {
       setValues(defaultValue || []);
     }, [defaultValue]);
-    useEffect(() => {
+    useLayoutEffect(() => {
       setOpen(defaultOpen || false);
     }, [defaultOpen]);
 

@@ -48,10 +48,10 @@ export const Popover: React.FC<PopoverPrimitive.PopoverProps & DrawerProps> = ({
   const [open, setOpen] = React.useState<boolean>(!!defOpen);
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     if (onOpenChange) onOpenChange(open);
   }, [open, onOpenChange]);
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     setOpen(!!defOpen);
   }, [defOpen]);
 

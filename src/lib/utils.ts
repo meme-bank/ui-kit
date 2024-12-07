@@ -1,5 +1,5 @@
 import { clsx, type ClassValue } from "clsx";
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { Area } from "react-easy-crop";
 import { twMerge } from "tailwind-merge";
 
@@ -38,7 +38,7 @@ export function useMediaQuery(query: string): boolean {
     setMatches(getMatches(query));
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const matchMedia = window.matchMedia(query);
 
     // Triggered at the first client-side load and if query changes
