@@ -24,25 +24,23 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function useMediaQuery(query: string): boolean {
-  const getMatches = (query: string): boolean => {
-    // Prevents SSR issues
-    if (typeof window !== "undefined") {
-      return window.matchMedia(query).matches;
-    }
-    return false;
-  };
-
-  const [matches, setMatches] = useState<boolean>(getMatches(query));
-
-  function handleChange() {
-    setMatches(getMatches(query));
-  }
+  const [matches, setMatches] = useState<boolean>(false);
 
   useLayoutEffect(() => {
-    const matchMedia = window.matchMedia(query);
+    const getMatches = (query: string): boolean => {
+      // Prevents SSR issues
+      if (typeof window !== "undefined") {
+        return window.matchMedia(query).matches;
+      }
+      return false;
+    };
 
-    // Triggered at the first client-side load and if query changes
+    function handleChange() {
+      setMatches(getMatches(query));
+    }
     handleChange();
+
+    const matchMedia = window.matchMedia(query);
 
     // Listen matchMedia
     if (matchMedia.addListener) {

@@ -50,8 +50,8 @@ export default [
       image(),
       typescript({ tsconfig: "./tsconfig.json" }),
       postcss(),
-      rollupPluginUseClient(),
       terser(),
+      rollupPluginUseClient(),
     ],
   },
   {

@@ -454,7 +454,6 @@ export const Header: React.FC<React.PropsWithChildren<HeaderProps>> = ({
   homePage,
 }) => {
   const isMobile = useMediaQuery("(max-width: 470px)");
-  console.log(isMobile);
 
   const Component = (
     <div className="ms-w-full ms-top-0 ms-left-0 ms-h-14 ms-border-b ms-border-border/60 ms-backdrop-blur ms-shadow-sm ms-fixed ms-z-50 ms-bg-background/90">
