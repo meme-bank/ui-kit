@@ -83,10 +83,7 @@ const CommandList = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <CommandPrimitive.List
     ref={ref}
-    className={cn(
-      "ms-overflow-hidden",
-      className
-    )}
+    className={cn("ms-overflow-hidden", className)}
     {...props}
   >
     <ScrollArea className="md:ms-max-h-[300px] ms-h-[350px] ms-px-3">
@@ -145,7 +142,7 @@ const CommandItem = React.forwardRef<
   <CommandPrimitive.Item
     ref={ref}
     className={cn(
-      "ms-relative ms-flex ms-cursor-pointer ms-duration-150 ms-select-none ms-items-center ms-rounded-sm ms-px-2 ms-py-1.5 ms-text-sm ms-outline-none aria-selected:ms-bg-accent aria-selected:ms-text-accent-foreground data-[disabled]:ms-pointer-events-none data-[disabled]:ms-opacity-50",
+      'ms-relative ms-flex ms-cursor-pointer ms-duration-150 ms-select-none ms-items-center ms-rounded-sm ms-px-2 ms-py-1.5 ms-text-sm ms-outline-none aria-selected:ms-bg-accent aria-selected:ms-text-accent-foreground data-[disabled="true"]:ms-pointer-events-none data-[disabled="true"]:ms-opacity-50',
       className
     )}
     {...props}
@@ -179,6 +176,5 @@ export {
   CommandItem,
   CommandList,
   CommandSeparator,
-  CommandShortcut
+  CommandShortcut,
 };
-

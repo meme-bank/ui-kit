@@ -71,3 +71,9 @@ export const Default: Story = {};
 //     },
 //   },
 // };
+
+export const WithTime: Story = {
+  args: {
+    withTime: true,
+  },
+};

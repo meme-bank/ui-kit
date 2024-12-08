@@ -136,7 +136,9 @@ export const DatePicker: React.FC<
                 {generateRangeArray(24)
                   .map(x => x.toString().padStart(2, "0"))
                   .map(val => (
-                    <ComboBoxItem value={val}>{val}</ComboBoxItem>
+                    <ComboBoxItem value={val} key={val}>
+                      {val}
+                    </ComboBoxItem>
                   ))}
               </ComboBox>
               <span>:</span>
@@ -157,7 +159,9 @@ export const DatePicker: React.FC<
                 {generateRangeArray(60)
                   .map(x => x.toString().padStart(2, "0"))
                   .map(val => (
-                    <ComboBoxItem value={val}>{val}</ComboBoxItem>
+                    <ComboBoxItem value={val} key={val}>
+                      {val}
+                    </ComboBoxItem>
                   ))}
               </ComboBox>
             </div>

@@ -8,7 +8,7 @@ import path from "path";
 import { dts } from "rollup-plugin-dts";
 import external from "rollup-plugin-peer-deps-external";
 import postcss from "rollup-plugin-postcss";
-import useClient from "rollup-plugin-use-client";
+import { rollupPluginUseClient } from "rollup-plugin-use-client";
 
 const packageJson = require("./package.json");
 
@@ -50,7 +50,7 @@ export default [
       image(),
       typescript({ tsconfig: "./tsconfig.json" }),
       postcss(),
-      useClient(),
+      rollupPluginUseClient(),
       terser(),
     ],
   },
