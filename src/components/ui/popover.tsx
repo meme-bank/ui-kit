@@ -2,7 +2,7 @@ import * as PopoverPrimitive from "@radix-ui/react-popover";
 import * as React from "react";
 
 import { ResponsibilityHOC } from "@/index";
-import { cn, useMediaQuery } from "@/lib/utils";
+import { cn, useIsomorphicLayoutEffect, useMediaQuery } from "@/lib/utils";
 import { Drawer, DrawerContent, DrawerProps, DrawerTrigger } from "./drawer";
 
 const PopoverNonResponsibility = PopoverPrimitive.Root;
@@ -48,10 +48,10 @@ export const Popover: React.FC<PopoverPrimitive.PopoverProps & DrawerProps> = ({
   const [open, setOpen] = React.useState<boolean>(!!defOpen);
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
-  React.useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (onOpenChange) onOpenChange(open);
   }, [open, onOpenChange]);
-  React.useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     setOpen(!!defOpen);
   }, [defOpen]);
 

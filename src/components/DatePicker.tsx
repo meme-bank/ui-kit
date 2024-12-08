@@ -17,7 +17,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { cn, generateRangeArray } from "@/lib/utils";
+import { cn, generateRangeArray, useIsomorphicLayoutEffect } from "@/lib/utils";
 import { ComboBox, ComboBoxItem } from "./ComboBox";
 
 export const DatePicker: React.FC<
@@ -46,20 +46,20 @@ export const DatePicker: React.FC<
   const [timeValue, setTimeValue] = React.useState<string>("00:00");
   const [open, setOpen] = React.useState(defOpen || false);
 
-  React.useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (onOpenChange) onOpenChange(open);
   }, [open, onOpenChange]);
-  React.useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     setOpen(defOpen || false);
   }, [defOpen]);
-  React.useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (selected !== date && onSelect) onSelect(date);
   }, [date, onSelect]);
-  React.useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     setTimeValue(selected ? formatDate(selected, "HH:mm") : "00:00");
     if (selected !== date) setDate(selected || new Date());
   }, [selected]);
-  React.useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const [hours, minutes] = timeValue.split(":").map(str => parseInt(str, 10));
     setDate(setHours(setMinutes(date || new Date(), minutes), hours));
   }, [timeValue]);

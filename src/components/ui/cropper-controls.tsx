@@ -1,7 +1,7 @@
-import { cn } from "@/lib/utils";
+import { cn, useIsomorphicLayoutEffect } from "@/lib/utils";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { Check, RotateCcwSquare, RotateCwSquare, Upload } from "lucide-react";
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useState } from "react";
 import { DropEvent, FileRejection, useDropzone } from "react-dropzone";
 import Cropper, { Area, Point, Size } from "react-easy-crop";
 import { Button } from "./button";
@@ -59,7 +59,7 @@ export const CropperControls = React.forwardRef<
     ),
   };
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (mediaSize) {
       const container = document.querySelector(`.reactEasyCrop_Container`);
       container?.setAttribute("data-vaul-no-drag", "true");
@@ -187,7 +187,7 @@ export const CropperDialogContent: React.FC<{
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>();
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (!image) return;
     const fetchImage = async () => {
       const resp = await fetch(image).then(resp => resp.blob());
@@ -197,7 +197,7 @@ export const CropperDialogContent: React.FC<{
     fetchImage();
   }, [image]);
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (typeof openState === void 0) return;
     if (!openState) {
       setFile(null);

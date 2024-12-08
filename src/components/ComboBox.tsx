@@ -1,6 +1,6 @@
 import { extractStringFromNode } from "@/lib/extract-string-from-element";
 import { Iconable } from "@/lib/types";
-import { cn } from "@/lib/utils";
+import { cn, useIsomorphicLayoutEffect } from "@/lib/utils";
 import clsx from "clsx";
 import { CommandLoading } from "cmdk";
 import debounce from "lodash.debounce";
@@ -14,9 +14,7 @@ import React, {
   forwardRef,
   useCallback,
   useContext,
-  useEffect,
   useId,
-  useLayoutEffect,
   useState,
 } from "react";
 import { Button, ButtonProps } from "./ui/button";
@@ -112,19 +110,19 @@ export const ComboBox = forwardRef<
     );
     const [isFirstRender, setIsFirstRender] = useState(true);
 
-    useLayoutEffect(() => {
+    useIsomorphicLayoutEffect(() => {
       setIsFirstRender(false);
     }, []);
-    useLayoutEffect(() => {
+    useIsomorphicLayoutEffect(() => {
       if (defaultSetValue) defaultSetValue(value);
     }, [value]);
-    useLayoutEffect(() => {
+    useIsomorphicLayoutEffect(() => {
       if (onOpenChange) onOpenChange(open);
     }, [open]);
-    useLayoutEffect(() => {
+    useIsomorphicLayoutEffect(() => {
       setValue(defaultValue || null);
     }, [defaultValue]);
-    useLayoutEffect(() => {
+    useIsomorphicLayoutEffect(() => {
       setOpen(defaultOpen || false);
     }, [defaultOpen]);
 
@@ -285,20 +283,20 @@ export const MultiselectComboBox = forwardRef<
     );
     const [isFirstRender, setIsFirstRender] = useState(true);
 
-    useLayoutEffect(() => {
+    useIsomorphicLayoutEffect(() => {
       setIsFirstRender(false);
     }, []);
 
-    useLayoutEffect(() => {
+    useIsomorphicLayoutEffect(() => {
       if (defaultSetValue) defaultSetValue(values);
     }, [values]);
-    useLayoutEffect(() => {
+    useIsomorphicLayoutEffect(() => {
       if (onOpenChange) onOpenChange(open);
     }, [open]);
-    useLayoutEffect(() => {
+    useIsomorphicLayoutEffect(() => {
       setValues(defaultValue || []);
     }, [defaultValue]);
-    useLayoutEffect(() => {
+    useIsomorphicLayoutEffect(() => {
       setOpen(defaultOpen || false);
     }, [defaultOpen]);
 
@@ -433,7 +431,7 @@ export const ComboBoxItem = forwardRef<
   } = useComboBox();
   const id = useId();
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     setOptions(options =>
       options.some(option => option?.value === (value || id))
         ? options

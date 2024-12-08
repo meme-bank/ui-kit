@@ -1,5 +1,5 @@
 import { clsx, type ClassValue } from "clsx";
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { Area } from "react-easy-crop";
 import { twMerge } from "tailwind-merge";
 
@@ -23,26 +23,47 @@ export function cn(...inputs: ClassValue[]) {
   );
 }
 
-export function useMediaQuery(query: string): boolean {
-  const [matches, setMatches] = useState<boolean>(false);
+const IS_SERVER = typeof window === "undefined";
 
-  useLayoutEffect(() => {
-    const getMatches = (query: string): boolean => {
-      // Prevents SSR issues
-      if (typeof window !== "undefined") {
-        return window.matchMedia(query).matches;
-      }
-      return false;
-    };
+export const useIsomorphicLayoutEffect = !IS_SERVER
+  ? useLayoutEffect
+  : useEffect;
 
-    function handleChange() {
-      setMatches(getMatches(query));
+type UseMediaQueryOptions = {
+  defaultValue?: boolean;
+  initializeWithValue?: boolean;
+};
+
+export function useMediaQuery(
+  query: string,
+  {
+    defaultValue = false,
+    initializeWithValue = true,
+  }: UseMediaQueryOptions = {}
+): boolean {
+  const getMatches = (query: string): boolean => {
+    if (IS_SERVER) {
+      return defaultValue;
     }
-    handleChange();
+    return window.matchMedia(query).matches;
+  };
 
+  const [matches, setMatches] = useState<boolean>(() => {
+    if (initializeWithValue) {
+      return getMatches(query);
+    }
+    return defaultValue;
+  });
+
+  function handleChange() {
+    setMatches(getMatches(query));
+  }
+
+  useIsomorphicLayoutEffect(() => {
     const matchMedia = window.matchMedia(query);
 
-    // Listen matchMedia
+    handleChange();
+
     if (matchMedia.addListener) {
       matchMedia.addListener(handleChange);
     } else {
@@ -56,7 +77,6 @@ export function useMediaQuery(query: string): boolean {
         matchMedia.removeEventListener("change", handleChange);
       }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
   return matches;
