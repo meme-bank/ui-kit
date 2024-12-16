@@ -30,6 +30,7 @@ const buttonVariants = cva({
       icon: "ms-h-10 ms-w-10",
       none: "",
       defaultNoPadding: "ms-h-10",
+      xs: "ms-h-6 ms-rounded-md ms-text-sm ms-px-2",
     },
   },
   defaultVariants: {

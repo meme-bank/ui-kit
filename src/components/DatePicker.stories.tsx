@@ -14,7 +14,9 @@ const meta: Meta<DatePickerType> = {
       date
         ? console.log(
             formatRelative(
-              typeof date === "function" ? date(new Date()) : date,
+              typeof date === "function"
+                ? date(new Date()) || new Date()
+                : date,
               new Date(),
               { locale: ru }
             )
