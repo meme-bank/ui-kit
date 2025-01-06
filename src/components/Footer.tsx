@@ -1,8 +1,9 @@
 import { Separator } from "@radix-ui/react-dropdown-menu";
 import { GithubIcon, HexagonIcon } from "lucide-react";
 import * as React from "react";
-import { VKIcon } from "..";
 import { Button } from "./ui/button";
+import { TelegramIcon } from "./ui/telegram-icon";
+import { VKIcon } from "./ui/vk-icon";
 
 export const Footer: React.FC = () => {
   return (
@@ -16,6 +17,16 @@ export const Footer: React.FC = () => {
           <a target="_blank" href="https://vk.com/club206737619">
             <VKIcon className="ms-h-4 ms-w-4 ms-mr-2 ms-fill-vk-azure" />
             Мы ВКонтакте
+          </a>
+        </Button>
+        <Button
+          asChild
+          variant={"link"}
+          className="ms-text-muted-foreground hover:ms-text-primary ms-h-auto ms-py-1 ms-px-0.5"
+        >
+          <a target="_blank" href="https://t.me/falleland/20">
+            <TelegramIcon className="ms-h-4 ms-w-4 ms-mr-2" />
+            Мы в Telegram
           </a>
         </Button>
         <Button
