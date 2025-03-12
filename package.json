@@ -13,7 +13,7 @@
     "build": "rollup -c --bundleConfigAsCjs && npm run css-build",
     "prepare": "ts-patch install -s",
     "prebuild": "rimraf dist",
-    "css-build": "npx tailwindcss -i ./src-style.css -o ./style.css",
+    "css-build": "npx @tailwindcss/cli -i ./src-style.css -o ./style.css",
     "install-peers": "install-peers"
   },
   "keywords": [
