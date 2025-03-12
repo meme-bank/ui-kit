@@ -18,16 +18,16 @@ export const VKAuthRequireDialog: React.FC<{ connect?: () => void }> = ({
       <DialogContent autoClose>
         <DialogHeader>
           <DialogTitle>
-            <span className="ms-flex ms-items-center ms-justify-center sm:ms-justify-start ms-gap-2">
-              <VKIcon className="ms-h-4 ms-w-4" />
+            <span className="ms:flex ms:items-center ms:justify-center ms:sm:justify-start ms:gap-2">
+              <VKIcon className="ms:h-4 ms:w-4" />
               Подключение VK ID
             </span>
           </DialogTitle>
-          <DialogDescription className="ms-space-y-2">
+          <DialogDescription className="ms:space-y-2">
             <p>
               Для использования НБМ, требуется подключить Ваш аккаунт VK ID к
               Вашей учётной записи НБМ
-              <sup className="ms-text-muted-foreground">Sanctum</sup>. Это
+              <sup className="ms:text-muted-foreground">Sanctum</sup>. Это
               требуется для проверки подлинности учётной записи, а также для
               осуществления привязки государств и организаций к группам VK.
             </p>

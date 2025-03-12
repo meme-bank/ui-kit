@@ -14,7 +14,7 @@ export const NavigationLayout: NavigationLayoutType = ({
   return (
     <div
       className={cn(
-        "ms-flex ms-flex-col lg:ms-grid lg:ms-grid-cols-5 ms-gap-4",
+        "ms:flex ms:flex-col ms:lg:grid ms:lg:grid-cols-5 ms:gap-4",
         className
       )}
     >
@@ -27,7 +27,7 @@ NavigationLayout.NavigatorBlock = ({ children, className }) => {
   return (
     <div
       className={cn(
-        "ms-col-span-1 ms-z-10 ms-flex ms-flex-col ms-gap-4",
+        "ms:col-span-1 ms:z-10 ms:flex ms:flex-col ms:gap-4",
         className
       )}
     >
@@ -37,5 +37,5 @@ NavigationLayout.NavigatorBlock = ({ children, className }) => {
 };
 
 NavigationLayout.PageBlock = ({ children, className }) => {
-  return <div className={cn("ms-col-span-4", className)}>{children}</div>;
+  return <div className={cn("ms:col-span-4", className)}>{children}</div>;
 };

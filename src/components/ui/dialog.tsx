@@ -29,7 +29,7 @@ const DialogOverlayNonResponsibility = React.forwardRef<
   <DialogPrimitive.Overlay
     ref={ref}
     className={cn(
-      "ms-fixed ms-inset-0 ms-z-50 ms-bg-background/80 ms-backdrop-blur-sm ms-data-[state=open]:animate-in ms-data-[state=closed]:animate-out ms-data-[state=closed]:fade-out-0 ms-data-[state=open]:fade-in-0",
+      "ms:fixed ms:inset-0 ms:z-50 ms:bg-background/80 ms:backdrop-blur-sm ms:data-[state=open]:animate-in ms:data-[state=closed]:animate-out ms:data-[state=closed]:fade-out-0 ms:data-[state=open]:fade-in-0",
       className
     )}
     {...props}
@@ -46,15 +46,15 @@ const DialogContentNonResponsibility = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        "ms-fixed ms-left-1/2 ms-top-1/2 ms-z-50 ms-flex ms-flex-col ms-w-full ms-max-h-screen ms-overflow-y-auto ms-max-w-lg -ms-translate-x-1/2 -ms-translate-y-1/2 ms-gap-4 ms-border ms-bg-background ms-p-6 ms-shadow-lg ms-duration-200 data-[state=open]:ms-animate-in data-[state=closed]:ms-animate-out data-[state=closed]:ms-fade-out-0 data-[state=open]:ms-fade-in-0 data-[state=closed]:ms-zoom-out-95 data-[state=open]:ms-zoom-in-95 data-[state=closed]:ms-slide-out-to-left-1/2 data-[state=closed]:ms-slide-out-to-top-[48%] data-[state=open]:ms-slide-in-from-left-1/2 data-[state=open]:ms-slide-in-from-top-[48%] sm:ms-rounded-lg md:ms-w-full",
+        "ms:fixed ms:left-1/2 ms:top-1/2 ms:z-50 ms:flex ms:flex-col ms:w-full ms:max-h-screen ms:overflow-y-auto ms:max-w-lg ms:-translate-x-1/2 ms:-translate-y-1/2 ms:gap-4 ms:border ms:bg-background ms:p-6 ms:shadow-lg ms:duration-200 ms:data-[state=open]:animate-in ms:data-[state=closed]:animate-out ms:data-[state=closed]:fade-out-0 ms:data-[state=open]:fade-in-0 ms:data-[state=closed]:zoom-out-95 ms:data-[state=open]:zoom-in-95 ms:data-[state=closed]:slide-out-to-left-1/2 ms:data-[state=closed]:slide-out-to-top-[48%] ms:data-[state=open]:slide-in-from-left-1/2 ms:data-[state=open]:slide-in-from-top-[48%] ms:sm:rounded-lg ms:md:w-full",
         className
       )}
       {...props}
     >
       {children}
-      {!autoClose && <DialogPrimitive.Close className={cn("ms-absolute ms-right-4 ms-top-4 ms-rounded-sm ms-opacity-70 ms-ring-offset-background ms-transition-opacity hover:ms-opacity-100 focus:ms-outline-none focus:ms-ring-2 focus:ms-ring-ring focus:ms-ring-offset-2 disabled:ms-pointer-events-none data-[state=open]:ms-bg-accent data-[state=open]:ms-text-muted-foreground")}>
-        <X className="ms-h-4 ms-w-4" />
-        <span className="ms-sr-only">Close</span>
+      {!autoClose && <DialogPrimitive.Close className={cn("ms:absolute ms:right-4 ms:top-4 ms:rounded-sm ms:opacity-70 ms:ring-offset-background ms:transition-opacity ms:hover:opacity-100 ms:focus:outline-none ms:focus:ring-2 ms:focus:ring-ring ms:focus:ring-offset-2 ms:disabled:pointer-events-none ms:data-[state=open]:bg-accent ms:data-[state=open]:text-muted-foreground")}>
+        <X className="ms:h-4 ms:w-4" />
+        <span className="ms:sr-only">Close</span>
       </DialogPrimitive.Close>}
     </DialogPrimitive.Content>
   </DialogPortalNonResponsibility>
@@ -67,7 +67,7 @@ const DialogHeaderNonResponsibility = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
-      "ms-flex ms-flex-col ms-space-y-1.5 ms-text-center sm:ms-text-left",
+      "ms:flex ms:flex-col ms:space-y-1.5 ms:text-center ms:sm:text-left",
       className
     )}
     {...props}
@@ -81,7 +81,7 @@ const DialogFooterNonResponsibility = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
-      "ms-flex ms-flex-col-reverse sm:ms-flex-row sm:ms-justify-end sm:ms-space-x-2",
+      "ms:flex ms:flex-col-reverse ms:sm:flex-row ms:sm:justify-end ms:sm:space-x-2",
       className
     )}
     {...props}
@@ -96,7 +96,7 @@ const DialogTitleNonResponsibility = React.forwardRef<
   <DialogPrimitive.Title
     ref={ref}
     className={cn(
-      "ms-text-lg ms-font-semibold ms-leading-none ms-tracking-tight",
+      "ms:text-lg ms:font-semibold ms:leading-none ms:tracking-tight",
       className
     )}
     {...props}
@@ -110,7 +110,7 @@ const DialogDescriptionNonResponsibility = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Description
     ref={ref}
-    className={cn("ms-text-sm ms-text-muted-foreground", className)}
+    className={cn("ms:text-sm ms:text-muted-foreground", className)}
     {...props}
   />
 ))

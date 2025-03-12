@@ -48,14 +48,14 @@ export const CropperControls = React.forwardRef<
 
   const classes = {
     containerClassName: cn(
-      "ms-bg-background ms-h-full ms-w-full ms-overflow-hidden ms-select-none ms-touch-none ms-cursor-move ms-flex ms-items-center ms-justify-items"
+      "ms:bg-background ms:h-full ms:w-full ms:overflow-hidden ms:select-none ms:touch-none ms:cursor-move ms:flex ms:items-center ms:justify-items"
     ),
     cropAreaClassName: cn(
-      "ms-absolute ms-text-background/50 ms-left-1/2 ms-top-1/2 ms-outline-2 ms-outline-foreground ms-outline -ms-translate-y-1/2 ms-overflow-hidden ms-shadow-[0_0_0_calc(100vw_+_100vh)] -ms-translate-x-1/2",
-      aspect[props.type] === 1 / 1 ? "ms-rounded-full" : "ms-rounded-md"
+      "ms:absolute ms:text-background/50 ms:left-1/2 ms:top-1/2 ms:outline-2 ms:outline-foreground ms:outline ms:-translate-y-1/2 ms:overflow-hidden ms:shadow-[0_0_0_calc(100vw_+_100vh)] ms:-translate-x-1/2",
+      aspect[props.type] === 1 / 1 ? "ms:rounded-full" : "ms:rounded-md"
     ),
     mediaClassName: cn(
-      "ms-bg-background ms-max-w-full ms-max-h-full ms-border-border ms-m-auto ms-absolute ms-left-0 ms-top-0 ms-bottom-0 ms-right-0"
+      "ms:bg-background ms:max-w-full ms:max-h-full ms:border-border ms:m-auto ms:absolute ms:left-0 ms:top-0 ms:bottom-0 ms:right-0"
     ),
   };
 
@@ -84,15 +84,15 @@ export const CropperControls = React.forwardRef<
   };
 
   return (
-    <div data-vaul-no-drag className="ms-h-full ms-min-h-96">
-      <div data-vaul-no-drag className="ms-flex ms-flex-col ms-h-full ms-gap-2">
+    <div data-vaul-no-drag className="ms:h-full ms:min-h-96">
+      <div data-vaul-no-drag className="ms:flex ms:flex-col ms:h-full ms:gap-2">
         <div
           data-vaul-no-drag
-          className="ms-relative ms-flex-1 ms-overflow-hidden"
+          className="ms:relative ms:flex-1 ms:overflow-hidden"
         >
           <div
             data-vaul-no-drag
-            className="ms-absolute ms-top-0 ms-bottom-0 ms-left-0 ms-right-0"
+            className="ms:absolute ms:top-0 ms:bottom-0 ms:left-0 ms:right-0"
           >
             <Cropper
               crop={crop}
@@ -122,12 +122,12 @@ export const CropperControls = React.forwardRef<
             />
           </div>
         </div>
-        <div className="ms-flex ms-gap-2">
+        <div className="ms:flex ms:gap-2">
           {props.onDrop && (
             <Dialog nested open={openReupload} onOpenChange={setReupload}>
               <DialogTrigger asChild>
                 <Button size={"icon"} variant={"outline"}>
-                  <Upload className="ms-h-[1.2rem] ms-w-[1.2rem]" />
+                  <Upload className="ms:h-[1.2rem] ms:w-[1.2rem]" />
                 </Button>
               </DialogTrigger>
               <DropDialogContent
@@ -142,7 +142,7 @@ export const CropperControls = React.forwardRef<
             variant={"outline"}
             size={"icon"}
           >
-            <RotateCwSquare className="ms-h-[1.2rem] ms-w-[1.2rem]" />
+            <RotateCwSquare className="ms:h-[1.2rem] ms:w-[1.2rem]" />
           </Button>
           <Button
             type="button"
@@ -150,10 +150,10 @@ export const CropperControls = React.forwardRef<
             variant={"outline"}
             size={"icon"}
           >
-            <RotateCcwSquare className="ms-h-[1.2rem] ms-w-[1.2rem]" />
+            <RotateCcwSquare className="ms:h-[1.2rem] ms:w-[1.2rem]" />
           </Button>
           <Slider
-            className="ms-flex-1 no-hover:ms-hidden"
+            className="ms:flex-1 no-ms:hover:hidden"
             step={0.125}
             max={2.75}
             min={1}
@@ -164,10 +164,10 @@ export const CropperControls = React.forwardRef<
           <DialogClose asChild onClick={() => props.onUpload(area as Area)}>
             <Button
               size={"icon"}
-              className="sm:ms-px-3 no-hover:ms-ml-auto sm:ms-w-auto sm:ms-py-2 sm:ms-justify-start"
+              className="ms:sm:px-3 no-ms:hover:ml-auto ms:sm:w-auto ms:sm:py-2 ms:sm:justify-start"
             >
-              <Check className="ms-h-[1.2rem] ms-w-[1.2rem] sm:ms-w-4 sm:ms-h-4 sm:ms-mr-3" />
-              <span className="ms-hidden sm:ms-inline">Отправить</span>
+              <Check className="ms:h-[1.2rem] ms:w-[1.2rem] ms:sm:w-4 ms:sm:h-4 ms:sm:mr-3" />
+              <span className="ms:hidden ms:sm:inline">Отправить</span>
             </Button>
           </DialogClose>
         </div>
@@ -222,9 +222,9 @@ export const CropperDialogContent: React.FC<{
     return (
       <DialogContent
         noScroll
-        className="ms-h-full ms-flex ms-flex-col md:ms-h-[50rem]"
+        className="ms:h-full ms:flex ms:flex-col ms:md:h-[50rem]"
       >
-        <div className="ms-h-full ms-flex ms-flex-col">
+        <div className="ms:h-full ms:flex ms:flex-col">
           <DialogHeader>
             <DialogTitle>Выберите отображаемую область</DialogTitle>
             <DialogDescription>
@@ -233,7 +233,7 @@ export const CropperDialogContent: React.FC<{
           </DialogHeader>
           <div
             data-vaul-no-drag
-            className="ms-p-2 md:ms-p-0 ms-h-full ms-flex-1"
+            className="ms:p-2 ms:md:p-0 ms:h-full ms:flex-1"
           >
             <CropperControls
               image={imageUrl}
@@ -261,9 +261,9 @@ const DropDialogContent: React.FC<{ onDrop: OnDrop; close?: () => void }> = ({
     },
     onDrop: close
       ? (...args) => {
-          onDrop(...args);
-          close();
-        }
+        onDrop(...args);
+        close();
+      }
       : onDrop,
   });
 
@@ -280,7 +280,7 @@ const DropDialogContent: React.FC<{ onDrop: OnDrop; close?: () => void }> = ({
       <input {...getInputProps()} />
       <DialogFooter>
         <Button type="button" onClick={open} disabled={isDragActive}>
-          <Upload className="ms-mr-2 ms-w-4 ms-h-4" />
+          <Upload className="ms:mr-2 ms:w-4 ms:h-4" />
           Выбрать изображение
         </Button>
       </DialogFooter>

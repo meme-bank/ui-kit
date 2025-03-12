@@ -10,21 +10,21 @@ const ScrollAreaMeta: Meta<ScrollAreaType> = {
   args: {
     children: (
       <>
-        <div className="ms-flex ms-w-max ms-space-x-4 ms-p-4">
+        <div className="ms:flex ms:w-max ms:space-x-4 ms:p-4">
           {[1, 2, 3, 4, 5, 6, 7, 8].map((id) => (
-            <figure key={id} className="ms-shrink-0">
-              <div className="ms-overflow-hidden ms-rounded-md">
+            <figure key={id} className="ms:shrink-0">
+              <div className="ms:overflow-hidden ms:rounded-md">
                 <img
                   src={`https://placehold.co/300x400`}
                   alt={`Placehold image`}
-                  className="ms-aspect-[3/4] ms-h-fit ms-w-fit ms-object-cover"
+                  className="ms:aspect-[3/4] ms:h-fit ms:w-fit ms:object-cover"
                   width={300}
                   height={400}
                 />
               </div>
-              <figcaption className="ms-pt-2 ms-text-xs ms-text-muted-foreground">
+              <figcaption className="ms:pt-2 ms:text-xs ms:text-muted-foreground">
                 Photo id -{" "}
-                <span className="ms-font-semibold ms-text-foreground">
+                <span className="ms:font-semibold ms:text-foreground">
                   {id}
                 </span>
               </figcaption>
@@ -34,7 +34,7 @@ const ScrollAreaMeta: Meta<ScrollAreaType> = {
         <ScrollBar orientation="horizontal" />
       </>
     ),
-    className: "ms-w-96 ms-whitespace-nowrap ms-rounded-md ms-border",
+    className: "ms:w-96 ms:whitespace-nowrap ms:rounded-md ms:border",
   },
 };
 

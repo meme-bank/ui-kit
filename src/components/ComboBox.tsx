@@ -37,8 +37,8 @@ export type OptionType = {
 const ComboBoxContext = createContext<{
   value: string | string[] | null;
   setValue:
-    | Dispatch<SetStateAction<string | null>>
-    | Dispatch<SetStateAction<string[]>>;
+  | Dispatch<SetStateAction<string | null>>
+  | Dispatch<SetStateAction<string[]>>;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
   setOptions: Dispatch<SetStateAction<OptionType[]>>;
@@ -49,7 +49,7 @@ const ComboBoxContext = createContext<{
 
 export interface ComboBoxProps
   extends Omit<ButtonProps, "onChange" | "unselectable">,
-    React.RefAttributes<HTMLButtonElement> {
+  React.RefAttributes<HTMLButtonElement> {
   Icon?: Iconable;
   placeholder: string;
   empty?: ReactNode;
@@ -105,7 +105,7 @@ export const ComboBox = forwardRef<
     const [open, setOpen] = useState(defaultOpen || false);
     const [options, setOptions] = useState<OptionType[]>([]);
     const inputSearch = useCallback(
-      onSearchChange ? debounce(onSearchChange, 500) : () => {},
+      onSearchChange ? debounce(onSearchChange, 500) : () => { },
       []
     );
     const [isFirstRender, setIsFirstRender] = useState(true);
@@ -145,7 +145,7 @@ export const ComboBox = forwardRef<
           <PopoverTrigger asChild>
             <Button
               variant="outline"
-              className="ms-justify-between"
+              className="ms:justify-between"
               role="combobox"
               aria-expanded={open}
               {...props}
@@ -153,35 +153,35 @@ export const ComboBox = forwardRef<
               {Icon && !currentOption?.Icon && (
                 <Icon
                   className={clsx(
-                    "ms-h-4 ms-w-4 ms-shrink-0 ms-opacity-50",
-                    (!hideChevrons || !onlyIconValue) && "ms-mr-2"
+                    "ms:h-4 ms:w-4 ms:shrink-0 ms:opacity-50",
+                    (!hideChevrons || !onlyIconValue) && "ms:mr-2"
                   )}
                 />
               )}
               {currentOption?.Icon && (
                 <currentOption.Icon
                   className={clsx(
-                    "ms-h-4 ms-w-4 ms-shrink-0",
-                    (!hideChevrons || !onlyIconValue) && "ms-mr-2"
+                    "ms:h-4 ms:w-4 ms:shrink-0",
+                    (!hideChevrons || !onlyIconValue) && "ms:mr-2"
                   )}
                 />
               )}
               {!onlyIconValue &&
                 (currentOption ? (
-                  <span className="ms-overflow-hidden ms-text-ellipsis ms-text-nowrap">
+                  <span className="ms:overflow-hidden ms:text-ellipsis ms:text-nowrap">
                     {currentOption.label}
                   </span>
                 ) : (
-                  <span className="ms-text-nowrap ms-text-muted-foreground ms-overflow-hidden ms-text-ellipsis">
+                  <span className="ms:text-nowrap ms:text-muted-foreground ms:overflow-hidden ms:text-ellipsis">
                     {placeholder}
                   </span>
                 ))}
               {!hideChevrons && (
-                <ChevronsUpDown className="ms-ml-2 ms-h-4 ms-w-4 ms-shrink-0 ms-opacity-50" />
+                <ChevronsUpDown className="ms:ml-2 ms:h-4 ms:w-4 ms:shrink-0 ms:opacity-50" />
               )}
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="ms-p-0">
+          <PopoverContent className="ms:p-0">
             <Command
               filter={(optionValue, search) => {
                 const option = options.find(
@@ -198,7 +198,7 @@ export const ComboBox = forwardRef<
                 return 0;
               }}
               shouldFilter={!onSearchChange}
-              className="ms-mt-4 md:ms-mt-0 ms-border-t md:ms-border-t-none"
+              className="ms:mt-4 ms:md:mt-0 ms:border-t ms:md:border-t-none"
             >
               <CommandInput
                 onValueChange={inputSearch}
@@ -217,7 +217,7 @@ export const ComboBox = forwardRef<
             </Command>
           </PopoverContent>
           {!open && value && isFirstRender && (
-            <div className="ms-hidden">
+            <div className="ms:hidden">
               <Command>
                 <CommandList>{children}</CommandList>
               </Command>
@@ -278,7 +278,7 @@ export const MultiselectComboBox = forwardRef<
     const [open, setOpen] = useState(defaultOpen || false);
     const [options, setOptions] = useState<OptionType[]>([]);
     const inputSearch = useCallback(
-      onSearchChange ? debounce(onSearchChange, 500) : () => {},
+      onSearchChange ? debounce(onSearchChange, 500) : () => { },
       []
     );
     const [isFirstRender, setIsFirstRender] = useState(true);
@@ -324,16 +324,16 @@ export const MultiselectComboBox = forwardRef<
           <PopoverTrigger asChild>
             <Button
               variant="outline"
-              className="ms-justify-between"
+              className="ms:justify-between"
               role="combobox"
               aria-expanded={open}
               {...props}
             >
               {Icon && (
-                <Icon className="ms-mr-2 ms-h-4 ms-w-4 ms-shrink-0 ms-opacity-50" />
+                <Icon className="ms:mr-2 ms:h-4 ms:w-4 ms:shrink-0 ms:opacity-50" />
               )}
               {currentOptions.length > 0 ? (
-                <span className="ms-overflow-hidden ms-text-nowrap ms-text-ellipsis">
+                <span className="ms:overflow-hidden ms:text-nowrap ms:text-ellipsis">
                   {currentOptions.map((option, index) => (
                     <>
                       {option?.label}
@@ -342,16 +342,16 @@ export const MultiselectComboBox = forwardRef<
                   ))}
                 </span>
               ) : (
-                <span className="ms-text-muted-foreground ms-text-nowrap ms-overflow-hidden ms-text-ellipsis">
+                <span className="ms:text-muted-foreground ms:text-nowrap ms:overflow-hidden ms:text-ellipsis">
                   {placeholder}
                 </span>
               )}
               {!hideChevrons && (
-                <ChevronsUpDown className="ms-ml-2 ms-h-4 ms-w-4 ms-shrink-0 ms-opacity-50" />
+                <ChevronsUpDown className="ms:ml-2 ms:h-4 ms:w-4 ms:shrink-0 ms:opacity-50" />
               )}
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="ms-p-0">
+          <PopoverContent className="ms:p-0">
             <Command
               filter={(optionValue, search) => {
                 const option = options.find(
@@ -368,7 +368,7 @@ export const MultiselectComboBox = forwardRef<
                 return 0;
               }}
               shouldFilter={!onSearchChange}
-              className="ms-mt-4 md:ms-mt-0 ms-border-t md:ms-border-t-none"
+              className="ms:mt-4 ms:md:mt-0 ms:border-t ms:md:border-t-none"
             >
               <CommandInput
                 onValueChange={inputSearch}
@@ -388,7 +388,7 @@ export const MultiselectComboBox = forwardRef<
             </Command>
           </PopoverContent>
           {!open && values.length > 0 && isFirstRender && (
-            <div className="ms-hidden">
+            <div className="ms:hidden">
               <Command>
                 <CommandList>{children}</CommandList>
               </Command>
@@ -475,8 +475,8 @@ export const ComboBoxItem = forwardRef<
     >
       <CheckIcon
         className={cn(
-          "ms-mr-2 ms-h-4 ms-w-4",
-          isChecked || Icon ? "ms-opacity-100" : "ms-opacity-0"
+          "ms:mr-2 ms:h-4 ms:w-4",
+          isChecked || Icon ? "ms:opacity-100" : "ms:opacity-0"
         )}
       />
       {children}

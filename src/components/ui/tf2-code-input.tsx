@@ -13,7 +13,7 @@ export type Props = {
 export const TF2CodeInput: React.FC<Props> = ({ valueLength, value, onChange }) => {
     // const valueItems = React.useMemo(() => {
     //     const valueArray = value.split('');
-    //     const items: Array<string> = [];
+    //     const items- Array<string> = [];
 
     //     for (let i = 0; i < valueLength; i++) {
     //         const char = valueArray[i];
@@ -117,7 +117,7 @@ export const TF2CodeInput: React.FC<Props> = ({ valueLength, value, onChange }) 
     // }
 
     // return (
-    //     <div className={"ms-flex ms-gap-1"}>
+    //     <div className={"ms:flex ms:gap-1"}>
     //         {valueItems.map((digit, idx) => (
     //             <Input
     //                 key={idx}
@@ -126,7 +126,7 @@ export const TF2CodeInput: React.FC<Props> = ({ valueLength, value, onChange }) 
     //                 autoComplete="one-time-code"
     //                 pattern="\d{1}"
     //                 maxLength={valueLength}
-    //                 className={"ms-aspect-square ms-w-auto ms-text-center"}
+    //                 className={"ms:aspect-square ms:w-auto ms:text-center"}
     //                 value={digit}
     //                 onChange={(e) => inputOnChange(e, idx)}
     //                 onKeyDown={inputOnKeyDown}

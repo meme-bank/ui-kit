@@ -18,6 +18,6 @@ export const Default: Story = {
   args: {
     children: "Эм пук",
     maxRows: 10,
-    className: "ms-resize-none",
+    className: "ms:resize-none",
   },
 };

@@ -5,21 +5,7 @@ import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(
-    clsx([
-      inputs[0]
-        ?.toString()
-        .split(" ")
-        .map(val =>
-          [
-            ...val.split(":").slice(0, -1),
-            val.split(":").slice(-1)[0].startsWith("ms-") ||
-            val.split(":").slice(-1)[0].startsWith("-ms-")
-              ? val.split(":").slice(-1)[0]
-              : "ms-" + val.split(":").slice(-1)[0],
-          ].join(":")
-        ),
-      ...inputs.splice(1),
-    ])
+    clsx(inputs)
   );
 }
 

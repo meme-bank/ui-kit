@@ -11,10 +11,10 @@ const InputOTP = React.forwardRef<
   <OTPInput
     ref={ref}
     containerClassName={cn(
-      "ms-flex ms-items-center ms-gap-2 has-[:disabled]:ms-opacity-50",
+      "ms:flex ms:items-center ms:gap-2 ms:has-[:disabled]:opacity-50",
       containerClassName
     )}
-    className={cn("disabled:ms-cursor-not-allowed", className)}
+    className={cn("ms:disabled:cursor-not-allowed", className)}
     {...props}
   />
 ))
@@ -24,7 +24,7 @@ const InputOTPGroup = React.forwardRef<
   React.ElementRef<"div">,
   React.ComponentPropsWithoutRef<"div">
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("ms-flex ms-items-center", className)} {...props} />
+  <div ref={ref} className={cn("ms:flex ms:items-center", className)} {...props} />
 ))
 InputOTPGroup.displayName = "InputOTPGroup"
 
@@ -39,16 +39,16 @@ const InputOTPSlot = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "ms-relative ms-flex ms-h-10 ms-w-10 ms-items-center ms-justify-center ms-border-y ms-border-r ms-border-input ms-text-sm ms-transition-all first:ms-rounded-l-md first:ms-border-l last:ms-rounded-r-md",
-        isActive && "ms-z-10 ms-ring-2 ms-ring-ring ms-ring-offset-background",
+        "ms:relative ms:flex ms:h-10 ms:w-10 ms:items-center ms:justify-center ms:border-y ms:border-r ms:border-input ms:text-sm ms:transition-all ms:first:rounded-l-md ms:first:border-l ms:last:rounded-r-md",
+        isActive && "ms:z-10 ms:ring-2 ms:ring-ring ms:ring-offset-background",
         className
       )}
       {...props}
     >
       {char}
       {hasFakeCaret && (
-        <div className="ms-pointer-events-none ms-absolute ms-inset-0 ms-flex ms-items-center ms-justify-center">
-          <div className="ms-h-4 ms-w-px ms-animate-caret-blink ms-bg-foreground ms-duration-1000" />
+        <div className="ms:pointer-events-none ms:absolute ms:inset-0 ms:flex ms:items-center ms:justify-center">
+          <div className="ms:h-4 ms:w-px ms:animate-caret-blink ms:bg-foreground ms:duration-1000" />
         </div>
       )}
     </div>

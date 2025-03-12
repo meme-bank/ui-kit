@@ -7,17 +7,16 @@ type ToasterProps = React.ComponentProps<typeof Sonner>
 const AlternativeToaster: React.FC<ToasterProps> = ({ className, ...props }) => {
   return (
     <Sonner
-      className={cn("toaster ms-group", className)}
+      className={cn("toaster ms:group", className)}
       {...props}
       toastOptions={{
         classNames: {
           toast:
-            "ms-group toast ms-group-[.toaster]:ms-bg-background group-[.toaster]:ms-text-foreground group-[.toaster]:ms-border-border group-[.toaster]:ms-shadow-lg",
-          description: "group-[.toast]:ms-text-muted-foreground",
+            "ms:group toast ms:group-[.toaster]:bg-background ms:group-[.toaster]:text-foreground ms:group-[.toaster]:border-border ms:group-[.toaster]:shadow-lg",
+          description: "group-[.toast]:text-muted-foreground",
           actionButton:
-            "group-[.toast]:ms-bg-primary group-[.toast]:ms-text-primary-foreground",
-          cancelButton:
-            "group-[.toast]:ms-bg-muted group-[.toast]:ms-text-muted-foreground",
+            "ms:group-[.toast]:bg-primary ms:group-[.toast]:text-primary-foreground",
+          cancelButton: "ms:group-[.toast]:bg-muted ms:group-[.toast]:text-muted-foreground",
           ...props.toastOptions?.classNames
         },
         ...props.toastOptions

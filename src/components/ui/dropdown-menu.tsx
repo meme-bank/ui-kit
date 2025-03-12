@@ -29,14 +29,14 @@ const DropdownMenuSubTriggerNonResponsibility = React.forwardRef<
   <DropdownMenuPrimitive.SubTrigger
     ref={ref}
     className={cn(
-      "ms-flex ms-select-none ms-items-center ms-rounded-sm ms-duration-150 ms-px-2 ms-py-1.5 data-[disabled]:ms-pointer-events-none data-[disabled]:ms-opacity-50 ms-text-sm ms-outline-none focus:ms-text-accent-foreground focus:ms-bg-accent data-[state=open]:ms-bg-accent",
-      inset && "ms-pl-8",
+      "ms:flex ms:select-none ms:items-center ms:rounded-sm ms:duration-150 ms:px-2 ms:py-1.5 ms:data-[disabled]:pointer-events-none ms:data-[disabled]:opacity-50 ms:text-sm ms:outline-none ms:focus:text-accent-foreground ms:focus:bg-accent ms:data-[state=open]:bg-accent",
+      inset && "ms:pl-8",
       className
     )}
     {...props}
   >
     {children}
-    <ChevronRight className="ms-ml-auto ms-h-4 ms-w-4" />
+    <ChevronRight className="ms:ml-auto ms:h-4 ms:w-4" />
   </DropdownMenuPrimitive.SubTrigger>
 ))
 DropdownMenuSubTriggerNonResponsibility.displayName =
@@ -49,7 +49,7 @@ const DropdownMenuSubContentNonResponsibility = React.forwardRef<
   <DropdownMenuPrimitive.SubContent
     ref={ref}
     className={cn(
-      "ms-z-50 ms-min-w-[8rem] ms-overflow-hidden ms-rounded-md ms-border ms-bg-popover ms-p-1 ms-text-popover-foreground ms-shadow-lg data-[state=open]:ms-animate-in data-[state=closed]:ms-animate-out data-[state=closed]:ms-fade-out-0 data-[state=open]:ms-fade-in-0 data-[state=closed]:ms-zoom-out-95 data-[state=open]:ms-zoom-in-95 data-[side=bottom]:ms-slide-in-from-top-2 data-[side=left]:ms-slide-in-from-right-2 data-[side=right]:ms-slide-in-from-left-2 data-[side=top]:ms-slide-in-from-bottom-2",
+      "ms:z-50 ms:min-w-[8rem] ms:overflow-hidden ms:rounded-md ms:border ms:bg-popover ms:p-1 ms:text-popover-foreground ms:shadow-lg ms:data-[state=open]:animate-in ms:data-[state=closed]:animate-out ms:data-[state=closed]:fade-out-0 ms:data-[state=open]:fade-in-0 ms:data-[state=closed]:zoom-out-95 ms:data-[state=open]:zoom-in-95 ms:data-[side=bottom]:slide-in-from-top-2 ms:data-[side=left]:slide-in-from-right-2 ms:data-[side=right]:slide-in-from-left-2 ms:data-[side=top]:slide-in-from-bottom-2",
       className
     )}
     {...props}
@@ -67,7 +67,7 @@ const DropdownMenuContentNonResponsibility = React.forwardRef<
       ref={ref}
       sideOffset={sideOffset}
       className={cn(
-        "ms-z-50 ms-min-w-[8rem] ms-overflow-hidden ms-rounded-md ms-border ms-bg-popover ms-p-1 ms-text-popover-foreground ms-shadow-md data-[state=open]:ms-animate-in data-[state=closed]:ms-animate-out data-[state=closed]:ms-fade-out-0 data-[state=open]:ms-fade-in-0 data-[state=closed]:ms-zoom-out-95 data-[state=open]:ms-zoom-in-95 data-[side=bottom]:ms-slide-in-from-top-2 data-[side=left]:ms-slide-in-from-right-2 data-[side=right]:ms-slide-in-from-left-2 data-[side=top]:ms-slide-in-from-bottom-2",
+        "ms:z-50 ms:min-w-[8rem] ms:overflow-hidden ms:rounded-md ms:border ms:bg-popover ms:p-1 ms:text-popover-foreground ms:shadow-md ms:data-[state=open]:animate-in ms:data-[state=closed]:animate-out ms:data-[state=closed]:fade-out-0 ms:data-[state=open]:fade-in-0 ms:data-[state=closed]:zoom-out-95 ms:data-[state=open]:zoom-in-95 ms:data-[side=bottom]:slide-in-from-top-2 ms:data-[side=left]:slide-in-from-right-2 ms:data-[side=right]:slide-in-from-left-2 ms:data-[side=top]:slide-in-from-bottom-2",
         className
       )}
       {...props}
@@ -89,10 +89,10 @@ const DropdownMenuItem = React.forwardRef<
       // @ts-ignore
       ref={ref}
       className={cn(
-        "ms-relative ms-flex ms-w-full ms-cursor-pointer ms-select-none ms-items-center ms-rounded-sm ms-text-sm ms-outline-none ms-transition-colors focus:ms-bg-accent focus:ms-text-accent-foreground data-[disabled]:ms-pointer-events-none data-[disabled]:ms-opacity-50",
-        inset && "ms-pl-8",
-        !match && "ms-mb-0 last:ms-mb-1 ms-py-2 ms-px-3",
-        match && "ms-px-2 ms-py-1.5",
+        "ms:relative ms:flex ms:w-full ms:cursor-pointer ms:select-none ms:items-center ms:rounded-sm ms:text-sm ms:outline-none ms:transition-colors ms:focus:bg-accent ms:focus:text-accent-foreground ms:data-[disabled]:pointer-events-none ms:data-[disabled]:opacity-50",
+        inset && "ms:pl-8",
+        !match && "ms:mb-0 ms:last:mb-1 ms:py-2 ms:px-3",
+        match && "ms:px-2 ms:py-1.5",
         className
       )}
       {...props}
@@ -108,15 +108,15 @@ const DropdownMenuCheckboxItem = React.forwardRef<
   <DropdownMenuPrimitive.CheckboxItem
     ref={ref}
     className={cn(
-      "ms-relative ms-flex ms-cursor-pointer ms-select-none ms-items-center ms-rounded-sm ms-py-1.5 ms-pl-8 ms-pr-2 ms-text-sm ms-outline-none ms-transition-colors focus:ms-bg-accent focus:ms-text-accent-foreground data-[disabled]:ms-pointer-events-none data-[disabled]:ms-opacity-50",
+      "ms:relative ms:flex ms:cursor-pointer ms:select-none ms:items-center ms:rounded-sm ms:py-1.5 ms:pl-8 ms:pr-2 ms:text-sm ms:outline-none ms:transition-colors ms:focus:bg-accent ms:focus:text-accent-foreground ms:data-[disabled]:pointer-events-none ms:data-[disabled]:opacity-50",
       className
     )}
     checked={checked}
     {...props}
   >
-    <span className="ms-absolute ms-left-2 ms-flex ms-h-3.5 ms-w-3.5 ms-items-center ms-justify-center">
+    <span className="ms:absolute ms:left-2 ms:flex ms:h-3.5 ms:w-3.5 ms:items-center ms:justify-center">
       <DropdownMenuPrimitive.ItemIndicator>
-        <Check className="ms-h-4 ms-w-4" />
+        <Check className="ms:h-4 ms:w-4" />
       </DropdownMenuPrimitive.ItemIndicator>
     </span>
     {children}
@@ -132,14 +132,14 @@ const DropdownMenuRadioItem = React.forwardRef<
   <DropdownMenuPrimitive.RadioItem
     ref={ref}
     className={cn(
-      "ms-relative ms-flex ms-cursor-pointer ms-select-none ms-items-center ms-rounded-sm ms-py-1.5 ms-pl-8 ms-pr-2 ms-text-sm ms-outline-none ms-transition-colors focus:ms-bg-accent focus:ms-text-accent-foreground data-[disabled]:ms-pointer-events-none data-[disabled]:ms-opacity-50",
+      "ms:relative ms:flex ms:cursor-pointer ms:select-none ms:items-center ms:rounded-sm ms:py-1.5 ms:pl-8 ms:pr-2 ms:text-sm ms:outline-none ms:transition-colors ms:focus:bg-accent ms:focus:text-accent-foreground ms:data-[disabled]:pointer-events-none ms:data-[disabled]:opacity-50",
       className
     )}
     {...props}
   >
-    <span className="ms-absolute ms-left-2 ms-flex ms-h-3.5 ms-w-3.5 ms-items-center ms-justify-center">
+    <span className="ms:absolute ms:left-2 ms:flex ms:h-3.5 ms:w-3.5 ms:items-center ms:justify-center">
       <DropdownMenuPrimitive.ItemIndicator>
-        <Circle className="ms-h-2 ms-w-2 ms-fill-current" />
+        <Circle className="ms:h-2 ms:w-2 ms:fill-current" />
       </DropdownMenuPrimitive.ItemIndicator>
     </span>
     {children}
@@ -156,8 +156,8 @@ const DropdownMenuLabelNonResponsibility = React.forwardRef<
   <DropdownMenuPrimitive.Label
     ref={ref}
     className={cn(
-      "ms-px-2 ms-py-1.5 ms-text-sm ms-font-semibold",
-      inset && "ms-pl-8",
+      "ms:px-2 ms:py-1.5 ms:text-sm ms:font-semibold",
+      inset && "ms:pl-8",
       className
     )}
     {...props}
@@ -171,7 +171,7 @@ const DropdownMenuSeparator = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DropdownMenuPrimitive.Separator
     ref={ref}
-    className={cn("-ms-mx-1 ms-my-1 ms-h-px ms-bg-muted", className)}
+    className={cn("ms:-mx-1 ms:my-1 ms:h-px ms:bg-muted", className)}
     {...props}
   />
 ))
@@ -183,7 +183,7 @@ const DropdownMenuShortcut = ({
 }: React.HTMLAttributes<HTMLSpanElement>) => {
   return (
     <span
-      className={cn("ms-ml-auto ms-text-xs ms-tracking-widest ms-opacity-60", className)}
+      className={cn("ms:ml-auto ms:text-xs ms:tracking-widest ms:opacity-60", className)}
       {...props}
     />
   )
@@ -208,10 +208,10 @@ export const DropdownMenuSub: React.FC<DropdownMenuPrimitive.DropdownMenuProps &
     <NestedDrawer shouldScaleBackground open={!isDesktop && open} onOpenChange={!isDesktop ? setOpen : undefined} {...props} children={children} />
   </DropdownMenuSubNonResponsibility>
 }
-export const DropdownMenuSubTrigger = ResponsibilityHOC("(min-width: 768px)", DropdownMenuSubTriggerNonResponsibility, (props: DialogTriggerProps & React.RefAttributes<HTMLButtonElement>) => <DrawerTrigger {...props} className={clsx("ms-flex ms-select-none ms-items-center ms-rounded-sm ms-duration-150 ms-m-1 ms-mb-0 last:ms-mb-1 ms-py-2 ms-px-3 data-[disabled]:ms-pointer-events-none data-[disabled]:ms-opacity-50 ms-text-sm ms-outline-none focus:ms-text-accent-foreground focus:ms-bg-accent data-[state=open]:ms-bg-accent", props.className)} />)
+export const DropdownMenuSubTrigger = ResponsibilityHOC("(min-width: 768px)", DropdownMenuSubTriggerNonResponsibility, (props: DialogTriggerProps & React.RefAttributes<HTMLButtonElement>) => <DrawerTrigger {...props} className={clsx("ms:flex ms:select-none ms:items-center ms:rounded-sm ms:duration-150 ms:m-1 ms:mb-0 ms:last:mb-1 ms:py-2 ms:px-3 ms:data-[disabled]:pointer-events-none ms:data-[disabled]:opacity-50 ms:text-sm ms:outline-none ms:focus:text-accent-foreground ms:focus:bg-accent ms:data-[state=open]:bg-accent", props.className)} />)
 export const DropdownMenuSubContent = ResponsibilityHOC("(min-width: 768px)", DropdownMenuSubContentNonResponsibility, DrawerContent)
 export const DropdownMenuPortal = ResponsibilityHOC("(min-width: 768px)", DropdownMenuPortalNonResponsibility, DrawerPortal)
-export const DropdownMenuLabel = ResponsibilityHOC("(min-width: 768px)", DropdownMenuLabelNonResponsibility, (props: React.HTMLAttributes<HTMLDivElement>) => <DrawerHeader className="ms-text-lg ms-font-semibold ms-leading-none ms-tracking-tight" {...props} />)
+export const DropdownMenuLabel = ResponsibilityHOC("(min-width: 768px)", DropdownMenuLabelNonResponsibility, (props: React.HTMLAttributes<HTMLDivElement>) => <DrawerHeader className="ms:text-lg ms:font-semibold ms:leading-none ms:tracking-tight" {...props} />)
 //   DropdownMenuCheckboxItem,
 //   DropdownMenuRadioItem,
 //   DropdownMenuGroup,

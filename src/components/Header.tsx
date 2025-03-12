@@ -101,11 +101,11 @@ const HeaderSearch: React.FC<{
               <Button
                 type="submit"
                 size={"icon"}
-                className="sm:ms-w-52 sm:ms-px-3 sm:ms-py-2 sm:ms-justify-start"
+                className="ms:sm:w-52 ms:sm:px-3 ms:sm:py-2 ms:sm:justify-start"
                 variant={"outline"}
               >
-                <Search className="ms-h-[1.2rem] ms-w-[1.2rem] sm:ms-mr-3" />
-                <span className="ms-text-muted-foreground ms-hidden sm:ms-inline">
+                <Search className="ms:h-[1.2rem] ms:w-[1.2rem] ms:sm:mr-3" />
+                <span className="ms:text-muted-foreground ms:hidden ms:sm:inline">
                   Поиск
                 </span>
               </Button>
@@ -125,12 +125,12 @@ const HeaderSearch: React.FC<{
           <DialogFooter>
             <form
               onSubmit={handleSubmit(({ search: text }) => search(text))}
-              className="ms-flex-row ms-flex ms-w-full ms-items-center ms-gap-1"
+              className="ms:flex-row ms:flex ms:w-full ms:items-center ms:gap-1"
             >
               <Input {...register("search")} placeholder="Поиск" />
               <DialogClose asChild>
                 <Button type="submit" variant={"secondary"}>
-                  <Search className="ms-h-4 ms-w-4 ms-mr-2" />
+                  <Search className="ms:h-4 ms:w-4 ms:mr-2" />
                   Найти
                 </Button>
               </DialogClose>
@@ -151,9 +151,9 @@ const ThemeSwitcher: React.FC<{
         <TooltipTrigger asChild>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" size="icon">
-              <Sun className="ms-h-[1.2rem] ms-w-[1.2rem] ms-rotate-0 ms-scale-100 ms-transition-all dark:ms--rotate-90 dark:ms-scale-0" />
-              <Moon className="ms-absolute ms-h-[1.2rem] ms-w-[1.2rem] ms-rotate-90 ms-scale-0 ms-transition-all dark:ms-rotate-0 dark:ms-scale-100" />
-              <span className="ms-sr-only">Тема</span>
+              <Sun className="ms:h-[1.2rem] ms:w-[1.2rem] ms:rotate-0 ms:scale-100 ms:transition-all ms:dark:-rotate-90 ms:dark:scale-0" />
+              <Moon className="ms:absolute ms:h-[1.2rem] ms:w-[1.2rem] ms:rotate-90 ms:scale-0 ms:transition-all ms:dark:rotate-0 ms:dark:scale-100" />
+              <span className="ms:sr-only">Тема</span>
             </Button>
           </DropdownMenuTrigger>
         </TooltipTrigger>
@@ -165,15 +165,15 @@ const ThemeSwitcher: React.FC<{
         <DropdownMenuLabel>Тема</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => themeSwitch?.("light")}>
-          <Sun className="ms-h-4 ms-w-4 ms-rotate-0 ms-scale-100 ms-transition-all ms-mr-2" />
+          <Sun className="ms:h-4 ms:w-4 ms:rotate-0 ms:scale-100 ms:transition-all ms:mr-2" />
           Светлая
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => themeSwitch?.("dark")}>
-          <Moon className="ms-h-4 ms-w-4 ms-rotate-0 ms-scale-100 ms-transition-all ms-mr-2" />
+          <Moon className="ms:h-4 ms:w-4 ms:rotate-0 ms:scale-100 ms:transition-all ms:mr-2" />
           Тёмная
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => themeSwitch?.("system")}>
-          <Computer className="ms-h-4 ms-w-4 ms-rotate-0 ms-scale-100 ms-transition-all ms-mr-2" />
+          <Computer className="ms:h-4 ms:w-4 ms:rotate-0 ms:scale-100 ms:transition-all ms:mr-2" />
           Системная
         </DropdownMenuItem>
       </DropdownMenuContent>
@@ -196,22 +196,22 @@ const NotificationDialog: React.FC<{
                 variant="outline"
                 className={
                   unReadNotify
-                    ? "ms-relative after:ms-animate-bounce after:-ms-right-1 after:-ms-bottom-1 after:ms-border-2 after:ms-border-background after:ms-absolute after:ms-rounded-full after:ms-h-3 after:ms-aspect-square after:ms-bg-primary"
+                    ? "ms:relative ms:after:animate-bounce ms:after:-right-1 ms:after:-bottom-1 ms:after:border-2 ms:after:border-background ms:after:absolute ms:after:rounded-full ms:after:h-3 ms:after:aspect-square ms:after:bg-primary"
                     : undefined
                 }
                 size={"icon"}
               >
-                <Bell className="ms-h-[1.2rem] ms-w-[1.2rem]" />
+                <Bell className="ms:h-[1.2rem] ms:w-[1.2rem]" />
               </Button>
             ) : (
               <DropdownMenuItem
                 className={
                   unReadNotify
-                    ? "ms-relative after:ms-animate-bounce after:-ms-left-1 after:-ms-top-1 after:ms-border-2 after:ms-border-background after:ms-absolute after:ms-rounded-full after:ms-h-3 after:ms-aspect-square after:ms-bg-primary"
+                    ? "ms:relative ms:after:animate-bounce ms:after:-left-1 ms:after:-top-1 ms:after:border-2 ms:after:border-background ms:after:absolute ms:after:rounded-full ms:after:h-3 ms:after:aspect-square ms:after:bg-primary"
                     : undefined
                 }
               >
-                <Bell className="ms-mr-2 ms-h-4 ms-w-4" />
+                <Bell className="ms:mr-2 ms:h-4 ms:w-4" />
                 Уведомления
               </DropdownMenuItem>
             )}
@@ -224,15 +224,15 @@ const NotificationDialog: React.FC<{
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            <p className="ms-flex ms-flex-row ms-gap-2 ms-items-center ms-justify-center sm:ms-justify-start">
+            <p className="ms:flex ms:flex-row ms:gap-2 ms:items-center ms:justify-center ms:sm:justify-start">
               <div
                 className={
                   unReadNotify
-                    ? "ms-relative after:ms-animate-bounce after:-ms-left-1 after:-ms-top-1 after:ms-border-2 after:ms-border-background after:ms-absolute after:ms-rounded-full after:ms-h-3 after:ms-aspect-square after:ms-bg-primary"
+                    ? "ms:relative ms:after:animate-bounce ms:after:-left-1 ms:after:-top-1 ms:after:border-2 ms:after:border-background ms:after:absolute ms:after:rounded-full ms:after:h-3 ms:after:aspect-square ms:after:bg-primary"
                     : undefined
                 }
               >
-                <Bell className={"ms-h-4 ms-w-4 ms-relative"} />
+                <Bell className={"ms:h-4 ms:w-4 ms:relative"} />
               </div>
               Уведомления
             </p>
@@ -255,18 +255,18 @@ const BalanceMenu: React.FC<Balance> = balance => {
           <DropdownMenuTrigger asChild>
             <Button
               variant={"outline"}
-              className="ms-flex ms-justify-between ms-items-center"
+              className="ms:flex ms:justify-between ms:items-center"
             >
-              <Wallet className="ms-w-4 ms-h-4 ms-mr-2" />
-              <p className="ms-whitespace-nowrap ms-justify-end ms-flex ms-items-center ms-gap-0.5 ms-w-14 ms-max-w-full">
-                <span className="ms-text-ellipsis ms-overflow-hidden">
+              <Wallet className="ms:w-4 ms:h-4 ms:mr-2" />
+              <p className="ms:whitespace-nowrap ms:justify-end ms:flex ms:items-center ms:gap-0.5 ms:w-14 ms:max-w-full">
+                <span className="ms:text-ellipsis ms:overflow-hidden">
                   {balance?.balance && nFormatter(balance.balance)}
                 </span>
                 {(balance.currencyImageSrc || balance.currencyId) && (
                   <img
                     src={balance.currencyImageSrc}
                     alt={balance.currencyId}
-                    className="dark:ms-invert ms-brightness-0 ms-w-3 ms-h-3"
+                    className="ms:dark:invert ms:brightness-0 ms:w-3 ms:h-3"
                   />
                 )}
               </p>
@@ -281,15 +281,15 @@ const BalanceMenu: React.FC<Balance> = balance => {
         <DropdownMenuLabel>Баланс</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={balance?.transaction}>
-          <Coins className="ms-mr-2 ms-h-4 ms-w-4" />
+          <Coins className="ms:mr-2 ms:h-4 ms:w-4" />
           Перевести
         </DropdownMenuItem>
         <DropdownMenuItem onClick={balance?.openTransactions}>
-          <Receipt className="ms-mr-2 ms-h-4 ms-w-4" />
+          <Receipt className="ms:mr-2 ms:h-4 ms:w-4" />
           Транзакции
         </DropdownMenuItem>
         <DropdownMenuItem onClick={balance?.buy}>
-          <RussianRuble className="ms-mr-2 ms-h-4 ms-w-4" />
+          <RussianRuble className="ms:mr-2 ms:h-4 ms:w-4" />
           Купить
         </DropdownMenuItem>
       </DropdownMenuContent>
@@ -312,130 +312,130 @@ const AuthMenu: React.FC<{
   Notifications,
   unReadNotify,
 }) => {
-  return (
-    <DropdownMenu>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <DropdownMenuTrigger asChild>
-            <Button
-              variant={"outline"}
-              size={"none"}
-              className="ms-p-0 ms-h-10 ms-overflow-hidden hover:ms-opacity-70 hover:md:ms-opacity-100 md:ms-p-1.5 md:ms-px-2 ms-items-center ms-gap-1"
-            >
+    return (
+      <DropdownMenu>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant={"outline"}
+                size={"none"}
+                className="ms:p-0 ms:h-10 ms:overflow-hidden ms:hover:opacity-70 ms:hover:md:opacity-100 ms:md:p-1.5 ms:md:px-2 ms:items-center ms:gap-1"
+              >
+                <StandardAvatar
+                  className="ms:h-10 ms:md:w-7 ms:w-10 ms:md:h-7 ms:rounded-none ms:md:rounded-full"
+                  src={user.avatarSrc}
+                  fallback={user.displayName}
+                />
+                <p className="ms:hidden ms:md:block ms:text-xs ms:text-ellipsis ms:overflow-hidden ms:whitespace-nowrap ms:w-20 ms:max-w-full">
+                  {user.displayName}
+                </p>
+              </Button>
+            </DropdownMenuTrigger>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Профиль</p>
+          </TooltipContent>
+        </Tooltip>
+        <DropdownMenuContent>
+          <DropdownMenuLabel
+            className="ms:rounded-xl ms:flex ms:justify-center ms:md:rounded ms:p-2 ms:m-2 ms:md:m-0"
+            style={{
+              background: `url("${user.backgroundSrc}")`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          >
+            <div className="ms:flex ms:text-center ms:aspect-square ms:md:aspect-auto ms:md:text-left ms:flex-col ms:md:flex-row ms:bg-background/75 ms:backdrop-blur ms:p-3 ms:rounded-xl ms:md:rounded ms:gap-2 ms:items-center ms:justify-center">
               <StandardAvatar
-                className="ms-h-10 md:ms-w-7 ms-w-10 md:ms-h-7 ms-rounded-none md:ms-rounded-full"
                 src={user.avatarSrc}
                 fallback={user.displayName}
+                className="ms:h-16 ms:w-16 ms:md:h-10 ms:md:w-10"
               />
-              <p className="ms-hidden md:ms-block ms-text-xs ms-text-ellipsis ms-overflow-hidden ms-whitespace-nowrap ms-w-20 ms-max-w-full">
-                {user.displayName}
-              </p>
-            </Button>
-          </DropdownMenuTrigger>
-        </TooltipTrigger>
-        <TooltipContent>
-          <p>Профиль</p>
-        </TooltipContent>
-      </Tooltip>
-      <DropdownMenuContent>
-        <DropdownMenuLabel
-          className="ms-rounded-xl ms-flex ms-justify-center md:ms-rounded ms-p-2 ms-m-2 md:ms-m-0"
-          style={{
-            background: `url("${user.backgroundSrc}")`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        >
-          <div className="ms-flex ms-text-center ms-aspect-square md:ms-aspect-auto md:ms-text-left ms-flex-col md:ms-flex-row ms-bg-background/75 ms-backdrop-blur ms-p-3 ms-rounded-xl md:ms-rounded ms-gap-2 ms-items-center ms-justify-center">
-            <StandardAvatar
-              src={user.avatarSrc}
-              fallback={user.displayName}
-              className="ms-h-16 ms-w-16 md:ms-h-10 md:ms-w-10"
-            />
-            <Separator className="ms-w-12 md:ms-w-px md:ms-h-12" />
-            <div className="ms-flex ms-flex-col">
-              <p className="ms-font-vksans ms-font-semibold">
-                {user.displayName}
-              </p>
-              <p className="ms-text-xs ms-text-muted-foreground">@{user.tag}</p>
-            </div>
-          </div>
-        </DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={userActions?.open}>
-          <User className="ms-mr-2 ms-h-4 ms-w-4" />
-          Профиль
-        </DropdownMenuItem>
-        {sanctumShow && (
-          <DropdownMenuItem onClick={userActions?.openMeduzaSanctum}>
-            <Lock className="ms-mr-2 ms-h-4 ms-w-4" />
-            Аккаунт НБМ<sup className="text-muted-foreground">Sanctum</sup>
-          </DropdownMenuItem>
-        )}
-        <DropdownMenuItem onClick={userActions?.goverment}>
-          <Flag className="ms-mr-2 ms-h-4 ms-w-4" />
-          Государство
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
-        {balance && (
-          <>
-            <DropdownMenuLabel>
-              <div className="ms-flex ms-font-light ms-text-sm ms-justify-between ms-gap-2 ms-items-center">
-                <p className="ms-flex ms-items-center">
-                  <Wallet className="ms-w-4 ms-h-4 ms-mr-2" />
-                  <span className="ms-text-ellipsis ms-overflow-hidden">
-                    Баланс
-                  </span>
+              <Separator className="ms:w-12 ms:md:w-px ms:md:h-12" />
+              <div className="ms:flex ms:flex-col">
+                <p className="ms:font-vksans ms:font-semibold">
+                  {user.displayName}
                 </p>
-                <p className="ms-whitespace-nowrap ms-justify-end ms-flex ms-items-center ms-gap-0.5 ms-max-w-full">
-                  <span className="ms-text-ellipsis ms-overflow-hidden">
-                    {balance?.balance && nFormatter(balance.balance)}
-                  </span>
-                  {(balance.currencyImageSrc || balance.currencyId) && (
-                    <img
-                      src={balance.currencyImageSrc}
-                      alt={balance.currencyId}
-                      className="dark:ms-invert ms-brightness-0 ms-w-4 ms-h-4"
-                    />
-                  )}
-                </p>
+                <p className="ms:text-xs ms:text-muted-foreground">@{user.tag}</p>
               </div>
-            </DropdownMenuLabel>
-            <DropdownMenuItem onClick={balance?.transaction}>
-              <Coins className="ms-mr-2 ms-h-4 ms-w-4" />
-              Перевести
+            </div>
+          </DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={userActions?.open}>
+            <User className="ms:mr-2 ms:h-4 ms:w-4" />
+            Профиль
+          </DropdownMenuItem>
+          {sanctumShow && (
+            <DropdownMenuItem onClick={userActions?.openMeduzaSanctum}>
+              <Lock className="ms:mr-2 ms:h-4 ms:w-4" />
+              Аккаунт НБМ<sup className="text-muted-foreground">Sanctum</sup>
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={balance?.openTransactions}>
-              <Receipt className="ms-mr-2 ms-h-4 ms-w-4" />
-              Транзакции
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={balance?.buy}>
-              <RussianRuble className="ms-mr-2 ms-h-4 ms-w-4" />
-              Купить
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-          </>
-        )}
-        {Notifications && (
-          <>
-            <NotificationDialog
-              Notifications={Notifications}
-              unReadNotify={unReadNotify}
-            />
-            <DropdownMenuSeparator />
-          </>
-        )}
-        <DropdownMenuItem
-          onClick={userActions?.logOut}
-          className="ms-text-destructive focus:ms-text-destructive"
-        >
-          <LogOut className="ms-mr-2 ms-h-4 ms-w-4" />
-          Выйти
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  );
-};
+          )}
+          <DropdownMenuItem onClick={userActions?.goverment}>
+            <Flag className="ms:mr-2 ms:h-4 ms:w-4" />
+            Государство
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          {balance && (
+            <>
+              <DropdownMenuLabel>
+                <div className="ms:flex ms:font-light ms:text-sm ms:justify-between ms:gap-2 ms:items-center">
+                  <p className="ms:flex ms:items-center">
+                    <Wallet className="ms:w-4 ms:h-4 ms:mr-2" />
+                    <span className="ms:text-ellipsis ms:overflow-hidden">
+                      Баланс
+                    </span>
+                  </p>
+                  <p className="ms:whitespace-nowrap ms:justify-end ms:flex ms:items-center ms:gap-0.5 ms:max-w-full">
+                    <span className="ms:text-ellipsis ms:overflow-hidden">
+                      {balance?.balance && nFormatter(balance.balance)}
+                    </span>
+                    {(balance.currencyImageSrc || balance.currencyId) && (
+                      <img
+                        src={balance.currencyImageSrc}
+                        alt={balance.currencyId}
+                        className="ms:dark:invert ms:brightness-0 ms:w-4 ms:h-4"
+                      />
+                    )}
+                  </p>
+                </div>
+              </DropdownMenuLabel>
+              <DropdownMenuItem onClick={balance?.transaction}>
+                <Coins className="ms:mr-2 ms:h-4 ms:w-4" />
+                Перевести
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={balance?.openTransactions}>
+                <Receipt className="ms:mr-2 ms:h-4 ms:w-4" />
+                Транзакции
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={balance?.buy}>
+                <RussianRuble className="ms:mr-2 ms:h-4 ms:w-4" />
+                Купить
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+            </>
+          )}
+          {Notifications && (
+            <>
+              <NotificationDialog
+                Notifications={Notifications}
+                unReadNotify={unReadNotify}
+              />
+              <DropdownMenuSeparator />
+            </>
+          )}
+          <DropdownMenuItem
+            onClick={userActions?.logOut}
+            className="ms:text-destructive ms:focus:text-destructive"
+          >
+            <LogOut className="ms:mr-2 ms:h-4 ms:w-4" />
+            Выйти
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    );
+  };
 
 export const Header: React.FC<React.PropsWithChildren<HeaderProps>> = ({
   returnToBank,
@@ -456,14 +456,14 @@ export const Header: React.FC<React.PropsWithChildren<HeaderProps>> = ({
   const isMobile = useMediaQuery("(max-width: 470px)");
 
   const Component = (
-    <div className="ms-w-full ms-top-0 ms-left-0 ms-h-14 ms-border-b ms-border-border/60 ms-backdrop-blur ms-shadow-sm ms-fixed ms-z-50 ms-bg-background/90">
-      <div className="ms-flex ms-flex-row ms-justify-between ms-h-full ms-gap-1 ms-p-2 ms-container">
-        <div className="ms-flex ms-flex-row ms-items-center ms-gap-1">
+    <div className="ms:w-full ms:top-0 ms:left-0 ms:h-14 ms:border-b ms:border-border/60 ms:backdrop-blur ms:shadow-sm ms:fixed ms:z-50 ms:bg-background/90">
+      <div className="ms:flex ms:flex-row ms:justify-between ms:h-full ms:gap-1 ms:p-2 ms:container">
+        <div className="ms:flex ms:flex-row ms:items-center ms:gap-1">
           {returnToBank && (
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button onClick={returnToBank} size={"icon"} variant={"ghost"}>
-                  <X className="ms-h-[1.2rem] ms-w-[1.2rem]" />
+                  <X className="ms:h-[1.2rem] ms:w-[1.2rem]" />
                 </Button>
               </TooltipTrigger>
               <TooltipContent>
@@ -476,7 +476,7 @@ export const Header: React.FC<React.PropsWithChildren<HeaderProps>> = ({
               <Button
                 variant={"ghost"}
                 onClick={homePage}
-                className="ms-px-1.5"
+                className="ms:px-1.5"
               >
                 <Logotype {...logo} />
               </Button>
@@ -487,8 +487,8 @@ export const Header: React.FC<React.PropsWithChildren<HeaderProps>> = ({
           </Tooltip>
           {search && <HeaderSearch search={search} appName={logo?.appName} />}
         </div>
-        <div className="ms-flex-1">{children}</div>
-        <div className="ms-flex ms-flex-row ms-items-center ms-gap-1">
+        <div className="ms:flex-1">{children}</div>
+        <div className="ms:flex ms:flex-row ms:items-center ms:gap-1">
           {themeSwitch && <ThemeSwitcher themeSwitch={themeSwitch} />}
           {user && (
             <>
@@ -511,7 +511,7 @@ export const Header: React.FC<React.PropsWithChildren<HeaderProps>> = ({
           )}
           {!user && login && (
             <Button onClick={login} variant={"outline"}>
-              <LogIn className="ms-mr-2 ms-h-4 ms-w-4" />
+              <LogIn className="ms:mr-2 ms:h-4 ms:w-4" />
               Войти
             </Button>
           )}

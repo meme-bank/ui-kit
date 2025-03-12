@@ -19,7 +19,7 @@ const PopoverContentNonResponsibility = React.forwardRef<
       align={align}
       sideOffset={sideOffset}
       className={cn(
-        "ms-z-50 ms-w-72 ms-rounded-md ms-border ms-bg-popover ms-text-popover-foreground ms-shadow-md ms-outline-none data-[state=open]:ms-animate-in data-[state=closed]:ms-animate-out data-[state=closed]:ms-fade-out-0 data-[state=open]:ms-fade-in-0 data-[state=closed]:ms-zoom-out-95 data-[state=open]:ms-zoom-in-95 data-[side=bottom]:ms-slide-in-from-top-2 data-[side=left]:ms-slide-in-from-right-2 data-[side=right]:ms-slide-in-from-left-2 data-[side=top]:ms-slide-in-from-bottom-2",
+        "ms:z-50 ms:w-72 ms:rounded-md ms:border ms:bg-popover ms:text-popover-foreground ms:shadow-md ms:outline-none ms:data-[state=open]:animate-in ms:data-[state=closed]:animate-out ms:data-[state=closed]:fade-out-0 ms:data-[state=open]:fade-in-0 ms:data-[state=closed]:zoom-out-95 ms:data-[state=open]:zoom-in-95 ms:data-[side=bottom]:slide-in-from-top-2 ms:data-[side=left]:slide-in-from-right-2 ms:data-[side=right]:slide-in-from-left-2 ms:data-[side=top]:slide-in-from-bottom-2",
         className
       )}
       {...props}

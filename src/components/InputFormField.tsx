@@ -36,16 +36,16 @@ export const InputFormField: React.FC<InputFormFieldProps> = ({
 }) => {
   if (skeletonLoad) {
     return (
-      <div className="ms-space-y-2">
-        <Skeleton className="ms-inline-block ms-leading-none ms-text-sm ms-font-medium ms-rounded-md">
-          <span className="ms-invisible ms-inline-flex ms-items-center ms-gap-2">
+      <div className="ms:space-y-2">
+        <Skeleton className="ms:inline-block ms:leading-none ms:text-sm ms:font-medium ms:rounded-md">
+          <span className="ms:invisible ms:inline-flex ms:items-center ms:gap-2">
             {LabelIcon && <LabelIcon className="h-4 w-4" />}
             {label}
           </span>
         </Skeleton>
-        <Skeleton className="ms-h-10 ms-w-full ms-rounded-md ms-px-3 ms-py-2 ms-text-sm" />
-        <Skeleton className="ms-inline-block ms-rounded-md">
-          <span className="ms-invisible ms-text-sm ms-text-muted-foreground">
+        <Skeleton className="ms:h-10 ms:w-full ms:rounded-md ms:px-3 ms:py-2 ms:text-sm" />
+        <Skeleton className="ms:inline-block ms:rounded-md">
+          <span className="ms:invisible ms:text-sm ms:text-muted-foreground">
             {description}
           </span>
         </Skeleton>
@@ -55,19 +55,19 @@ export const InputFormField: React.FC<InputFormFieldProps> = ({
 
   if (!rhfControl || typeof rhfControl === "object")
     return (
-      <div className="ms-space-y-2">
-        <Label className={error && "ms-text-destructive"}>
-          <span className="ms-flex ms-items-center ms-gap-2">
-            {LabelIcon && <LabelIcon className="ms-h-4 ms-w-4" />}
+      <div className="ms:space-y-2">
+        <Label className={error && "ms:text-destructive"}>
+          <span className="ms:flex ms:items-center ms:gap-2">
+            {LabelIcon && <LabelIcon className="ms:h-4 ms:w-4" />}
             {label}
           </span>
         </Label>
         <Input name={name} {...rhfControl} {...props} />
         {description && (
-          <p className="ms-text-sm ms-text-muted-foreground">{description}</p>
+          <p className="ms:text-sm ms:text-muted-foreground">{description}</p>
         )}
         {error && (
-          <p className={cn("ms-text-sm ms-font-medium ms-text-destructive")}>
+          <p className={cn("ms:text-sm ms:font-medium ms:text-destructive")}>
             {error}
           </p>
         )}
@@ -81,8 +81,8 @@ export const InputFormField: React.FC<InputFormFieldProps> = ({
         <FormItem>
           {label && (
             <FormLabel>
-              <span className="ms-flex ms-items-center ms-gap-2">
-                {LabelIcon && <LabelIcon className="ms-h-4 ms-w-4" />}
+              <span className="ms:flex ms:items-center ms:gap-2">
+                {LabelIcon && <LabelIcon className="ms:h-4 ms:w-4" />}
                 {label}
               </span>
             </FormLabel>

@@ -45,59 +45,59 @@ export const ProfileBlockBackground: React.FC<
   noFullWidth,
   backgroundUrl,
 }) => {
-  const [cropperDialog, setCropperDialog] = React.useState(false);
-  if (skeletonLoad)
-    return (
-      <Skeleton
-        className={cn(
-          "ms-@container/main ms-max-w-full ms-rounded-md",
-          noFullWidth && "ms-w-[42rem]"
-        )}
-      >
-        <div className="@md/main:ms-aspect-[5/2] @md/main:ms-relative">
-          <div className="ms-aspect-[5/2] @md/main:ms-absolute @md/main:ms-top-0 @md/main:ms-left-0"></div>
-          {children}
-        </div>
-      </Skeleton>
-    );
+    const [cropperDialog, setCropperDialog] = React.useState(false);
+    if (skeletonLoad)
+      return (
+        <Skeleton
+          className={cn(
+            "ms:@container/main ms:max-w-full ms:rounded-md",
+            noFullWidth && "ms:w-[42rem]"
+          )}
+        >
+          <div className="@md/ms:main:aspect-[5/2] @md/ms:main:relative">
+            <div className="ms:aspect-[5/2] @md/ms:main:absolute @md/ms:main:top-0 @md/ms:main:left-0"></div>
+            {children}
+          </div>
+        </Skeleton>
+      );
 
-  return (
-    <div
-      className={clsx(
-        "ms-@container/main ms-max-w-full",
-        noFullWidth && "ms-w-[42rem]"
-      )}
-    >
+    return (
       <div
-        className={cn(
-          "@md/main:ms-aspect-[5/2] @md/main:ms-relative ms-border @md/main:ms-py-2 ms-rounded-md ms-overflow-hidden @md/main:ms-flex @md/main:ms-justify-center @md/main:ms-items-center",
-          className
+        className={clsx(
+          "ms:@container/main ms:max-w-full",
+          noFullWidth && "ms:w-[42rem]"
         )}
       >
         <div
           className={cn(
-            "ms-aspect-[5/2] @md/main:ms-absolute ms-border-b @md/main:ms-border-0 @md/main:ms-top-0 @md/main:ms-left-0 ms-group/profilebg ms-relative w-full ms-bg-cover ms-bg-center ms-bg-secondary"
+            "@md/ms:main:aspect-[5/2] @md/ms:main:relative ms:border @md/ms:main:py-2 ms:rounded-md ms:overflow-hidden @md/ms:main:flex @md/ms:main:justify-center @md/ms:main:items-center",
+            className
           )}
-          style={{ backgroundImage: `url("${backgroundUrl}")` }}
         >
-          {setBg && (
-            <Dialog onOpenChange={setCropperDialog} open={cropperDialog}>
-              <DialogTrigger className="ms-flex ms-opacity-0 ms-right-2 ms-top-2 ms-bg-background/90 group-hover/profilebg:ms-opacity-100 ms-justify-center ms-items-center ms-cursor-pointer ms-h-8 ms-w-8 ms-rounded-full ms-absolute ms-border ms-backdrop-blur-sm ms-duration-150">
-                <Pencil className="ms-h-4 ms-w-4" />
-              </DialogTrigger>
-              <CropperDialogContent
-                openState={cropperDialog}
-                onUpload={setBg}
-                type="background"
-              />
-            </Dialog>
-          )}
+          <div
+            className={cn(
+              "ms:aspect-[5/2] @md/ms:main:absolute ms:border-b @md/ms:main:border-0 @md/ms:main:top-0 @md/ms:main:left-0 ms:group/profilebg ms:relative w-full ms:bg-cover ms:bg-center ms:bg-secondary"
+            )}
+            style={{ backgroundImage: `url("${backgroundUrl}")` }}
+          >
+            {setBg && (
+              <Dialog onOpenChange={setCropperDialog} open={cropperDialog}>
+                <DialogTrigger className="ms:flex ms:opacity-0 ms:right-2 ms:top-2 ms:bg-background/90 group-hover/ms:profilebg:opacity-100 ms:justify-center ms:items-center ms:cursor-pointer ms:h-8 ms:w-8 ms:rounded-full ms:absolute ms:border ms:backdrop-blur-sm ms:duration-150">
+                  <Pencil className="ms:h-4 ms:w-4" />
+                </DialogTrigger>
+                <CropperDialogContent
+                  openState={cropperDialog}
+                  onUpload={setBg}
+                  type="background"
+                />
+              </Dialog>
+            )}
+          </div>
+          {children}
         </div>
-        {children}
       </div>
-    </div>
-  );
-};
+    );
+  };
 
 export const ProfileInfoBlock: React.FC<{
   displaynameClassName?: ClassNameValue;
@@ -116,61 +116,61 @@ export const ProfileInfoBlock: React.FC<{
   tagClassName,
   nameBlockClassName,
 }) => {
-  const [cropperDialog, setCropperDialog] = React.useState(false);
-  return (
-    <div
-      className={cn(
-        "@md/main:ms-border @md/main:ms-h-40 @3xl/main:ms-h-60 ms-max-h-full @md/main:ms-aspect-square ms-flex ms-items-center @md/main:ms-flex-col ms-gap-3 @md/main:ms-gap-1.5 @md/main:ms-justify-evenly ms-p-2 ms-bg-background/90 ms-backdrop-blur-[2px] ms-rounded-md",
-        className
-      )}
-    >
-      <StandardAvatar
-        className={cn(
-          "ms-w-16 ms-h-16 @md/main:ms-h-20 @md/main:ms-w-20 @3xl/main:ms-h-28 @3xl/main:ms-w-28 ms-border ms-group/avatar ms-relative ms-aspect-square ms-max-h-full",
-          avatarClassName
-        )}
-        fallback={account?.displayname}
-        src={account?.avatarUrl}
-      >
-        {setAvatar && (
-          <Dialog onOpenChange={setCropperDialog} open={cropperDialog}>
-            <DialogTrigger className="ms-opacity-0 group-hover/avatar:ms-opacity-100 ms-inset-0 ms-m-auto ms-bg-background/90 ms-flex ms-duration-150 ms-justify-center ms-items-center ms-cursor-pointer ms-h-8 ms-w-8 ms-rounded-full ms-absolute ms-border ms-backdrop-blur-sm">
-              <Pencil className="ms-h-4 ms-w-4" />
-            </DialogTrigger>
-            <CropperDialogContent
-              openState={cropperDialog}
-              onUpload={setAvatar}
-              type="avatar"
-            />
-          </Dialog>
-        )}
-      </StandardAvatar>
+    const [cropperDialog, setCropperDialog] = React.useState(false);
+    return (
       <div
         className={cn(
-          "ms-flex @md/main:ms-items-center ms-flex-col",
-          nameBlockClassName
+          "@md/ms:main:border @md/ms:main:h-40 @3xl/ms:main:h-60 ms:max-h-full @md/ms:main:aspect-square ms:flex ms:items-center @md/ms:main:flex-col ms:gap-3 @md/ms:main:gap-1.5 @md/ms:main:justify-evenly ms:p-2 ms:bg-background/90 ms:backdrop-blur-[2px] ms:rounded-md",
+          className
         )}
       >
-        <h4
+        <StandardAvatar
           className={cn(
-            "@md/main:ms-text-xs @3xl/main:ms-text-base",
-            displaynameClassName
+            "ms:w-16 ms:h-16 @md/ms:main:h-20 @md/ms:main:w-20 @3xl/ms:main:h-28 @3xl/ms:main:w-28 ms:border ms:group/avatar ms:relative ms:aspect-square ms:max-h-full",
+            avatarClassName
+          )}
+          fallback={account?.displayname}
+          src={account?.avatarUrl}
+        >
+          {setAvatar && (
+            <Dialog onOpenChange={setCropperDialog} open={cropperDialog}>
+              <DialogTrigger className="ms:opacity-0 group-hover/ms:avatar:opacity-100 ms:inset-0 ms:m-auto ms:bg-background/90 ms:flex ms:duration-150 ms:justify-center ms:items-center ms:cursor-pointer ms:h-8 ms:w-8 ms:rounded-full ms:absolute ms:border ms:backdrop-blur-sm">
+                <Pencil className="ms:h-4 ms:w-4" />
+              </DialogTrigger>
+              <CropperDialogContent
+                openState={cropperDialog}
+                onUpload={setAvatar}
+                type="avatar"
+              />
+            </Dialog>
+          )}
+        </StandardAvatar>
+        <div
+          className={cn(
+            "ms:flex @md/ms:main:items-center ms:flex-col",
+            nameBlockClassName
           )}
         >
-          {account?.displayname}
-        </h4>
-        <p
-          className={cn(
-            "ms-text-xs @3xl/main:ms-text-sm ms-text-muted-foreground",
-            tagClassName
-          )}
-        >
-          @{account?.tag}
-        </p>
+          <h4
+            className={cn(
+              "@md/ms:main:text-xs @3xl/ms:main:text-base",
+              displaynameClassName
+            )}
+          >
+            {account?.displayname}
+          </h4>
+          <p
+            className={cn(
+              "ms:text-xs @3xl/ms:main:text-sm ms:text-muted-foreground",
+              tagClassName
+            )}
+          >
+            @{account?.tag}
+          </p>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  };
 
 export const ProfileBlock: React.FC<ProfileBlockProps> = ({
   account,
