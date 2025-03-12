@@ -90,6 +90,9 @@
     "fonts",
     "sf-ui-stylesheet.css",
     "vk-sans-stylesheet.css",
+    "variants-stylesheet.css",
+    "theme-stylesheet.css",
+    "base-stylesheet.css",
     "tailwind.config.js"
   ],
   "dependencies": {

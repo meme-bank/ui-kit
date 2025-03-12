@@ -28,70 +28,38 @@ yarn add @meduza-bank/ui-kit@latest
 | @hookform/resolvers | Validation resolve form library | ^3.3.0 |
 | zod | Validation library | ^3.22.2 |
 
-### Step 2 (if you use with tailwind css) - import in `tailwind.config.ts`
+### Step 2 (if you use with tailwind css 4) - import in `src-style.css`
 
-```js
-const conf = require("@meduza-bank/ui-kit/tailwind.config");
+```css
+/* ./path/to/src-style.css */
+@import "tailwindcss" prefix(ms); /* or other prefix */
 
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-  ...conf,
-  content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
-  prefix: undefined
-}
+/* fonts */
+@import "@meduza-bank/ui-kit/sf-ui-stylesheet.css";
+@import "@meduza-bank/ui-kit/vk-sans-stylesheet.css";
+
+/* meduza ui kit styles */
+@import "@meduza-bank/ui-kit/variants-stylesheet.css";
+@import "@meduza-bank/ui-kit/theme-stylesheet.css";
+@import "@meduza-bank/ui-kit/base-stylesheet.css";
 ```
-
-```ts
-import { Config } from 'tailwindcss';
-
-// @ts-ignore
-import conf from "@meduza-bank/ui-kit/tailwind.config";
-
-export default {
-    ...conf,
-  content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
-    prefix: "as-"
-} satisfies Config;
-```
-
-`prefix` is **REQUIRED**
 
 ### Step 3 - import in project
 
 ```ts
-import sfUiFont from "@meduza-bank/ui-kit/sf-ui-stylesheet.css"; // SF UI font
-import vkSansFont from "@meduza-bank/ui-kit/vk-sans-stylesheet.css"; // VK Sans font
 import meduzaStyles from "@meduza-bank/ui-kit/style.css"; // Production styles
-import meduzaStylesSRC from "@meduza-bank/ui-kit/src-style.css"; // Tailwind styles (if you use with tailwind css)
+import styles from "./path/to/src-style.css"; // Tailwind styles (if you use with tailwind css)
 
 // If using remix
 import { Links } from "@remix-run/react";
 
 export const links: LinksFunction = () => [
   {
-    href: sfUiFont,
-    rel: "stylesheet"
-  },
-  {
-    href: vkSansFont,
-    rel: "stylesheet"
-  },
-  {
     href: meduzaStyles,
     rel: "stylesheet"
   },
   {
-    href: meduzaStylesSRC,
+    href: styles,
     rel: "stylesheet"
   },
   // ...
