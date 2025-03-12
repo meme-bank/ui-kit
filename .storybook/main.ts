@@ -1,6 +1,4 @@
-import type { StorybookConfig } from "@storybook/react-webpack5";
-import webpackConfig from "../webpack.config";
-import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
+import type { StorybookConfig } from "@storybook/react-vite";
 
 const config: StorybookConfig = {
   stories: ["../src/components/**/*.stories.tsx"],
@@ -9,45 +7,32 @@ const config: StorybookConfig = {
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
-    {
-      name: "@storybook/addon-styling",
-      options: {
-        postCss: {
-          implementation: require.resolve('postcss'),
-        },
-      },
-
-    },
-    "@storybook/addon-webpack5-compiler-swc",
     "@chromatic-com/storybook"
   ],
 
   framework: {
-    name: "@storybook/react-webpack5",
-    options: {},
+    name: "@storybook/react-vite",
+    options: {
+    },
+  },
+
+  core: {
+    builder: '@storybook/builder-vite',
+    disableTelemetry: true
   },
 
   docs: {},
 
-  webpack(cfg) {
-    return {
-      ...cfg,
-      resolve: {
-        ...webpackConfig.resolve,
-        ...cfg.resolve,
-        alias: {
-          ...webpackConfig.resolve?.alias,
-          ...cfg.resolve?.alias
-        },
-        plugins: [
-          new TsconfigPathsPlugin()
-        ]
-      }
-    }
-  },
+  async viteFinal(config) {
+    // Merge custom configuration into the default config
+    const { mergeConfig } = await import('vite');
 
-  typescript: {
-    reactDocgen: "react-docgen-typescript"
-  }
+    return mergeConfig(config, {
+      // Add dependencies to pre-optimization
+      optimizeDeps: {
+        include: ['storybook-dark-mode'],
+      },
+    });
+  },
 };
 export default config;
