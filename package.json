@@ -1,6 +1,6 @@
 {
   "name": "@meduza-bank/ui-kit",
-  "version": "2.3.127",
+  "version": "2.3.128",
   "description": "UI Kit of the bank of Meme World \"Peoples Bank Memes\" or \"Meduza Bank\"",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
