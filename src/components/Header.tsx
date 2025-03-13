@@ -471,9 +471,9 @@ const HomePageButton: React.FC<{ logo?: Omit<LogotypeProps, "isButton">, homePag
   )
 }
 
-const Section: React.FC<React.PropsWithChildren> = () => {
+const Section: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
-    <div className="ms:flex ms:flex-row ms:items-center ms:gap-1"></div>
+    <div className="ms:flex ms:flex-row ms:items-center ms:gap-1">{children}</div>
   )
 }
 const LoginButton: React.FC<{ login: React.MouseEventHandler; }> = ({ login }) => {

@@ -15,7 +15,7 @@ export const Footer: React.FC = () => {
           className="ms:text-muted-foreground ms:group ms:hover:text-vk-azure ms:h-auto ms:py-1 ms:px-0.5"
         >
           <a target="_blank" href="https://vk.com/club206737619">
-            <VKIcon className="ms:h-4 ms:w-4 ms:mr-2 ms:group-hover:fill-vk-azure" />
+            <VKIcon className="ms:h-4 ms:w-4 ms:mr-2 ms:fill-muted-foreground ms:group-hover:fill-vk-azure" />
             Мы ВКонтакте
           </a>
         </Button>
