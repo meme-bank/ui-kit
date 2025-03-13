@@ -437,6 +437,54 @@ const AuthMenu: React.FC<{
     );
   };
 
+const ReturnToCoreAppButton: React.FC<{ returnToBank: React.MouseEventHandler; coreAppName?: string; }> = ({ returnToBank, coreAppName = "НБМ" }) => {
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button onClick={returnToBank} size={"icon"} variant={"ghost"}>
+          <X className="ms:h-[1.2rem] ms:w-[1.2rem]" />
+        </Button>
+      </TooltipTrigger>
+      <TooltipContent>
+        <p>Вернуться в {coreAppName}</p>
+      </TooltipContent>
+    </Tooltip>
+  )
+}
+
+const HomePageButton: React.FC<{ logo?: Omit<LogotypeProps, "isButton">, homePage?: React.MouseEventHandler }> = ({ homePage, logo }) => {
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Button
+          variant={"ghost"}
+          onClick={homePage}
+          className="ms:px-1.5"
+        >
+          <Logotype {...logo} />
+        </Button>
+      </TooltipTrigger>
+      <TooltipContent>
+        <p>Главная страница</p>
+      </TooltipContent>
+    </Tooltip>
+  )
+}
+
+const Section: React.FC<React.PropsWithChildren> = () => {
+  return (
+    <div className="ms:flex ms:flex-row ms:items-center ms:gap-1"></div>
+  )
+}
+const LoginButton: React.FC<{ login: React.MouseEventHandler; }> = ({ login }) => {
+  return (
+    <Button onClick={login} variant={"outline"}>
+      <LogIn className="ms:mr-2 ms:h-4 ms:w-4" />
+      Войти
+    </Button>
+  )
+}
+
 export const Header: React.FC<React.PropsWithChildren<HeaderProps>> = ({
   returnToBank,
   children,
@@ -458,37 +506,15 @@ export const Header: React.FC<React.PropsWithChildren<HeaderProps>> = ({
   const Component = (
     <div className="ms:w-full ms:top-0 ms:left-0 ms:h-14 ms:border-b ms:border-border/60 ms:backdrop-blur ms:shadow-sm ms:fixed ms:z-50 ms:bg-background/90">
       <div className="ms:flex ms:flex-row ms:justify-between ms:h-full ms:gap-1 ms:p-2 ms:container">
-        <div className="ms:flex ms:flex-row ms:items-center ms:gap-1">
+        <Section>
           {returnToBank && (
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button onClick={returnToBank} size={"icon"} variant={"ghost"}>
-                  <X className="ms:h-[1.2rem] ms:w-[1.2rem]" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Вернуться в НБМ</p>
-              </TooltipContent>
-            </Tooltip>
+            <ReturnToCoreAppButton returnToBank={returnToBank} />
           )}
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                variant={"ghost"}
-                onClick={homePage}
-                className="ms:px-1.5"
-              >
-                <Logotype {...logo} />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Главная страница</p>
-            </TooltipContent>
-          </Tooltip>
+          <HomePageButton homePage={homePage} logo={logo} />
           {search && <HeaderSearch search={search} appName={logo?.appName} />}
-        </div>
+        </Section>
         <div className="ms:flex-1">{children}</div>
-        <div className="ms:flex ms:flex-row ms:items-center ms:gap-1">
+        <Section>
           {themeSwitch && <ThemeSwitcher themeSwitch={themeSwitch} />}
           {user && (
             <>
@@ -510,12 +536,9 @@ export const Header: React.FC<React.PropsWithChildren<HeaderProps>> = ({
             </>
           )}
           {!user && login && (
-            <Button onClick={login} variant={"outline"}>
-              <LogIn className="ms:mr-2 ms:h-4 ms:w-4" />
-              Войти
-            </Button>
+            <LoginButton login={login} />
           )}
-        </div>
+        </Section>
       </div>
     </div>
   );

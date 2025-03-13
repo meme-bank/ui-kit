@@ -8,24 +8,24 @@ import { VKIcon } from "./ui/vk-icon";
 export const Footer: React.FC = () => {
   return (
     <footer className="ms:container ms:p-2 ms:mx-auto ms:flex ms:flex-col ms:gap-4">
-      <div className="ms:text-muted-foreground ms:flex-row ms:gap-2 ms:flex-wrap">
+      <div className="ms:text-muted-foreground ms:flex-row ms:gap-3 ms:flex ms:flex-wrap">
         <Button
           asChild
           variant={"linkWithoutColor"}
-          className="ms:text-muted-foreground ms:text-vk-azure ms:h-auto ms:py-1 ms:px-0.5"
+          className="ms:text-muted-foreground ms:group ms:hover:text-vk-azure ms:h-auto ms:py-1 ms:px-0.5"
         >
           <a target="_blank" href="https://vk.com/club206737619">
-            <VKIcon className="ms:h-4 ms:w-4 ms:mr-2 ms:fill-vk-azure" />
+            <VKIcon className="ms:h-4 ms:w-4 ms:mr-2 ms:group-hover:fill-vk-azure" />
             Мы ВКонтакте
           </a>
         </Button>
         <Button
           asChild
           variant={"link"}
-          className="ms:text-muted-foreground ms:hover:text-primary ms:h-auto ms:py-1 ms:px-0.5"
+          className="ms:text-muted-foreground ms:hover:text-primary ms:group ms:h-auto ms:py-1 ms:px-0.5"
         >
           <a target="_blank" href="https://t.me/falleland/20">
-            <TelegramIcon className="ms:h-4 ms:w-4 ms:mr-2" />
+            <TelegramIcon className="ms:h-4 ms:fill-muted-foreground ms:group-hover:fill-primary ms:w-4 ms:mr-2" />
             Мы в Telegram
           </a>
         </Button>
@@ -50,7 +50,7 @@ export const Footer: React.FC = () => {
           </a>
         </Button>
       </div>
-      <Separator className="ms:w-full" />
+      <Separator className="ms:w-full ms:bg-muted ms:h-px" />
       <p className="ms:text-sm ms:text-muted-foreground">
         © Народный Банк Мемов, 2020-{new Date().getFullYear()}, Права не
         защищены, но пиздить не хорошо!

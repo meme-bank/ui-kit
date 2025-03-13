@@ -1,6 +1,6 @@
 @utility container {
-  margin: auto;
-  padding: 2rem;
+  margin: auto 0;
+  /* padding: 2rem; */
 }
 
 :root {
