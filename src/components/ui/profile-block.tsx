@@ -50,12 +50,12 @@ export const ProfileBlockBackground: React.FC<
       return (
         <Skeleton
           className={cn(
-            "ms:@container/main ms:max-w-full ms:rounded-md",
+            "ms:@container/main ms:max-w-full ms:rounded-md ",
             noFullWidth && "ms:w-[42rem]"
           )}
         >
-          <div className="@md/ms:main:aspect-[5/2] @md/ms:main:relative">
-            <div className="ms:aspect-[5/2] @md/ms:main:absolute @md/ms:main:top-0 @md/ms:main:left-0"></div>
+          <div className="ms:@md/main:aspect-[5/2] ms:@md/main:relative">
+            <div className="ms:aspect-[5/2] ms:@md/main:absolute ms:@md/main:top-0 ms:@md/main:left-0"></div>
             {children}
           </div>
         </Skeleton>
@@ -70,19 +70,19 @@ export const ProfileBlockBackground: React.FC<
       >
         <div
           className={cn(
-            "@md/ms:main:aspect-[5/2] @md/ms:main:relative ms:border @md/ms:main:py-2 ms:rounded-md ms:overflow-hidden @md/ms:main:flex @md/ms:main:justify-center @md/ms:main:items-center",
+            "ms:@md/main:aspect-[5/2] ms:@md/main:relative ms:border ms:@md/main:py-2 ms:rounded-md ms:overflow-hidden ms:@md/main:flex ms:@md/main:justify-center ms:@md/main:items-center",
             className
           )}
         >
           <div
             className={cn(
-              "ms:aspect-[5/2] @md/ms:main:absolute ms:border-b @md/ms:main:border-0 @md/ms:main:top-0 @md/ms:main:left-0 ms:group/profilebg ms:relative w-full ms:bg-cover ms:bg-center ms:bg-secondary"
+              "ms:aspect-[5/2] ms:@md/main:absolute ms:border-b ms:@md/main:border-0 ms:@md/main:top-0 ms:@md/main:left-0 ms:group/profilebg ms:relative ms:w-full ms:bg-cover ms:bg-center ms:bg-secondary"
             )}
             style={{ backgroundImage: `url("${backgroundUrl}")` }}
           >
             {setBg && (
               <Dialog onOpenChange={setCropperDialog} open={cropperDialog}>
-                <DialogTrigger className="ms:flex ms:opacity-0 ms:right-2 ms:top-2 ms:bg-background/90 group-hover/ms:profilebg:opacity-100 ms:justify-center ms:items-center ms:cursor-pointer ms:h-8 ms:w-8 ms:rounded-full ms:absolute ms:border ms:backdrop-blur-sm ms:duration-150">
+                <DialogTrigger className="ms:flex ms:opacity-0 ms:right-2 ms:top-2 ms:bg-background/90 ms:group-hover/profilebg:opacity-100 ms:group-hover/profilebg:animate-in ms:justify-center ms:items-center ms:cursor-pointer ms:h-8 ms:w-8 ms:rounded-full ms:absolute ms:border ms:backdrop-blur-sm ms:duration-150">
                   <Pencil className="ms:h-4 ms:w-4" />
                 </DialogTrigger>
                 <CropperDialogContent
@@ -120,13 +120,13 @@ export const ProfileInfoBlock: React.FC<{
     return (
       <div
         className={cn(
-          "@md/ms:main:border @md/ms:main:h-40 @3xl/ms:main:h-60 ms:max-h-full @md/ms:main:aspect-square ms:flex ms:items-center @md/ms:main:flex-col ms:gap-3 @md/ms:main:gap-1.5 @md/ms:main:justify-evenly ms:p-2 ms:bg-background/90 ms:backdrop-blur-[2px] ms:rounded-md",
+          "ms:@md/main:border ms:@md/main:h-40 @3xl/ms:main:h-60 ms:max-h-full ms:@md/main:aspect-square ms:flex ms:items-center ms:@md/main:flex-col ms:gap-3 ms:@md/main:gap-1.5 ms:@md/main:justify-evenly ms:p-2 ms:bg-background/90 ms:backdrop-blur-[2px] ms:rounded-md",
           className
         )}
       >
         <StandardAvatar
           className={cn(
-            "ms:w-16 ms:h-16 @md/ms:main:h-20 @md/ms:main:w-20 @3xl/ms:main:h-28 @3xl/ms:main:w-28 ms:border ms:group/avatar ms:relative ms:aspect-square ms:max-h-full",
+            "ms:w-16 ms:h-16 ms:@md/main:h-20 ms:@md/main:w-20 @3xl/ms:main:h-28 @3xl/ms:main:w-28 ms:border ms:group/avatar ms:relative ms:aspect-square ms:max-h-full",
             avatarClassName
           )}
           fallback={account?.displayname}
@@ -134,7 +134,7 @@ export const ProfileInfoBlock: React.FC<{
         >
           {setAvatar && (
             <Dialog onOpenChange={setCropperDialog} open={cropperDialog}>
-              <DialogTrigger className="ms:opacity-0 group-hover/ms:avatar:opacity-100 ms:inset-0 ms:m-auto ms:bg-background/90 ms:flex ms:duration-150 ms:justify-center ms:items-center ms:cursor-pointer ms:h-8 ms:w-8 ms:rounded-full ms:absolute ms:border ms:backdrop-blur-sm">
+              <DialogTrigger className="ms:opacity-0 ms:group-hover/avatar:animate-in ms:group-hover/avatar:opacity-100 ms:inset-0 ms:m-auto ms:bg-background/90 ms:flex ms:duration-150 ms:justify-center ms:items-center ms:cursor-pointer ms:h-8 ms:w-8 ms:rounded-full ms:absolute ms:border ms:backdrop-blur-sm">
                 <Pencil className="ms:h-4 ms:w-4" />
               </DialogTrigger>
               <CropperDialogContent
@@ -147,13 +147,13 @@ export const ProfileInfoBlock: React.FC<{
         </StandardAvatar>
         <div
           className={cn(
-            "ms:flex @md/ms:main:items-center ms:flex-col",
+            "ms:flex ms:@md/main:items-center ms:flex-col",
             nameBlockClassName
           )}
         >
           <h4
             className={cn(
-              "@md/ms:main:text-xs @3xl/ms:main:text-base",
+              "ms:@md/main:text-xs @3xl/ms:main:text-base",
               displaynameClassName
             )}
           >
